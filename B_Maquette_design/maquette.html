@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adidas Store Mockup</title>
+  <style>
+    :root {
+      --bg: #f8f8f8;
+      --card-bg: #fff;
+      --primary: #000;
+      --gray: #666;
+      --radius: 12px;
+      --gap: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+    }
+    .container {
+      max-width: 420px;
+      margin: auto;
+      padding-bottom: 60px; /* for bottom nav */
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px var(--gap);
+      background: var(--card-bg);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header img.icon { width: 24px; height: 24px; }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin: var(--gap);
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 8px;
+    }
+    .search-bar img { width: 20px; height: 20px; margin-right: 8px; }
+    .search-bar input {
+      border: none;
+      flex: 1;
+      font-size: 14px;
+    }
+    .search-bar input:focus { outline: none; }
+    .search-bar img.filter { margin-left: 8px; cursor: pointer; }
+    .banner {
+      position: relative;
+      margin: 0 var(--gap) var(--gap);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .banner img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .banner .btn {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .categories {
+      display: flex;
+      gap: var(--gap);
+      overflow-x: auto;
+      padding: 0 var(--gap) var(--gap);
+    }
+    .categories .cat {
+      flex: 0 0 auto;
+      background: var(--card-bg);
+      padding: 12px;
+      border-radius: 50%;
+      text-align: center;
+    }
+    .categories .cat img { width: 28px; height: 28px; }
+    .categories .cat span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gap);
+      padding: 0 var(--gap) var(--gap);
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+    .card img.product {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .card .info {
+      padding: 8px;
+      font-size: 14px;
+    }
+    .card .info h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .card .info p {
+      font-size: 13px;
+      color: var(--gray);
+    }
+    .card .btn-cart {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: var(--primary);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .card .btn-cart img {
+      width: 18px; height: 18px;
+      filter: invert(1);
+    }
+    .recent {
+      padding: 0 var(--gap) var(--gap);
+    }
+    .recent h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .recent .item {
+      display: flex;
+      align-items: center;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      margin-bottom: var(--gap);
+      overflow: hidden;
+    }
+    .recent img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+    .recent .details {
+      padding: 8px;
+      font-size: 13px;
+    }
+    .recent .details h4 {
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    .recent .details p {
+      color: var(--primary);
+      font-weight: bold;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      border-top: 1px solid #ddd;
+    }
+    .bottom-nav img {
+      width: 24px; height: 24px;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+    .bottom-nav img.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img class="icon" src="https://img.icons8.com/ios-filled/50/000000/menu--v1.png"/>
+      <img class="icon" src="https://seeklogo.com/images/A/adidas-logo-36DC4C1470-seeklogo.com.png"/>
+      <img class="icon" src="https://img.icons8.com/ios-filled/50/000000/appointment-reminders--v1.png"/>
+    </header>
+
+    <div class="search-bar">
+      <img src="https://img.icons8.com/ios-glyphs/30/000000/search--v1.png"/>
+      <input type="text" placeholder="Search"/>
+      <img class="filter" src="https://img.icons8.com/ios-filled/50/000000/filter.png"/>
+    </div>
+
+    <div class="banner">
+      <img src="https://source.unsplash.com/420x200/?tracksuit,adidas"/>
+      <button class="btn">Shop Now →</button>
+    </div>
+
+    <div class="categories">
+      <div class="cat">
+        <img src="https://img.icons8.com/ios-filled/50/000000/running-shoe.png"/>
+        <span>Shoes</span>
+      </div>
+      <div class="cat">
+        <img src="https://img.icons8.com/ios-filled/50/000000/t-shirt.png"/>
+        <span>T‑shirt</span>
+      </div>
+      <div class="cat">
+        <img src="https://img.icons8.com/ios-filled/50/000000/shopping-bag--v1.png"/>
+        <span>Bags</span>
+      </div>
+      <div class="cat">
+        <img src="https://img.icons8.com/ios-filled/50/000000/suit--v1.png"/>
+        <span>Tracksuit</span>
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <div class="card">
+        <img class="product" src="https://source.unsplash.com/300x300/?adidas,shoe,1"/>
+        <div class="info">
+          <h4>Adidas HOOBS 2.0</h4>
+          <p>$250</p>
+        </div>
+        <div class="btn-cart" onclick="alert('Added!')">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-bag--v1.png"/>
+        </div>
+      </div>
+      <div class="card">
+        <img class="product" src="https://source.unsplash.com/300x300/?adidas,shoe,2"/>
+        <div class="info">
+          <h4>Crystal White</h4>
+          <p>$100</p>
+        </div>
+        <div class="btn-cart" onclick="alert('Added!')">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-bag--v1.png"/>
+        </div>
+      </div>
+      <div class="card">
+        <img class="product" src="https://source.unsplash.com/300x300/?adidas,shoe,3"/>
+        <div class="info">
+          <h4>Adidas Barricade</h4>
+          <p>$100</p>
+        </div>
+        <div class="btn-cart" onclick="alert('Added!')">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-bag--v1.png"/>
+        </div>
+      </div>
+      <div class="card">
+        <img class="product" src="https://source.unsplash.com/300x300/?adidas,shoe,4"/>
+        <div class="info">
+          <h4>Adidas Adistar</h4>
+          <p>$100</p>
+        </div>
+        <div class="btn-cart" onclick="alert('Added!')">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-bag--v1.png"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="recent">
+      <h3>Recent viewed</h3>
+      <div class="item">
+        <img src="https://source.unsplash.com/100x100/?adidas,basketball"/>
+        <div class="details">
+          <h4>Men's Game 3 Basketball</h4>
+          <p>$349</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://source.unsplash.com/100x100/?adidas,running"/>
+        <div class="details">
+          <h4>Men's Adizero EVO SL</h4>
+          <p>$199</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <img class="active" src="https://img.icons8.com/ios-filled/50/000000/home.png"/>
+    <img src="https://img.icons8.com/ios-filled/50/000000/shopping-bag--v1.png"/>
+    <img src="https://img.icons8.com/ios-filled/50/000000/like--v1.png"/>
+    <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"/>
+  </nav>
+</body>
+</html>
