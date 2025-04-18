@@ -1,0 +1,24 @@
+@startuml file.plantuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Visitor
+actor RegisteredUser as User
+
+Visitor --> (Browse Products)
+Visitor --> (View Product Detail)
+Visitor --> (Add to Cart)
+Visitor --> (View Cart)
+Visitor --> (Register)
+Visitor --> (Login)
+Visitor --> (Contact Support)
+
+User --> (Checkout)
+User --> (Make Payment)
+User --> (View Order Confirmation)
+
+(Browse Products) .> (View Product Detail) : includes
+(Add to Cart) .> (View Cart) : extends
+(Checkout) <|-- (Make Payment)
+(Checkout) .> (View Order Confirmation)
+@enduml

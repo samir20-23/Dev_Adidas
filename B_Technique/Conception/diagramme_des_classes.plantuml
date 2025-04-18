@@ -1,0 +1,64 @@
+@startuml diagramme_des_classes.plantuml
+skinparam classAttributeIconSize 0
+
+class Product {
+  +id: String
+  +name: String
+  +description: String
+  +price: Decimal
+  +getAvailableVariants(): List<Variant>
+}
+
+class Variant {
+  +id: String
+  +size: String
+  +color: String
+  +stock: int
+}
+
+class Cart {
+  -items: List<CartItem>
+  +addItem(p: Product, v: Variant, qty: int)
+  +removeItem(item: CartItem)
+  +getTotal(): Decimal
+}
+
+class CartItem {
+  +product: Product
+  +variant: Variant
+  +quantity: int
+}
+
+class User {
+  +id: String
+  +email: String
+  +password: String
+  +getCart(): Cart
+  +getOrders(): List<Order>
+}
+
+class Order {
+  +id: String
+  +date: Date
+  +items: List<CartItem>
+  +total: Decimal
+}
+
+class Payment {
+  +id: String
+  +amount: Decimal
+  +date: Date
+  +process(): Boolean
+}
+
+Product "1" *-- "*" Variant
+
+Cart "1" *-- "*" CartItem
+CartItem --> Product
+CartItem --> Variant
+
+User "1" o-- "1" Cart
+User "1" o-- "*" Order
+Order "1" *-- "*" CartItem : contains
+Order --> Payment
+@enduml
