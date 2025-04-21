@@ -1,24 +1,48 @@
-@startuml file.plantuml
-left to right direction
-skinparam packageStyle rectangle
+@startuml usecase_diagram_ecommerce
 
-actor Visitor
-actor RegisteredUser as User
+actor User
+actor Admin
 
-Visitor --> (Browse Products)
-Visitor --> (View Product Detail)
-Visitor --> (Add to Cart)
-Visitor --> (View Cart)
-Visitor --> (Register)
-Visitor --> (Login)
-Visitor --> (Contact Support)
+rectangle "E-commerce App" {
+ 
+  (Register/Login) as UC1
+  (Browse Products) as UC2
+  (View Product Detail) as UC3
+  (Add to Cart) as UC4
+  (View Cart) as UC5
+  (Select Variant) as UC6
+  (Remove Item from Cart) as UC7
+  (Choose Payment Method) as UC8
+  (Checkout) as UC9
+  (View Orders) as UC10
+  (View Recent Products) as UC11
+  (Add to Wishlist) as UC12
 
-User --> (Checkout)
-User --> (Make Payment)
-User --> (View Order Confirmation)
+  (Add Product) as UC13
+  (Edit Product) as UC14
+  (Delete Product) as UC15
+  (Manage Orders) as UC16
+}
 
-(Browse Products) .> (View Product Detail) : includes
-(Add to Cart) .> (View Cart) : extends
-(Checkout) <|-- (Make Payment)
-(Checkout) .> (View Order Confirmation)
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+User --> UC9
+User --> UC10
+User --> UC11
+User --> UC12
+
+Admin --> UC13
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+
+UC4 --> UC6 : includes
+UC9 --> UC8 : includes
+
 @enduml
