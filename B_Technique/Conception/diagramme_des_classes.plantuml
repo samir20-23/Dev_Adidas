@@ -1,64 +1,105 @@
 @startuml diagramme_des_classes.plantuml
 skinparam classAttributeIconSize 0
 
-class Product {
-  +id: String
-  +name: String
-  +description: String
-  +price: Decimal
-  +getAvailableVariants(): List<Variant>
-}
-
-class Variant {
-  +id: String
-  +size: String
-  +color: String
-  +stock: int
-}
-
-class Cart {
-  -items: List<CartItem>
-  +addItem(p: Product, v: Variant, qty: int)
-  +removeItem(item: CartItem)
-  +getTotal(): Decimal
-}
-
-class CartItem {
-  +product: Product
-  +variant: Variant
-  +quantity: int
-}
-
 class User {
-  +id: String
+  +id: int
+  +name: String
   +email: String
   +password: String
   +getCart(): Cart
   +getOrders(): List<Order>
 }
 
+class Product {
+  +id: int
+  +name: String
+  +description: String
+  +price: Decimal
+  +category: String
+  +is_popular: Boolean
+  +getAvailableVariants(): List<Variant>
+}
+
+class Variant {
+  +id: int
+  +product_id: int
+  +size: String
+  +color: String
+  +stock: int
+  +price: Decimal
+}
+
+class Cart {
+  +id: int
+  +user_id: int
+  +addItem(): void
+  +removeItem(): void
+  +getTotal(): Decimal
+}
+
+class CartItem {
+  +id: int
+  +cart_id: int
+  +product_id: int
+  +variant_id: int
+  +quantity: int
+}
+
 class Order {
-  +id: String
+  +id: int
+  +user_id: int
   +date: Date
-  +items: List<CartItem>
   +total: Decimal
 }
 
+class OrderItem {
+  +id: int
+  +order_id: int
+  +product_id: int
+  +variant_id: int
+  +quantity: int
+}
+
 class Payment {
-  +id: String
+  +id: int
+  +order_id: int
   +amount: Decimal
   +date: Date
   +process(): Boolean
 }
 
-Product "1" *-- "*" Variant
+class RecentView {
+  +id: int
+  +user_id: int
+  +product_id: int
+}
 
-Cart "1" *-- "*" CartItem
-CartItem --> Product
-CartItem --> Variant
+class PaymentMethod {
+  +id: int
+  +user_id: int
+  +type: Enum
+  +card_number_masked: String
+}
+
+class Wishlist {
+  +id: int
+  +user_id: int
+  +product_id: int
+}
 
 User "1" o-- "1" Cart
 User "1" o-- "*" Order
-Order "1" *-- "*" CartItem : contains
+User "1" o-- "*" Wishlist
+User "1" o-- "*" RecentView
+User "1" o-- "*" PaymentMethod
+
+Product "1" *-- "*" Variant
+Cart "1" *-- "*" CartItem
+CartItem --> Product
+CartItem --> Variant
+Order "1" *-- "*" OrderItem
+OrderItem --> Product
+OrderItem --> Variant
 Order --> Payment
+
 @enduml

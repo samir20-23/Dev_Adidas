@@ -28,6 +28,32 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    // 
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function recentViews()
+    {
+        return $this->hasMany(RecentView::class);
+    }
+
+    public function paymentMethods()
+    {
+        return $this->hasMany(PaymentMethod::class);
+    }
+    // 
     protected $hidden = [
         'password',
         'remember_token',
