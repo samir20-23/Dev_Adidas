@@ -13,7 +13,7 @@ use App\Models\PaymentMethod;
 use App\Models\RecentView;
 use App\Models\Variant;
 use App\Models\Wishlist;
-
+ 
 class DatabaseSeeder extends Seeder
 {
     /**
