@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Adidas Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            user-select: none;
+        }
+        
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #000000 0%, #222222 100%);
+            position: relative;
+            color: #FFFFFF;
+        }
+        
+        /* Radial Gradients (Spotlight Effect) */
+        .top-spotlight, .bottom-spotlight {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            mix-blend-mode: screen;
+        }
+        
+        .top-spotlight {
+            top: -50%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+        }
+        
+        .bottom-spotlight {
+            top: 50%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+        }
+        
+        /* Status Bar */
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            z-index: 100;
+        }
+        
+        .status-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-icon {
+            margin-left: 8px;
+        }
+        
+        /* Signal Bars */
+        .signal {
+            display: flex;
+            align-items: flex-end;
+            height: 12px;
+        }
+        
+        .signal-bar {
+            width: 3px;
+            background: #FFFFFF;
+            margin-right: 1px;
+            border-radius: 1px;
+        }
+        
+        .signal-bar:nth-child(1) { height: 4px; }
+        .signal-bar:nth-child(2) { height: 6px; }
+        .signal-bar:nth-child(3) { height: 8px; }
+        .signal-bar:nth-child(4) { height: 10px; }
+        
+        /* WiFi Icon */
+        .wifi {
+            position: relative;
+            width: 15px;
+            height: 10px;
+        }
+        
+        .wifi:before, .wifi:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+        }
+        
+        .wifi:before {
+            width: 12px;
+            height: 12px;
+            bottom: -2px;
+            left: 0;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            transform: rotate(45deg);
+        }
+        
+        .wifi:after {
+            width: 6px;
+            height: 6px;
+            bottom: 1px;
+            left: 3px;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            transform: rotate(45deg);
+        }
+        
+        /* Battery Icon */
+        .battery {
+            width: 20px;
+            height: 10px;
+            border: 1px solid #FFFFFF;
+            border-radius: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .battery:after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 2px;
+            height: 6px;
+            width: 2px;
+            background: #FFFFFF;
+            border-radius: 0 1px 1px 0;
+        }
+        
+        .battery-level {
+            background: #FFFFFF;
+            height: 6px;
+            width: 16px;
+            margin-left: 1px;
+        }
+        
+        /* Get Started Button */
+        .center-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65%;
+            z-index: 20;
+        }
+        
+        .get-started-btn {
+            width: 100%;
+            height: 48px;
+            border: 2px solid #FFFFFF;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            touch-action: none;
+        }
+        
+        .get-started-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .arrow-circle {
+            width: 32px;
+            height: 32px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .arrow-icon {
+            color: #000000;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .btn-text {
+            margin-left: 12px;
+            flex-grow: 1;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            padding-right: 40px;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Progress bar for drag animation */
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background-color: rgba(255, 255, 255, 0.15);
+            z-index: 1;
+            transition: width 0.1s ease;
+        }
+        
+        /* Home Indicator */
+        .home-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35%;
+            height: 5px;
+            background: #FFFFFF;
+            border-radius: 2.5px;
+            z-index: 100;
+        }
+        
+        /* Adidas Store Content */
+        .adidas-store {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f8f8;
+            z-index: 10;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            color: #111;
+        }
+        
+        .adidas-store.open {
+            transform: translateY(0);
+        }
+        
+        /* Store Header */
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 20px 20px;
+            background: linear-gradient(to bottom, #000 0%, #111 100%);
+            color: white;
+        }
+        
+        .store-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .store-logo img {
+            width: 50px;
+        }
+        
+        .store-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .store-actions i {
+            font-size: 20px;
+        }
+        
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: #000;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+        
+        .nav-tab {
+            color: #ddd;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-tab.active {
+            color: white;
+        }
+        
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+        }
+        
+        .hero-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .hero-subtitle {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: white;
+            color: black;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        /* Product Grid */
+        .products-section {
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            background-color: #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-info {
+            padding: 12px;
+        }
+        
+        .product-category {
+            font-size: 12px;
+            color: #777;
+            text-transform: uppercase;
+        }
+        
+        .product-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* 3D Shoe Animation */
+        .shoe-3d-container {
+            position: relative;
+            height: 300px;
+            margin: 30px 0;
+            perspective: 1200px;
+            cursor: grab;
+            overflow: hidden;
+        }
+        
+        .shoe-3d {
+            position: absolute;
+            width: 220px;
+            height: 180px;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%) rotateY(0deg) rotateX(15deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .shoe-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .shoe-face-1 { 
+            transform: rotateY(0deg) translateZ(90px); 
+            background-image: url('/api/placeholder/220/180');
+            opacity: 1;
+        }
+        .shoe-face-2 { 
+            transform: rotateY(72deg) translateZ(90px); 
+            background-image: url('/api/placeholder/220/180');
+        }
+        .shoe-face-3 { 
+            transform: rotateY(144deg) translateZ(90px); 
+            background-image: url('/api/placeholder/220/180');
+        }
+        .shoe-face-4 { 
+            transform: rotateY(216deg) translateZ(90px); 
+            background-image: url('/api/placeholder/220/180');
+        }
+        .shoe-face-5 { 
+            transform: rotateY(288deg) translateZ(90px); 
+            background-image: url('/api/placeholder/220/180');
+        }
+        
+        .shoe-shadow {
+            position: absolute;
+            width: 220px;
+            height: 30px;
+            border-radius: 50%;
+            background: radial-gradient(rgba(0,0,0,0.3), transparent 70%);
+            transform: translateX(-50%) translateY(100px) rotateX(90deg);
+            top: 50%;
+            left: 50%;
+            filter: blur(5px);
+        }
+        
+        /* Color Options */
+        .color-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: -20px;
+            margin-bottom: 30px;
+        }
+        
+        .color-option {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .color-option:nth-child(1) { background-color: #e63946; }
+        .color-option:nth-child(2) { background-color: #1d3557; }
+        .color-option:nth-child(3) { background-color: #2a9d8f; }
+        .color-option:nth-child(4) { background-color: #111111; }
+        
+        .color-option.active {
+            transform: scale(1.2);
+            border-color: #000;
+        }
+        
+        /* Product Features */
+        .features-section {
+            padding: 20px;
+            background-color: #000;
+            color: white;
+            margin: 20px 0;
+        }
+        
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon i {
+            font-size: 20px;
+        }
+        
+        .feature-text h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .feature-text p {
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            padding: 15px 0 30px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 50;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #777;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-item span {
+            font-size: 12px;
+        }
+        
+        .nav-item.active {
+            color: #000;
+        }
+        
+        /* Initial Loading Animation */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease;
+        }
+        
+        .logo-animation {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .logo-animation:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            mask: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M46.52,25.174C40.348,22.07,30.696,20.214,30.696,20.214L4.235,12.078l-2.783,4.609s12.522,5.826,14.087,6.522c0,0,19.991,9.304,28.261,11.608c1.109,0.33,2.174-0.305,2.504-1.413C46.652,32.295,47.452,25.67,46.52,25.174z'/%3E%3Cpath d='M29.739,26.343l-10.956-4.522l-15.391-7l-2.087,3.695l14.217,7.522c0,0,10.522,4.87,13,5.739c3.652,1.217,4.478-1.695,4.478-1.695L29.739,26.343z'/%3E%3Cpath d='M27.174,32.257c-0.087-0.043-9.565-4.609-9.565-4.609L3.522,21.387L1,24.865l14.695,7.348c0,0,8.522,4.174,10.826,5c2.435,0.826,4.174-1.348,4.174-1.348L27.174,32.257z'/%3E%3C/svg%3E") no-repeat center center;
+            mask-size: contain;
+            -webkit-mask: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M46.52,25.174C40.348,22.07,30.696,20.214,30.696,20.214L4.235,12.078l-2.783,4.609s12.522,5.826,14.087,6.522c0,0,19.991,9.304,28.261,11.608c1.109,0.33,2.174-0.305,2.504-1.413C46.652,32.295,47.452,25.67,46.52,25.174z'/%3E%3Cpath d='M29.739,26.343l-10.956-4.522l-15.391-7l-2.087,3.695l14.217,7.522c0,0,10.522,4.87,13,5.739c3.652,1.217,4.478-1.695,4.478-1.695L29.739,26.343z'/%3E%3Cpath d='M27.174,32.257c-0.087-0.043-9.565-4.609-9.565-4.609L3.522,21.387L1,24.865l14.695,7.348c0,0,8.522,4.174,10.826,5c2.435,0.826,4.174-1.348,4.174-1.348L27.174,32.257z'/%3E%3C/svg%3E") no-repeat center center;
+            -webkit-mask-size: contain;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+        
+        .loading-progress {
+            width: 200px;
+            height: 4px;
+            background-color: #333;
+            margin-top: 20px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .loading-bar {
+            height: 100%;
+            width: 0;
+            background-color: white;
+            border-radius: 2px;
+             }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #000000 0%, #333333 100%);
+            position: relative;
+            color: #FFFFFF;
+        }
+        
+        /* Radial Gradients (Spotlight Effect) */
+        .top-spotlight, .bottom-spotlight {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            mix-blend-mode: screen;
+        }
+        
+        .top-spotlight {
+            top: -50%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+        }
+        
+        .bottom-spotlight {
+            top: 50%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+        }
+        
+        /* Status Bar */
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .status-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-icon {
+            margin-left: 8px;
+        }
+        
+        /* Signal Bars */
+        .signal {
+            display: flex;
+            align-items: flex-end;
+            height: 12px;
+        }
+        
+        .signal-bar {
+            width: 3px;
+            background: #FFFFFF;
+            margin-right: 1px;
+            border-radius: 1px;
+        }
+        
+        .signal-bar:nth-child(1) { height: 4px; }
+        .signal-bar:nth-child(2) { height: 6px; }
+        .signal-bar:nth-child(3) { height: 8px; }
+        .signal-bar:nth-child(4) { height: 10px; }
+        
+        /* WiFi Icon */
+        .wifi {
+            position: relative;
+            width: 15px;
+            height: 10px;
+        }
+        
+        .wifi:before, .wifi:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+        }
+        
+        .wifi:before {
+            width: 12px;
+            height: 12px;
+            bottom: -2px;
+            left: 0;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            transform: rotate(45deg);
+        }
+        
+        .wifi:after {
+            width: 6px;
+            height: 6px;
+            bottom: 1px;
+            left: 3px;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            transform: rotate(45deg);
+        }
+        
+        /* Battery Icon */
+        .battery {
+            width: 20px;
+            height: 10px;
+            border: 1px solid #FFFFFF;
+            border-radius: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .battery:after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 2px;
+            height: 6px;
+            width: 2px;
+            background: #FFFFFF;
+            border-radius: 0 1px 1px 0;
+        }
+        
+        .battery-level {
+            background: #FFFFFF;
+            height: 6px;
+            width: 16px;
+            margin-left: 1px;
+        }
+        
+        /* Get Started Button */
+        .center-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65%;
+        }
+        
+        .get-started-btn {
+            width: 100%;
+            height: 48px;
+            border: 2px solid #FFFFFF;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        .get-started-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .get-started-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .arrow-circle {
+            width: 32px;
+            height: 32px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .get-started-btn:active .arrow-circle {
+            transform: translateX(5px);
+        }
+        
+        .arrow-icon {
+            color: #000000;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .btn-text {
+            margin-left: 12px;
+            flex-grow: 1;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            padding-right: 40px;
+        }
+        
+        /* Home Indicator */
+        .home-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35%;
+            height: 5px;
+            background: #FFFFFF;
+            border-radius: 2.5px;
+        }
+        
+        /* Ensure safe areas on notched devices */
+        @supports (padding: max(0px)) {
+            .status-bar {
+                padding-top: max(10px, env(safe-area-inset-top));
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+            }
+            
+            .home-indicator {
+                bottom: max(30px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Spotlights -->
+    <div class="top-spotlight"></div>
+    <div class="bottom-spotlight"></div>
+    
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="status-icons">
+            <div class="status-icon signal">
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+            </div>
+            <div class="status-icon wifi"></div>
+            <div class="status-icon battery">
+                <div class="battery-level"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Get Started Button -->
+    <div class="center-container">
+        <div class="get-started-btn" id="getStartedBtn">
+            <div class="arrow-circle">
+                <span class="arrow-icon">→</span>
+            </div>
+            <span class="btn-text">Get started</span>
+        </div>
+    </div>
+    
+    <!-- Home Indicator -->
+    <div class="home-indicator"></div>
+    
+    <script>
+        // Get Started Button Click Handler
+        document.getElementById('getStartedBtn').addEventListener('click', function() {
+            // Animation effect on click
+            this.classList.add('clicked');
+            
+            // Navigation logic would go here
+            alert('Starting your journey!');
+            
+            // Remove animation class after a delay
+            setTimeout(() => {
+                this.classList.remove('clicked');
+            }, 300);
+        });
+    </script>
+</body>
+</html>
