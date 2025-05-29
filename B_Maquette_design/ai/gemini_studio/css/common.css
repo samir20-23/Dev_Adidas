@@ -1,0 +1,200 @@
+/* css/common.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-bg: #FFFFFF;
+    --secondary-bg: #F8F8F8;
+    --card-bg: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #6c757d;
+    --text-placeholder: #B0B0B0;
+    --border-color: #E0E0E0;
+    --accent-color: #000000; /* Often black in this design */
+    --danger-color: #FF3B30;
+    --white: #FFFFFF;
+    --black: #000000;
+    --button-primary-bg: #000000;
+    --button-primary-text: #FFFFFF;
+
+    --header-height: 56px;
+    --bottom-nav-height: 60px;
+    --safe-area-bottom: env(safe-area-inset-bottom);
+}
+
+body.dark-mode {
+    --primary-bg: #000000; /* Or a very dark grey like #121212 */
+    --secondary-bg: #1A1A1A;
+    --card-bg: #1E1E1E;
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0A0A0;
+    --text-placeholder: #505050;
+    --border-color: #333333;
+    --accent-color: #FFFFFF;
+    --button-primary-bg: #FFFFFF;
+    --button-primary-text: #000000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+}
+
+.app-container {
+    max-width: 480px; /* Common mobile width */
+    margin: 0 auto;
+    width: 100%;
+    background-color: var(--primary-bg);
+    flex-grow: 1; /* Allows footer/nav to stick to bottom */
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    background-color: var(--primary-bg); /* Header bg matches page or can be distinct */
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.app-header .title {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.app-header .icon-left, .app-header .icon-right {
+    width: 40px; /* For touch targets */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+.app-header .icon-left { margin-right: auto; }
+.app-header .icon-right { margin-left: auto; }
+.app-header .back-arrow { text-decoration: none; color: var(--text-primary); }
+
+
+.main-content {
+    padding: 16px;
+    flex-grow: 1;
+    overflow-y: auto; /* Allow content to scroll */
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(var(--bottom-nav-height) + var(--safe-area-bottom));
+    padding-bottom: var(--safe-area-bottom);
+    background-color: var(--primary-bg);
+    border-top: 1px solid var(--border-color);
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+
+.bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    flex-grow: 1;
+    padding-top: 8px; /* Space for icon and text */
+}
+
+.bottom-nav a.active {
+    color: var(--accent-color);
+}
+
+.bottom-nav a svg {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    fill: currentColor;
+}
+
+/* Basic Button */
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    width: 100%;
+}
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-danger {
+    background-color: transparent;
+    color: var(--danger-color);
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--danger-color); /* Or no border based on design */
+}
+.btn-danger:hover {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-danger { color: var(--danger-color); }
+.font-bold { font-weight: bold; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+
+/* For elements like the "Kadia test" bar */
+.fixed-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--secondary-bg);
+    color: var(--text-secondary);
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    border-top: 1px solid var(--border-color);
+    z-index: 101; /* Above bottom nav if they overlap */
+}

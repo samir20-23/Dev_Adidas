@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Payment Method - Sneaker App</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/payment.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header payment-header">
+            <a href="cart.html" class="icon-left back-arrow" aria-label="Back to Cart">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </a>
+            <h1 class="title">Payment method</h1>
+            <div class="icon-right" style="width: 40px;"></div> <!-- Spacer -->
+        </header>
+
+        <main class="main-content payment-content">
+            <section class="payment-group">
+                <h2 class="group-title">Your cards</h2>
+                <div class="payment-options-list">
+                    <!-- Mastercard -->
+                    <label class="payment-option selected">
+                        <input type="radio" name="paymentMethod" value="mastercard" checked>
+                        <div class="option-icon" id="mastercard-logo-placeholder"></div>
+                        <div class="option-details">
+                            <span class="card-name">Mastercard</span>
+                            <span class="card-info">**** **** **** 1234</span>
+                        </div>
+                        <span class="radio-custom"></span>
+                    </label>
+                    <!-- PayPal -->
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="paypal">
+                        <div class="option-icon" id="paypal-logo-placeholder"></div>
+                        <div class="option-details">
+                            <span class="card-name">PayPal</span>
+                            <span class="card-info">user@example.com</span>
+                        </div>
+                        <span class="radio-custom"></span>
+                    </label>
+                    <!-- Visa -->
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="visa">
+                        <div class="option-icon" id="visa-logo-placeholder"></div>
+                        <div class="option-details">
+                            <span class="card-name">Visa</span>
+                            <span class="card-info">**** **** **** 5678</span>
+                        </div>
+                        <span class="radio-custom"></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="payment-group">
+                <h2 class="group-title">Other options</h2>
+                <button class="btn-other-option" id="addNewCardBtn">
+                    <span class="other-option-icon" id="plus-icon-payment-placeholder"></span>
+                    Add new card
+                </button>
+                <button class="btn-other-option" id="cashOnDeliveryBtn">
+                     <span class="other-option-icon" id="cash-icon-payment-placeholder"></span>
+                    Cash on delivery
+                </button>
+            </section>
+            
+        </main>
+        <div class="pay-now-footer">
+            <button class="btn btn-primary pay-now-btn">Pay Now</button>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>

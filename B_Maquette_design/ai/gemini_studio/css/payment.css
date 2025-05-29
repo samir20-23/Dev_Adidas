@@ -1,0 +1,170 @@
+/* css/payment.css */
+.payment-header {
+    border-bottom: 1px solid var(--border-color);
+}
+.payment-header .title {
+    color: var(--text-primary);
+}
+
+.payment-content {
+    padding-bottom: calc(80px + var(--safe-area-bottom)); /* Space for Pay Now button footer */
+}
+
+.payment-group {
+    margin-bottom: 24px;
+}
+.group-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.payment-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    border: 1px solid transparent; /* For selected state */
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+body.dark-mode .payment-option {
+    background-color: var(--card-bg);
+}
+
+.payment-option input[type="radio"] {
+    display: none; /* Hide actual radio button */
+}
+
+.payment-option .option-icon {
+    width: 40px; /* Space for logo */
+    height: 24px; /* Aspect ratio for card logos */
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment-option .option-icon img,
+.payment-option .option-icon svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.payment-option .option-details {
+    flex-grow: 1;
+}
+.payment-option .card-name {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+.payment-option .card-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--text-placeholder);
+    display: inline-block;
+    position: relative;
+}
+.payment-option input[type="radio"]:checked + .option-icon + .option-details + .radio-custom {
+    border-color: var(--black); /* Active radio border */
+}
+.payment-option input[type="radio"]:checked + .option-icon + .option-details + .radio-custom::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--black); /* Active radio inner dot */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the whole selected payment option item */
+.payment-option.selected,
+.payment-option:has(input[type="radio"]:checked) { /* Modern CSS for auto-styling based on check */
+    border-color: var(--black);
+    background-color: var(--primary-bg); /* Slightly different background or just border */
+}
+/* Dark mode specifics for selection */
+body.dark-mode .payment-option.selected,
+body.dark-mode .payment-option:has(input[type="radio"]:checked) {
+    border-color: var(--white);
+    background-color: var(--secondary-bg);
+}
+body.dark-mode .payment-option input[type="radio"]:checked + .option-icon + .option-details + .radio-custom {
+    border-color: var(--white);
+}
+body.dark-mode .payment-option input[type="radio"]:checked + .option-icon + .option-details + .radio-custom::after {
+    background-color: var(--white);
+}
+
+
+.btn-other-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--secondary-bg);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 12px;
+}
+body.dark-mode .btn-other-option {
+    background-color: var(--card-bg);
+}
+.btn-other-option:last-child {
+    margin-bottom: 0;
+}
+.btn-other-option .other-option-icon {
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary); /* Icon color */
+}
+.btn-other-option .other-option-icon svg {
+    fill: currentColor;
+}
+
+.pay-now-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    padding-bottom: calc(16px + var(--safe-area-bottom));
+    background-color: var(--primary-bg);
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+    max-width: 480px; /* Match app container width */
+    margin: 0 auto; /* Center it */
+}
+body.dark-mode .pay-now-footer {
+    background-color: var(--primary-bg); /* Or card-bg if preferred */
+    border-top-color: var(--border-color);
+}
+.pay-now-btn {
+    width: 100%;
+}

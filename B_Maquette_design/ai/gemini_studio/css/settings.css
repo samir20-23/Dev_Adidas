@@ -1,0 +1,186 @@
+/* css/settings.css */
+.profile-section {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-section .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 16px;
+    object-fit: cover;
+    background-color: var(--secondary-bg); /* Placeholder bg */
+}
+
+.profile-section .profile-info {
+    flex-grow: 1;
+}
+
+.profile-section .profile-info .name {
+    display: block;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+.profile-section .profile-info .email {
+    display: block;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.settings-group .group-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    padding-left: 4px; /* Align with list items if they have padding */
+}
+
+.settings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-list li {
+    display: flex;
+    align-items: center;
+    padding: 16px 0; /* Matches design for vertical spacing */
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+}
+.settings-list li:last-child {
+    border-bottom: none;
+}
+
+.settings-list li .setting-icon {
+    margin-right: 16px;
+    width: 24px; /* For icon alignment */
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary); /* Icon color */
+}
+body.dark-mode .settings-list li .setting-icon {
+    color: var(--text-primary);
+}
+
+
+.settings-list li span:first-of-type { /* Text label */
+    flex-grow: 1;
+    color: var(--text-primary);
+}
+
+.arrow-icon, .settings-list li .setting-icon {
+    display: inline-block; /* Ensure it takes space */
+    color: var(--text-secondary); /* Arrow color */
+}
+body.dark-mode .arrow-icon {
+    color: var(--text-primary);
+}
+
+
+/* Dark Mode Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Width of the switch */
+    height: 28px; /* Height of the switch */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px; /* Knob height */
+    width: 20px;  /* Knob width */
+    left: 4px;    /* Knob position */
+    bottom: 4px;  /* Knob position */
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color); /* Use accent color for ON state */
+}
+body.dark-mode input:checked + .slider {
+    background-color: var(--button-primary-bg); /* Or another distinct color for dark mode 'on' */
+}
+body.dark-mode .slider { /* Slider background when off in dark mode */
+    background-color: #555;
+}
+
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--accent-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px); /* Move knob to the right */
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.delete-account-section {
+    margin-top: 32px;
+}
+
+.delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align icon and text to left */
+    width: 100%;
+    padding: 16px 0px; /* Match list item padding if desired or make it look like a button */
+    background-color: transparent;
+    color: var(--danger-color);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-top: 1px solid var(--border-color); /* Based on image */
+    border-bottom: 1px solid var(--border-color); /* Based on image */
+}
+.delete-button .setting-icon {
+    margin-right: 16px;
+    color: var(--danger-color); /* Icon color matches text */
+}
+
+/* Kadia test bar specific adjustment if needed */
+/* Making sure main content has padding for the fixed bar */
+.app-container {
+    padding-bottom: calc(40px + var(--safe-area-bottom)); /* Height of Kadia bar + safe area */
+}
+#kadia-test-bar {
+    background-color: var(--secondary-bg); /* Matches dark/light mode */
+    color: var(--text-secondary);
+}
+body.dark-mode #kadia-test-bar {
+    background-color: var(--card-bg); /* Darker variant for dark mode */
+}

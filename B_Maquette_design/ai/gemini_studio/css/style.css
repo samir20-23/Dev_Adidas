@@ -1,0 +1,294 @@
+/* css/style.css */
+.home-header {
+    justify-content: space-between;
+    border-bottom: none; /* As per design */
+}
+.home-header .logo-center {
+    font-weight: bold;
+    font-size: 20px;
+    /* If using SVG logo, adjust styling */
+}
+.home-header .header-icons-right {
+    display: flex;
+}
+.home-header .icon-left, .home-header .icon-right {
+    color: var(--text-primary);
+}
+
+.home-content {
+    padding-top: 0; /* Header might not have border, content flows up */
+}
+
+.hero-collection {
+    position: relative;
+    margin: 16px 0; /* Margin from header and next section */
+    border-radius: 12px;
+    overflow: hidden;
+    height: 200px; /* Or adjust as per image aspect ratio */
+}
+
+.hero-collection .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-collection .hero-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+    color: var(--white); /* Assuming text is on dark part of image or overlay */
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+    width: 100%;
+}
+.hero-collection .hero-text h2 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+.hero-collection .hero-text h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+}
+.hero-collection .shop-now-btn {
+    background-color: var(--white);
+    color: var(--black);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 20px;
+}
+body.dark-mode .hero-collection .shop-now-btn {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+}
+
+
+.categories-section {
+    display: flex;
+    justify-content: space-around;
+    margin: 24px 0;
+    text-align: center;
+}
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+.category-item .category-icon-bg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--button-primary-bg); /* Black background for icons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+.category-item .category-icon-bg img { /* For placeholder images */
+    border-radius: 50%;
+}
+body.dark-mode .category-item .category-icon-bg {
+    background-color: var(--card-bg);
+}
+body.dark-mode .category-item span {
+    color: var(--text-primary);
+}
+
+
+.product-section {
+    margin-bottom: 24px;
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.section-header .see-all {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+body.dark-mode .section-header .see-all {
+    color: var(--text-placeholder);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.product-card {
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: left; /* Align text to left */
+    position: relative;
+    cursor: pointer;
+    overflow: hidden; /* Ensure content fits */
+}
+body.dark-mode .product-card {
+    background-color: var(--card-bg);
+}
+.product-card img {
+    width: 100%;
+    max-height: 100px; /* Or adjust as needed */
+    object-fit: contain; /* Or cover, depending on image aspect ratio */
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background-color: var(--white); /* If image has transparency */
+}
+body.dark-mode .product-card img {
+    background-color: var(--secondary-bg);
+}
+.product-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.product-card .price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.fav-icon-product {
+    position: absolute;
+    top: 8px;
+    left: 8px; /* Changed from right to left based on image */
+    background: transparent;
+    border: none;
+    font-size: 20px; /* For icon */
+    cursor: pointer;
+    padding: 4px;
+    width: 28px;
+    height: 28px;
+    z-index: 1;
+    color: var(--text-placeholder);
+}
+/* Simple heart shape for fav icon, replace with SVG */
+.fav-icon-product::before {
+    content: '♡'; /* Unicode heart outline */
+}
+.fav-icon-product.favorited::before {
+    content: '♥'; /* Unicode solid heart */
+    color: var(--danger-color);
+}
+
+
+.add-to-cart-icon-product {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+body.dark-mode .add-to-cart-icon-product {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+}
+
+
+.trend-moment .trend-card {
+    background-color: var(--secondary-bg); /* Looks like light brown/beige in image */
+    border-radius: 12px;
+    padding: 0; /* Image takes full width */
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+body.dark-mode .trend-moment .trend-card {
+    background-color: var(--card-bg);
+}
+.trend-card img {
+    width: 100%;
+    display: block;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 180px;
+    object-fit: cover;
+}
+.trend-card .fav-icon-trend {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white bg */
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--black);
+}
+.trend-card .fav-icon-trend::before {
+    content: '♡'; /* Unicode heart outline */
+    font-size: 18px;
+}
+
+.trend-card .trend-info {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-bg); /* Match card background */
+}
+body.dark-mode .trend-card .trend-info {
+    background-color: var(--card-bg);
+}
+
+.trend-card .trend-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: var(--text-primary);
+}
+.trend-card .trend-info p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+.trend-card .shop-now-trend-btn {
+    background-color: var(--white);
+    color: var(--black);
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 20px;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+body.dark-mode .trend-card .shop-now-trend-btn {
+    background-color: var(--card-bg); /* Or button-primary-bg for dark mode */
+    color: var(--text-primary);
+    border: 1px solid var(--text-secondary);
+}
+
+/* Bottom Nav active state is handled by common.js setActiveNav */
+.bottom-nav a svg {
+    fill: currentColor; /* Ensures SVG picks up text color */
+}

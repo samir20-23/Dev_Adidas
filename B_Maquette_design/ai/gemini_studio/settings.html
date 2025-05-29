@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Settings - Sneaker App</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="index.html" class="icon-left back-arrow" aria-label="Back to Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </a>
+            <h1 class="title">Settings</h1>
+            <div class="icon-right" style="width: 40px;"></div> <!-- Spacer -->
+        </header>
+
+        <main class="main-content">
+            <section class="profile-section">
+                <img src="https://via.placeholder.com/60/CCCCCC/000000?text=User" alt="User Avatar" class="avatar">
+                <div class="profile-info">
+                    <span class="name">Yasmine Naoui</span>
+                    <span class="email">yasminenaoui@example.com</span>
+                </div>
+                <span class="arrow-icon" id="profile-icon-placeholder"></span>
+            </section>
+
+            <section class="settings-group">
+                <h2 class="group-title">Other settings</h2>
+                <ul class="settings-list">
+                    <li>
+                        <span class="setting-icon" id="notification-icon-placeholder"></span>
+                        <span>Notification</span>
+                        <span class="arrow-icon" id="notification-arrow-placeholder"></span>
+                    </li>
+                    <li>
+                        <span class="setting-icon" id="password-icon-placeholder"></span>
+                        <span>Password</span>
+                        <span class="arrow-icon" id="password-arrow-placeholder"></span>
+                    </li>
+                    <li>
+                        <span class="setting-icon" id="darkmode-icon-placeholder"></span>
+                        <span>Dark mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <span class="setting-icon" id="about-icon-placeholder"></span>
+                        <span>About appKickers</span>
+                        <span class="arrow-icon" id="about-arrow-placeholder"></span>
+                    </li>
+                    <li>
+                        <span class="setting-icon" id="help-icon-placeholder"></span>
+                        <span>Help/FAQ</span>
+                        <span class="arrow-icon" id="help-arrow-placeholder"></span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="delete-account-section">
+                <button class="delete-button">
+                    <span class="setting-icon" id="delete-icon-placeholder"></span>
+                    Delete my account
+                </button>
+            </section>
+        </main>
+        
+        <div class="fixed-bottom-bar" id="kadia-test-bar">Kadia test</div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+/* css/product_detail.css */
+.product-header {
+    justify-content: space-between;
+    background-color: var(--secondary-bg); /* Header matches image bg */
+    border-bottom: none;
+}
+body.dark-mode .product-header {
+    background-color: var(--card-bg);
+}
+.product-header .title {
+    color: var(--text-primary);
+}
+.product-header .icon-left, .product-header .icon-right {
+    color: var(--text-primary);
+}
+.product-header .header-icons-right {
+    display: flex;
+}
+
+.product-detail-content {
+    padding: 0; /* Full width image section */
+    background-color: var(--secondary-bg); /* Page background */
+    display: flex;
+    flex-direction: column;
+}
+body.dark-mode .product-detail-content {
+    background-color: var(--primary-bg);
+}
+
+
+.product-image-section {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0; /* Spacing around image */
+    background-color: var(--secondary-bg); /* Match the image bg in design */
+}
+body.dark-mode .product-image-section {
+    background-color: var(--card-bg); /* Darker for dark mode */
+}
+
+.main-product-image {
+    max-width: 80%;
+    height: auto;
+    max-height: 250px; /* Control max image height */
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+.image-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-placeholder);
+    margin: 0 4px;
+    cursor: pointer;
+}
+.image-dots .dot.active {
+    background-color: var(--black); /* Active dot color */
+}
+body.dark-mode .image-dots .dot.active {
+    background-color: var(--white);
+}
+
+
+.product-info-card {
+    background-color: var(--primary-bg); /* White card for info */
+    padding: 24px 16px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-top: -20px; /* Overlap with image section for seamless look */
+    position: relative; /* For z-index if needed */
+    flex-grow: 1;
+}
+body.dark-mode .product-info-card {
+    background-color: var(--card-bg); /* Dark card for info */
+}
+
+
+.product-title-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items at the start of their container */
+    margin-bottom: 16px;
+}
+.product-title-price h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    flex-basis: 70%; /* Give more space to title */
+}
+.product-title-price .price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    white-space: nowrap;
+}
+
+.options-section {
+    margin-bottom: 20px;
+}
+.options-section label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+.options-section label #selectedColorName {
+    font-weight: normal;
+    color: var(--text-secondary);
+}
+
+.color-swatches, .size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: border-color 0.2s;
+}
+.color-swatch.active {
+    border-color: var(--black); /* Active color swatch border */
+}
+body.dark-mode .color-swatch.active {
+    border-color: var(--white);
+}
+
+
+.size-btn {
+    padding: 8px 12px;
+    min-width: 40px; /* Ensure minimum touch target */
+    text-align: center;
+    background-color: var(--secondary-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.size-btn.active {
+    background-color: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+}
+body.dark-mode .size-btn {
+    background-color: var(--card-bg);
+    border-color: var(--text-placeholder);
+    color: var(--text-primary);
+}
+body.dark-mode .size-btn.active {
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+}
+
+.product-description {
+    margin-bottom: 20px;
+}
+.product-description h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+.product-description p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+.product-description .read-more {
+    color: var(--accent-color); /* Or your primary link color */
+    text-decoration: none;
+    font-weight: 500;
+}
+body.dark-mode .product-description .read-more {
+    color: var(--button-primary-bg);
+}
+
+
+.reviews-section {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 24px; /* Space before Add to Cart button */
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.add-to-cart-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% - 32px); /* Full width minus padding */
+    margin: 0 16px 16px 16px; /* Positioned at bottom */
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    position: sticky; /* Stick to bottom if content overflows */
+    bottom: 16px;
+}
+.add-to-cart-btn svg { /* For cart icon in button */
+    width: 20px;
+    height: 20px;
+}
+
+/* If product detail page is long and scrolls, add padding for sticky button */
+.product-detail-content {
+    padding-bottom: calc(70px + var(--safe-area-bottom)); /* Height of button + margin + safe area */
+}
