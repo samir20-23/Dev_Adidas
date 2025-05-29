@@ -40,7 +40,7 @@ cd Dev_Adidas/B_Application
 
 --- 
 <p align="center">
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWh2ZXk0NWc3aGwzb2psbGJjdGppeDJpdjY3bTZua2xyNnMxMDg3cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jPNxvhkqsUlfhqr3IT/giphy.gif" width="200"/>
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWh2ZXk0NWc3aGwzb2psbGJjdGppeDJpdjY3bTZua2xyNnMxMDg3cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jPNxvhkqsUlfhqr3IT/giphy.gif" />
 </p>
 ## ✍️ Creator
 
