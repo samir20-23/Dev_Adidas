@@ -1,0 +1,150 @@
+/* css/cart.css */
+.cart-header {
+    justify-content: space-between;
+}
+.cart-header .title {
+    color: var(--text-primary);
+}
+.cart-header .icon-left, .cart-header .icon-right {
+    color: var(--text-primary);
+}
+
+.cart-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.empty-cart-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+.empty-cart-icon {
+    font-size: 64px; /* For large icon */
+    color: var(--text-placeholder);
+    margin-bottom: 24px;
+}
+.empty-cart-icon svg { /* If using SVG */
+    width: 80px;
+    height: 80px;
+    fill: var(--text-placeholder);
+}
+.empty-cart-container h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+.empty-cart-container p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+.empty-cart-container .btn-primary {
+    padding: 12px 30px;
+}
+
+/* Styles for when cart has items (example, not fully implemented in JS for static) */
+.cart-items-container {
+    flex-grow: 1;
+}
+.cart-item {
+    display: flex;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+    gap: 12px;
+}
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: var(--secondary-bg);
+}
+.cart-item-details {
+    flex-grow: 1;
+}
+.cart-item-details h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+.cart-item-details .item-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+.quantity-selector {
+    display: flex;
+    align-items: center;
+}
+.quantity-selector .quantity-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-primary);
+    border-radius: 4px;
+    cursor: pointer;
+}
+.quantity-selector .quantity-value {
+    padding: 0 12px;
+    font-size: 16px;
+    min-width: 20px; /* For number display */
+    text-align: center;
+}
+
+.cart-item-price-remove {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.cart-item-price-remove .item-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.remove-item-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.remove-item-btn svg { fill: currentColor; }
+
+.cart-summary {
+    padding: 20px 0;
+    margin-top: auto; /* Pushes summary to bottom if items don't fill space */
+    border-top: 1px solid var(--border-color);
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+.summary-row.total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-color);
+}
+.summary-row span:first-child { color: var(--text-secondary); }
+.summary-row span:last-child { color: var(--text-primary); }
+.summary-row.total span { color: var(--text-primary); }
+
+.btn-checkout {
+    margin-top: 16px;
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneaker Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen active">
+        <header class="header">
+            <div class="status-bar">
+                <span class="time">9:41</span>
+                <div class="status-icons">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            <div class="header-content">
+                <h1>Collection</h1>
+                <button class="profile-btn" onclick="showScreen('settings-screen')">
+                    <img src="/placeholder.svg?height=32&width=32" alt="Profile" class="profile-img">
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="hero-section">
+                <div class="hero-card">
+                    <img src="/placeholder.svg?height=200&width=300" alt="Featured Sneaker" class="hero-image">
+                    <div class="hero-content">
+                        <h2>Adidas</h2>
+                        <p>Campus 00s</p>
+                        <div class="hero-controls">
+                            <div class="color-dots">
+                                <span class="color-dot active" style="background: #2d5a87;"></span>
+                                <span class="color-dot" style="background: #8b4513;"></span>
+                                <span class="color-dot" style="background: #000;"></span>
+                            </div>
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="products-section">
+                <h3>Popular Shoes</h3>
+                <div class="products-grid">
+                    <div class="product-card" onclick="showProductDetail('adidas-campus', 299)">
+                        <img src="/placeholder.svg?height=120&width=120" alt="Adidas Campus" class="product-image">
+                        <h4>Adidas</h4>
+                        <p>Campus 00s</p>
+                        <span class="price">$299</span>
+                    </div>
+                    <div class="product-card" onclick="showProductDetail('adidas-gazelle', 249)">
+                        <img src="/placeholder.svg?height=120&width=120" alt="Adidas Gazelle" class="product-image">
+                        <h4>Adidas</h4>
+                        <p>Gazelle</p>
+                        <span class="price">$249</span>
+                    </div>
+                    <div class="product-card" onclick="showProductDetail('adidas-samba', 249)">
+                        <img src="/placeholder.svg?height=120&width=120" alt="Adidas Samba" class="product-image">
+                        <h4>Adidas</h4>
+                        <p>Samba</p>
+                        <span class="price">$249</span>
+                    </div>
+                    <div class="product-card" onclick="showProductDetail('adidas-stan-smith', 249)">
+                        <img src="/placeholder.svg?height=120&width=120" alt="Adidas Stan Smith" class="product-image">
+                        <h4>Adidas</h4>
+                        <p>Stan Smith</p>
+                        <span class="price">$249</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="products-section">
+                <h3>Most Popular</h3>
+                <div class="products-grid">
+                    <div class="product-card" onclick="showProductDetail('nike-air-max', 199)">
+                        <img src="/placeholder.svg?height=120&width=120" alt="Nike Air Max" class="product-image">
+                        <h4>Nike</h4>
+                        <p>Air Max 90</p>
+                        <span class="price">$199</span>
+                    </div>
+                    <div class="product-card" onclick="showProductDetail('converse-chuck', 89)">
+                        <img src="/placeholder.svg?height=120&width=120" alt="Converse Chuck" class="product-image">
+                        <h4>Converse</h4>
+                        <p>Chuck Taylor</p>
+                        <span class="price">$89</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </button>
+            <button class="nav-item" onclick="showScreen('cart-screen')">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+                <span class="cart-badge" id="cart-count">0</span>
+            </button>
+            <button class="nav-item">
+                <i class="fas fa-heart"></i>
+                <span>Favorites</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="screen">
+        <header class="header">
+            <div class="status-bar">
+                <span class="time">9:41</span>
+                <div class="status-icons">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            <div class="header-content">
+                <button class="back-btn" onclick="showScreen('home-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1>Settings</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="profile-section">
+                <img src="/placeholder.svg?height=80&width=80" alt="Profile" class="profile-avatar">
+                <h2>Marcus Smith</h2>
+                <p>marcus.smith@email.com</p>
+            </div>
+
+            <div class="settings-list">
+                <div class="settings-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Privacy</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payment Methods</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-headset"></i>
+                    <span>Support</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="settings-item" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <label for="dark-mode-toggle"></label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Log Out
+            </button>
+        </main>
+    </div>
+
+    <!-- Product Detail Screen -->
+    <div id="product-detail-screen" class="screen">
+        <header class="header">
+            <div class="status-bar">
+                <span class="time">9:41</span>
+                <div class="status-icons">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            <div class="header-content">
+                <button class="back-btn" onclick="showScreen('home-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 id="product-title">Adidas</h1>
+                <button class="favorite-btn">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="product-images">
+                <img src="/placeholder.svg?height=300&width=300" alt="Product" class="main-product-image" id="main-product-image">
+                <div class="image-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="product-info">
+                <div class="product-header">
+                    <div>
+                        <h2 id="product-name">Campus 00s</h2>
+                        <p id="product-category">Casual Shoes</p>
+                    </div>
+                    <span class="product-price" id="product-price">$299</span>
+                </div>
+
+                <div class="product-options">
+                    <div class="option-group">
+                        <h4>Color</h4>
+                        <div class="color-options">
+                            <button class="color-option active" style="background: #2d5a87;"></button>
+                            <button class="color-option" style="background: #8b4513;"></button>
+                            <button class="color-option" style="background: #000;"></button>
+                            <button class="color-option" style="background: #fff; border: 1px solid #ddd;"></button>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h4>Size</h4>
+                        <div class="size-options">
+                            <button class="size-option">7</button>
+                            <button class="size-option">8</button>
+                            <button class="size-option active">9</button>
+                            <button class="size-option">10</button>
+                            <button class="size-option">11</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-btn" onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Cart Screen -->
+    <div id="cart-screen" class="screen">
+        <header class="header">
+            <div class="status-bar">
+                <span class="time">9:41</span>
+                <div class="status-icons">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            <div class="header-content">
+                <button class="back-btn" onclick="showScreen('home-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1>Shopping Cart</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be populated by JavaScript -->
+            </div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>$10</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">$10</span>
+                </div>
+            </div>
+
+            <button class="checkout-btn" onclick="showScreen('payment-screen')">
+                Proceed to Checkout
+            </button>
+        </main>
+    </div>
+
+    <!-- Payment Screen -->
+    <div id="payment-screen" class="screen">
+        <header class="header">
+            <div class="status-bar">
+                <span class="time">9:41</span>
+                <div class="status-icons">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+            <div class="header-content">
+                <button class="back-btn" onclick="showScreen('cart-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1>Payment</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="payment-methods">
+                <h3>Payment Methods</h3>
+                <div class="payment-card active">
+                    <div class="card-info">
+                        <i class="fab fa-cc-mastercard"></i>
+                        <div>
+                            <p>•••• •••• •••• 1234</p>
+                            <span>Expires 12/25</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="payment-card">
+                    <div class="card-info">
+                        <i class="fab fa-cc-visa"></i>
+                        <div>
+                            <p>•••• •••• •••• 5678</p>
+                            <span>Expires 08/26</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-card-btn">
+                    <i class="fas fa-plus"></i>
+                    Add New Card
+                </button>
+            </div>
+
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span>Items (1)</span>
+                    <span id="payment-subtotal">$299</span>
+                </div>
+                <div class="summary-item">
+                    <span>Shipping</span>
+                    <span>$10</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span id="payment-total">$309</span>
+                </div>
+            </div>
+
+            <button class="pay-btn" onclick="processPayment()">
+                Pay Now
+            </button>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

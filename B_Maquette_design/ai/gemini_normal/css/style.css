@@ -1,0 +1,593 @@
+/* css/styles.css */
+
+:root {
+    /* Light Mode Colors */
+    --background-color-light: #ffffff;
+    --text-color-light: #1a1a1a;
+    --secondary-text-color-light: #666666;
+    --border-color-light: #e0e0e0;
+    --card-background-light: #f9f9f9;
+    --button-background-light: #1a1a1a;
+    --button-text-light: #ffffff;
+    --nav-background-light: #ffffff;
+    --nav-icon-color-light: #666666;
+    --nav-icon-active-light: #1a1a1a;
+    --switch-bg-off-light: #e0e0e0;
+    --switch-circle-off-light: #ffffff;
+    --switch-bg-on-light: #1a1a1a;
+    --switch-circle-on-light: #ffffff;
+    --input-border-light: #e0e0e0;
+    --input-background-light: #f9f9f9;
+    --price-color-light: #1a1a1a;
+    --selected-option-border-light: #1a1a1a;
+    --selected-option-bg-light: #e0e0e0;
+
+    /* Dark Mode Colors (default to light if not explicitly set by JS) */
+    --background-color-dark: #1a1a1a;
+    --text-color-dark: #ffffff;
+    --secondary-text-color-dark: #cccccc;
+    --border-color-dark: #333333;
+    --card-background-dark: #2a2a2a;
+    --button-background-dark: #eeeeee;
+    --button-text-dark: #1a1a1a;
+    --nav-background-dark: #1a1a1a;
+    --nav-icon-color-dark: #cccccc;
+    --nav-icon-active-dark: #ffffff;
+    --switch-bg-off-dark: #444444;
+    --switch-circle-off-dark: #cccccc;
+    --switch-bg-on-dark: #eeeeee;
+    --switch-circle-on-dark: #1a1a1a;
+    --input-border-dark: #444444;
+    --input-background-dark: #2a2a2a;
+    --price-color-dark: #ffffff;
+    --selected-option-border-dark: #ffffff;
+    --selected-option-bg-dark: #444444;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dark Mode specific styles */
+body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark-mode .header {
+    background-color: var(--background-color-dark);
+    border-bottom-color: var(--border-color-dark);
+}
+
+body.dark-mode .nav-bar {
+    background-color: var(--nav-background-dark);
+    border-top-color: var(--border-color-dark);
+}
+
+body.dark-mode .nav-item svg {
+    fill: var(--nav-icon-color-dark);
+}
+
+body.dark-mode .nav-item.active svg {
+    fill: var(--nav-icon-active-dark);
+}
+
+body.dark-mode .settings-list li {
+    background-color: var(--card-background-dark);
+    border-bottom-color: var(--border-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark-mode .settings-list li span {
+    color: var(--secondary-text-color-dark);
+}
+
+body.dark-mode .toggle-switch-background {
+    background-color: var(--switch-bg-off-dark);
+}
+
+body.dark-mode .toggle-switch-circle {
+    background-color: var(--switch-circle-off-dark);
+}
+
+body.dark-mode .toggle-switch.active .toggle-switch-background {
+    background-color: var(--switch-bg-on-dark);
+}
+
+body.dark-mode .toggle-switch.active .toggle-switch-circle {
+    background-color: var(--switch-circle-on-dark);
+}
+
+body.dark-mode .collection-card,
+body.dark-mode .product-card {
+    background-color: var(--card-background-dark);
+    border-color: var(--border-color-dark);
+}
+
+body.dark-mode .collection-card .card-title,
+body.dark-mode .product-card .product-name {
+    color: var(--text-color-dark);
+}
+
+body.dark-mode .collection-card .card-subtitle {
+    color: var(--secondary-text-color-dark);
+}
+
+body.dark-mode .product-details-section h2 {
+    color: var(--text-color-dark);
+}
+
+body.dark-mode .product-details-section .price {
+    color: var(--price-color-dark);
+}
+
+body.dark-mode .color-option.selected,
+body.dark-mode .size-option.selected {
+    border-color: var(--selected-option-border-dark);
+    background-color: var(--selected-option-bg-dark);
+}
+
+body.dark-mode .add-to-cart-btn {
+    background-color: var(--button-background-dark);
+    color: var(--button-text-dark);
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color-light);
+    background-color: var(--background-color-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-left {
+    gap: 8px;
+}
+
+.header-title {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+}
+
+.header-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.header-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--text-color-light);
+    transition: fill 0.3s ease;
+}
+
+body.dark-mode .header-icon svg {
+    fill: var(--text-color-dark);
+}
+
+/* Page Container */
+.page-container {
+    flex-grow: 1;
+    padding-bottom: 70px; /* Space for fixed nav bar */
+}
+
+/* Main Content */
+.main-content {
+    padding: 16px;
+}
+
+/* Settings List */
+.settings-list {
+    list-style: none;
+    padding: 0;
+}
+
+.settings-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color-light);
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s ease, color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.settings-list li:last-child {
+    border-bottom: none;
+}
+
+.settings-list li a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.settings-list li span {
+    color: var(--secondary-text-color-light);
+    font-size: 0.9rem;
+}
+
+.settings-list li .arrow-icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--secondary-text-color-light);
+    margin-left: 8px;
+}
+
+body.dark-mode .settings-list li .arrow-icon {
+    fill: var(--secondary-text-color-dark);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    width: 44px;
+    height: 24px;
+    background-color: var(--switch-bg-off-light);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-switch-background {
+    width: 100%;
+    height: 100%;
+    background-color: var(--switch-bg-off-light);
+    border-radius: inherit;
+    position: absolute;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-switch-circle {
+    width: 20px;
+    height: 20px;
+    background-color: var(--switch-circle-off-light);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.toggle-switch.active .toggle-switch-background {
+    background-color: var(--switch-bg-on-light);
+}
+
+.toggle-switch.active .toggle-switch-circle {
+    transform: translateX(20px);
+    background-color: var(--switch-circle-on-light);
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--nav-background-light);
+    border-top: 1px solid var(--border-color-light);
+    padding: 0 8px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-top-color 0.3s ease;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--nav-icon-color-light);
+    font-size: 0.75rem; /* 12px */
+    transition: color 0.3s ease;
+    flex: 1;
+    height: 100%;
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--nav-icon-color-light);
+    margin-bottom: 4px;
+    transition: fill 0.3s ease;
+}
+
+.nav-item.active {
+    color: var(--nav-icon-active-light);
+}
+
+.nav-item.active svg {
+    fill: var(--nav-icon-active-light);
+}
+
+/* Home Screen Specific */
+.home-categories {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 16px 0;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.home-categories::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, Opera */
+}
+
+.category-pill {
+    background-color: var(--card-background-light);
+    border: 1px solid var(--border-color-light);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent items from shrinking */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .category-pill {
+    background-color: var(--card-background-dark);
+    border-color: var(--border-color-dark);
+    color: var(--text-color-dark);
+}
+
+.category-pill.active {
+    background-color: var(--button-background-light);
+    color: var(--button-text-light);
+    border-color: var(--button-background-light);
+}
+
+body.dark-mode .category-pill.active {
+    background-color: var(--button-background-dark);
+    color: var(--button-text-dark);
+    border-color: var(--button-background-dark);
+}
+
+
+.section-header {
+    font-size: 1.1rem; /* 18px */
+    font-weight: 600;
+    margin: 24px 0 16px;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    padding-bottom: 16px;
+}
+
+.collection-card {
+    background-color: var(--card-background-light);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.collection-card-image-wrapper {
+    width: 100%;
+    height: 120px;
+    background-color: #f0f0f0; /* Placeholder background */
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collection-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.collection-card .card-title {
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-color-light);
+    transition: color 0.3s ease;
+}
+
+.collection-card .card-subtitle {
+    font-size: 0.85rem; /* 14px */
+    color: var(--secondary-text-color-light);
+    transition: color 0.3s ease;
+}
+
+/* Product Detail Page Specific */
+.product-image-carousel {
+    width: 100%;
+    height: 300px; /* Adjust as needed */
+    background-color: #f0f0f0; /* Placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* or cover, depending on desired look */
+    display: block;
+}
+
+.product-details-section {
+    padding: 16px;
+}
+
+.product-details-section h1 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-color-light);
+    transition: color 0.3s ease;
+}
+
+.product-details-section .price {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--price-color-light);
+    transition: color 0.3s ease;
+}
+
+.option-section {
+    margin-bottom: 24px;
+}
+
+.option-section h2 {
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-color-light);
+    transition: color 0.3s ease;
+}
+
+.color-options,
+.size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.color-option {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.color-option.selected {
+    border-color: var(--selected-option-border-light);
+    transform: scale(1.1);
+}
+
+.size-option {
+    padding: 10px 16px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.size-option.selected {
+    background-color: var(--selected-option-bg-light);
+    border-color: var(--selected-option-border-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode .size-option {
+    border-color: var(--border-color-dark);
+    color: var(--text-color-dark);
+}
+
+
+.product-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--secondary-text-color-light);
+    margin-bottom: 24px;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .product-description {
+    color: var(--secondary-text-color-dark);
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--button-background-light);
+    color: var(--button-text-light);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-to-cart-btn:active {
+    opacity: 0.8;
+}
+
+/* General Layout Adjustments */
+.content-wrapper {
+    max-width: 450px; /* Constrain width for larger mobile devices/tablets */
+    margin: 0 auto;
+    padding: 0 16px; /* Add padding to sides */
+}
+
+/* For smaller screens, remove side padding on main content */
+@media (max-width: 480px) {
+    .content-wrapper {
+        padding: 0; /* Remove padding for very small screens */
+    }
+    .main-content {
+        padding: 16px; /* Re-add padding inside main-content for structure */
+    }
+    .home-categories {
+        padding: 16px;
+    }
+}
+
+/* Ensure padding is consistent */
+.settings-list {
+    padding: 0 16px;
+}
+.settings-list li {
+    padding: 16px 0;
+}

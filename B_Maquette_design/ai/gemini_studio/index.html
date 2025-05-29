@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sneaker App - Home</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css"> <!-- Home specific styles -->
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header home-header">
+            <div class="icon-left" id="search-icon-header-placeholder"></div>
+            <div class="logo-center" id="adidas-logo-header-placeholder">ADIDAS</div>
+            <div class="header-icons-right">
+                <div class="icon-right" id="bell-icon-header-placeholder"></div>
+                <a href="settings.html" class="icon-right" id="user-icon-header-placeholder"></a>
+            </div>
+        </header>
+
+        <main class="main-content home-content">
+            <!-- Hero Collection Banner -->
+            <section class="hero-collection">
+                <img src="https://via.placeholder.com/380x200/EEEEEE/000000?text=Campus+00s+Collection" alt="Adidas Campus 00s Collection" class="hero-image">
+                <div class="hero-text">
+                    <h2>Adidas Campus 00s</h2>
+                    <h1>Collection</h1>
+                    <button class="btn shop-now-btn" onclick="navigateTo('product_list.html')">Shop Now +</button>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="categories-section">
+                <div class="category-item">
+                    <div class="category-icon-bg"><img src="https://via.placeholder.com/40x40/000000/FFFFFF?text=S" alt="Shoes"></div>
+                    <span>Shoes</span>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon-bg"><img src="https://via.placeholder.com/40x40/000000/FFFFFF?text=T" alt="T-shirt"></div>
+                    <span>T-shirt</span>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon-bg"><img src="https://via.placeholder.com/40x40/000000/FFFFFF?text=B" alt="Bag"></div>
+                    <span>Bag</span>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon-bg"><img src="https://via.placeholder.com/40x40/000000/FFFFFF?text=H" alt="Hat"></div>
+                    <span>Hat</span>
+                </div>
+            </section>
+
+            <!-- Popular Shoes -->
+            <section class="product-section popular-shoes">
+                <div class="section-header">
+                    <h2>Popular Shoes</h2>
+                    <a href="#" class="see-all">See all</a>
+                </div>
+                <div class="product-grid">
+                    <!-- Product Card 1 -->
+                    <div class="product-card" onclick="navigateTo('product_detail.html?id=1')">
+                        <button class="fav-icon-product" aria-label="Add to favorites"></button>
+                        <img src="https://via.placeholder.com/150x100/F0F0F0/000000?text=Shoe+1" alt="Popular Shoe 1">
+                        <h3>Adiray M Running</h3>
+                        <p class="price">199 $ <span class="add-to-cart-icon-product">+</span></p>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="product-card" onclick="navigateTo('product_detail.html?id=2')">
+                        <button class="fav-icon-product" aria-label="Add to favorites"></button>
+                        <img src="https://via.placeholder.com/150x100/F0F0F0/000000?text=Shoe+2" alt="Popular Shoe 2">
+                        <h3>Adidas Ultraboost</h3>
+                        <p class="price">258 $ <span class="add-to-cart-icon-product">+</span></p>
+                    </div>
+                     <!-- Product Card 3 -->
+                    <div class="product-card" onclick="navigateTo('product_detail.html?id=3')">
+                        <button class="fav-icon-product" aria-label="Add to favorites"></button>
+                        <img src="https://via.placeholder.com/150x100/F0F0F0/000000?text=Shoe+3" alt="Popular Shoe 3">
+                        <h3>Nike Air Max</h3>
+                        <p class="price">178 $ <span class="add-to-cart-icon-product">+</span></p>
+                    </div>
+                     <!-- Product Card 4 -->
+                    <div class="product-card" onclick="navigateTo('product_detail.html?id=4')">
+                        <button class="fav-icon-product" aria-label="Add to favorites"></button>
+                        <img src="https://via.placeholder.com/150x100/F0F0F0/000000?text=Shoe+4" alt="Popular Shoe 4">
+                        <h3>Puma Suede</h3>
+                        <p class="price">449 $ <span class="add-to-cart-icon-product">+</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trend of the moment -->
+            <section class="product-section trend-moment">
+                <div class="section-header">
+                    <h2>Trend of the moment</h2>
+                </div>
+                <div class="trend-card" onclick="navigateTo('product_detail.html?id=5')">
+                    <button class="fav-icon-trend" aria-label="Add to favorites"></button>
+                    <img src="https://via.placeholder.com/350x180/EAEAEA/000000?text=Trend+Shoe" alt="Trend Shoe">
+                    <div class="trend-info">
+                        <div>
+                            <h3>Adidas Forum 1</h3>
+                            <p>49MS</p>
+                        </div>
+                        <button class="btn shop-now-trend-btn">Shop Now →</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="active" id="nav-home">
+                <!-- SVG Home Icon -->
+                <span>Home</span>
+            </a>
+            <a href="cart.html" id="nav-cart-or-plus">
+                <!-- SVG Plus/Cart Icon -->
+                <span>Cart</span>
+            </a>
+            <a href="favorites.html" id="nav-favorites">
+                <!-- SVG Heart Icon -->
+                <span>Favorites</span>
+            </a>
+            <a href="settings.html" id="nav-profile">
+                <!-- SVG User Icon -->
+                <span>Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
