@@ -1,11 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- Font Awesome 6 (all CSS + JS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/v4-shims.min.js"></script>
+
+    <!-- your custom styles -->
+    <link rel="stylesheet" href="css/register.css" />
+
 </head>
+
 <body>
-    
+    <div class="mainRegister">
+        <div class="headeRegister">
+            <div class="logoBar">
+                <div class="mainBrand">
+                    <div class="brand">
+                        <div class="shape s1"></div>
+                        <div class="shape s2"></div>
+                        <div class="shape s3"></div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="titleRegister">Welcome Back!</h2>
+        </div>
+        <form id="registerForm" action="#" method="post">
+            
+
+            <!-- Email -->
+            <div class="field-group">
+                <label for="emailRegister">Email *</label>
+                <div class="input-group">
+                    <i class="fa fa-envelope" id="iconsInputs"></i>
+                    <input type="email" name="Email" id="emailRegister" placeholder="example@gmail.com" required />
+                </div>
+                <span class="error-msg" id="error-emailRegister"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="field-group">
+                <label for="passwordRegister">Password *</label>
+                <div class="input-group">
+                    <i class="fa fa-lock" id="iconsInputs"></i>
+                    <input type="password" name="PasswordRegister" id="passwordRegister"
+                        placeholder="Type your password" required />
+                    <i class="fa fa-eye toggle-password" data-target="passwordRegister" id="iconsInputs"></i>
+                </div>
+                <span class="error-msg" id="error-passwordRegister"></span>
+            </div>
+
+           
+            <!-- Terms -->
+            <div class="terms field-group">
+                <input type="checkbox" id="termsCheckbox" />
+                <label for="termsCheckbox" id="termsCheckboxcontent">Remember me!</label>
+                <span class="error-msg" id="error-termsCheckbox"></span>
+            </div>
+
+            <button type="submit" id="submitRegister">Log in </button>
+        </form>
+
+
+        <div class="orRegister">
+            <span>
+                <hr>
+            </span>
+            <span>or</span>
+            <span>
+                <hr>
+            </span>
+        </div>
+        <div class="logsWith">
+            <button  id="signupbtnAple" class="social-btn apple">
+                <i class="fa fa-apple"></i>
+                <span>Sign up with Apple</span>
+            </button>
+            <button id="signupbtnGoogle" class="social-btn google">
+                <i class="fa fa-google"></i>
+                <span>Sign up with Google</span>
+            </button>
+        </div>
+
+        <p id="AlreadyRegister">Dont have on account? <span> <a href="http://127.0.0.1:5500/B_Application/resources/views/pagesStart/register.html">Sign Up</a></span></p>
+    </div>
+
+    <script src="js/register.js"></script>
+
 </body>
-</html>
+
+</html> 
