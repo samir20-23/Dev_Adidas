@@ -49,3 +49,19 @@ cd Dev_Adidas/B_Application
 
 > “Keep calm and code on!” 💻❤️
  
+
+**Samir Aoulad Amar** 😎  
+📧 aouladamarsamir@gmail.com  
+
+> “Keep calm and code on!” 💻❤️
+ 
+**Samir Aoulad Amar** 😎  
+📧 aouladamarsamir@gmail.com  
+
+> “Keep calm and code on!” 💻❤️
+ 
+**Samir Aoulad Amar** 😎  
+📧 aouladamarsamir@gmail.com  
+
+> “Keep calm and code on!” 💻❤️
+ 
