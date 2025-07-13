@@ -1,15 +1,16 @@
 // pages/SettingsPage.tsx
 import { useEffect, useState } from "react";
+import "../css/Settings.css"; 
 export default function SettingsPage() {
     const [darkMode, setDarkMode] = useState(
         document.documentElement.getAttribute("data-theme") === "dark"
     );
 
-    useEffect(() => { 
+    useEffect(() => {
         document.documentElement.classList.add("transition");
         window.setTimeout(() => {
             document.documentElement.classList.remove("transition");
-        }, 300);  
+        }, 300);
         document.documentElement.setAttribute(
             "data-theme",
             darkMode ? "dark" : "light"
@@ -31,7 +32,147 @@ export default function SettingsPage() {
             <div className="section_main">
                 <div className="user_section">
                     <div className="user_Profile">
-                        <div className="img" />
+                        <div className="img">
+                            <svg
+                                className="img"
+                                xmlns="http://www.w3.org/2000/svg"
+                                x="0px"
+                                y="0px"
+                                width="100"
+                                height="100"
+                                viewBox="0,0,256,256"
+                            >
+                                <defs>
+                                    <linearGradient
+                                        x1="3.879"
+                                        y1="3.879"
+                                        x2="20.121"
+                                        y2="20.121"
+                                        gradientUnits="userSpaceOnUse"
+                                        id="color-1_Ki9c1nedn2pV_gr1"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="#6a03b4"
+                                            stop-opacity="0.81176"
+                                        ></stop>
+                                        <stop
+                                            offset="1"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.30196"
+                                        ></stop>
+                                    </linearGradient>
+                                    <linearGradient
+                                        x1="3.879"
+                                        y1="3.879"
+                                        x2="20.121"
+                                        y2="20.121"
+                                        gradientUnits="userSpaceOnUse"
+                                        id="color-2_Ki9c1nedn2pV_gr2"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="#6a03b4"
+                                            stop-opacity="0.81176"
+                                        ></stop>
+                                        <stop
+                                            offset="0.493"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0"
+                                        ></stop>
+                                        <stop
+                                            offset="0.997"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.30196"
+                                        ></stop>
+                                    </linearGradient>
+                                    <linearGradient
+                                        x1="15.586"
+                                        y1="6.586"
+                                        x2="18.414"
+                                        y2="9.414"
+                                        gradientUnits="userSpaceOnUse"
+                                        id="color-3_Ki9c1nedn2pV_gr3"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.70196"
+                                        ></stop>
+                                        <stop
+                                            offset="0.519"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.45098"
+                                        ></stop>
+                                        <stop
+                                            offset="1"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.54902"
+                                        ></stop>
+                                    </linearGradient>
+                                    <linearGradient
+                                        x1="6.292"
+                                        y1="9.961"
+                                        x2="16.373"
+                                        y2="20.042"
+                                        gradientUnits="userSpaceOnUse"
+                                        id="color-4_Ki9c1nedn2pV_gr4"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.70196"
+                                        ></stop>
+                                        <stop
+                                            offset="0.519"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.45098"
+                                        ></stop>
+                                        <stop
+                                            offset="1"
+                                            stop-color="#ffffff"
+                                            stop-opacity="0.54902"
+                                        ></stop>
+                                    </linearGradient>
+                                </defs>
+                                <g
+                                    fill="none"
+                                    fill-rule="nonzero"
+                                    stroke="none"
+                                    stroke-width="1"
+                                    stroke-linecap="butt"
+                                    stroke-linejoin="miter"
+                                    stroke-miterlimit="10"
+                                    stroke-dasharray=""
+                                    stroke-dashoffset="0"
+                                    font-family="none"
+                                    font-weight="none"
+                                    font-size="none"
+                                    text-anchor="none"
+                                >
+                                    <g transform="scale(10.66667,10.66667)">
+                                        <path
+                                            d="M19,20h-14c-1.657,0 -3,-1.343 -3,-3v-10c0,-1.657 1.343,-3 3,-3h14c1.657,0 3,1.343 3,3v10c0,1.657 -1.343,3 -3,3z"
+                                            fill="url(#color-1_Ki9c1nedn2pV_gr1)"
+                                        ></path>
+                                        <path
+                                            d="M19,4.5c1.379,0 2.5,1.121 2.5,2.5v10c0,1.378 -1.121,2.5 -2.5,2.5h-14c-1.379,0 -2.5,-1.122 -2.5,-2.5v-10c0,-1.379 1.121,-2.5 2.5,-2.5h14M19,4h-14c-1.657,0 -3,1.343 -3,3v10c0,1.657 1.343,3 3,3h14c1.657,0 3,-1.343 3,-3v-10c0,-1.657 -1.343,-3 -3,-3z"
+                                            fill="url(#color-2_Ki9c1nedn2pV_gr2)"
+                                        ></path>
+                                        <circle
+                                            cx="17"
+                                            cy="8"
+                                            r="2"
+                                            fill="url(#color-3_Ki9c1nedn2pV_gr3)"
+                                        ></circle>
+                                        <path
+                                            d="M4,16c0,0.548 0.448,1 1,1h14c0.552,0 1,-0.444 1,-1c0,-1.364 -1.688,-3 -2.5,-3c-0.812,0 -1.548,1 -3.5,1c-2.442,0 -4,-5 -6,-5c-2,0 -4,4.362 -4,7z"
+                                            fill="url(#color-4_Ki9c1nedn2pV_gr4)"
+                                        ></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
                         <p className="user_name"> User Name</p>
                     </div>
                     <i className="fa fa-angle-right" aria-hidden="true"></i>

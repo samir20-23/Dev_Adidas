@@ -1,3 +1,4 @@
+
 const boxCenter  = document.querySelector('.boxCenter');
 const forwardBtn = document.querySelector('.forwardBtn');
 const content    = document.querySelector('.content');
