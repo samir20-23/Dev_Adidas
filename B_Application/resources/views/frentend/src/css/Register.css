@@ -1,62 +1,3 @@
-body{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-/* logo */
-.logoBar {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.brand {
-  width: 206px;
-  height: 120px;
-  position: relative;
-  overflow: hidden;
-  transform: scale(0.3);
-  transform-origin: center center;
-  display: inline-block;
-}
-
-.shape {
-  width: 46px;
-  height: 150px;
-  background: #000;
-  position: absolute;
-  transform: rotate(-31deg);
-}
-
-
-
-
-.mainBrand {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20px;
-}
-
-
-.s1 {
-  top: 86px;
-  left: 36px;
-}
-
-.s2 {
-  top: 45px;
-  left: 82px;
-}
-
-.s3 {
-  top: 4px;
-  left: 128px;
-}
-
 .titleRegister {
   font-size: 25px;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.221);
@@ -71,6 +12,20 @@ body{
   padding: 15px;
   min-width: 300px;
   max-width: 600px;
+}
+
+.headeRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logoBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
 }
 
 #registerForm {
@@ -133,9 +88,11 @@ body{
 }
 
 .field-group>label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-weight: 500;
+  position: relative !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+  color: #000 !important;
+  cursor: pointer !important;
 }
 
 .error-msg {
@@ -215,10 +172,10 @@ span hr {
   color: rgb(80, 80, 80);
 }
 
-#AlreadyRegister span a{
+#AlreadyRegister span a {
   color: black;
-  padding-left: 15px; 
-  text-decoration: none; 
+  padding-left: 15px;
+  text-decoration: none;
   cursor: pointer;
 }
 

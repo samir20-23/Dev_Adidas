@@ -62,10 +62,10 @@ export default function Logo() {
             style={{ color: logoColor }}
         >
             <div className="logo-shapes">
-                <div className="shape s1" />
-                <div className="shape s2" />
-                <div className="shape s3" />
-            </div> 
+                <div className="logoShape logoS1" />
+                <div className="logoShape logoS2" />
+                <div className="logoShape logoS3" />
+            </div>
         </div>
     );
 }

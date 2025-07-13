@@ -1,10 +1,12 @@
+import { useNavigate } from "react-router-dom";
 // pages/SettingsPage.tsx
 import { useEffect, useState } from "react";
-import "../css/Settings.css"; 
+import "../css/Settings.css";
 export default function SettingsPage() {
     const [darkMode, setDarkMode] = useState(
         document.documentElement.getAttribute("data-theme") === "dark"
     );
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.documentElement.classList.add("transition");
@@ -22,9 +24,17 @@ export default function SettingsPage() {
     };
 
     return (
-        <div className="main">
+        <div className="SettingsPage">
             <div className="nav_section">
-                <i className="fa fa-angle-left" aria-hidden="true"></i>
+                <div onClick={() => navigate(-1)}>
+                    <i
+                        className="fa fa-angle-left"
+                        id="backSettings"
+                        aria-hidden="true"
+                        style={{ cursor: "pointer" }}
+                    ></i>
+                </div>
+
                 <div className="title_section">
                     <p>Settings</p>
                 </div>

@@ -1,118 +1,130 @@
+import { useNavigate } from "react-router-dom";
+
 // src/pages/StartPage.tsx
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import "../css/StartPage.css";
-
 export default function StartPage() {
-  const boxCenterRef = useRef<HTMLDivElement>(null);
-  const forwardBtnRef = useRef<HTMLButtonElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  
-  const [isDragging, setIsDragging] = useState(false);
-  const startXRef = useRef(0);
-  const lastMoveXRef = useRef(0);
+    const navigation = useNavigate();
+    const boxCenterRef = useRef<HTMLDivElement>(null);
+    const forwardBtnRef = useRef<HTMLButtonElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
-  // Drag functionality
-  useEffect(() => {
-    const boxCenter = boxCenterRef.current;
-    const forwardBtn = forwardBtnRef.current;
-    const content = contentRef.current;
-    
-    if (!boxCenter || !forwardBtn || !content) return;
+    const [isDragging, setIsDragging] = useState(false);
+    const startXRef = useRef(0);
+    const lastMoveXRef = useRef(0);
+    // Drag functionality
+    useEffect(() => {
+        const boxCenter = boxCenterRef.current;
+        const forwardBtn = forwardBtnRef.current;
+        const content = contentRef.current;
 
-    const handleMouseDown = (e: MouseEvent) => {
-      e.preventDefault();
-      setIsDragging(true);
-      startXRef.current = e.clientX;
-      document.body.style.userSelect = "none";
-    };
+        if (!boxCenter || !forwardBtn || !content) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      // Drag functionality
-      if (isDragging) {
-        const dx = e.clientX - startXRef.current;
-        const maxMove = boxCenter.clientWidth - forwardBtn.clientWidth - 6;
-        const moveX = Math.min(Math.max(0, dx), maxMove);
-        lastMoveXRef.current = moveX;
+        const handleMouseDown = (e: MouseEvent) => {
+            e.preventDefault();
+            setIsDragging(true);
+            startXRef.current = e.clientX;
+            document.body.style.userSelect = "none";
+        };
 
-        forwardBtn.style.left = `${moveX + 3}px`;
-        forwardBtn.style.minWidth = `${Math.max(20, (moveX / maxMove) * 100)}%`;
+        const handleMouseMove = (e: MouseEvent) => {
+            // Drag functionality
+            if (isDragging) {
+                const dx = e.clientX - startXRef.current;
+                const maxMove =
+                    boxCenter.clientWidth - forwardBtn.clientWidth - 6;
+                const moveX = Math.min(Math.max(0, dx), maxMove);
+                lastMoveXRef.current = moveX;
 
-        const opacity = 1 - moveX / maxMove;
-        content.style.opacity = `${opacity}`;
+                forwardBtn.style.left = `${moveX + 3}px`;
+                forwardBtn.style.minWidth = `${Math.max(
+                    20,
+                    (moveX / maxMove) * 100
+                )}%`;
 
-        if (opacity <= 0.5) {
-          content.style.display = "none";
-        } else {
-          content.style.display = "flex";
-        }
+                const opacity = 1 - moveX / maxMove;
+                content.style.opacity = `${opacity}`;
 
-        boxCenter.style.padding = "3px";
-      }
-      
-      // 3D effect
-      const xRatio = (e.clientX / window.innerWidth) * 2 - 1;
-      const yRatio = (e.clientY / window.innerHeight) * 2 - 1;
-      const rotateY = xRatio * 20;
-      const rotateX = -yRatio * 20;
+                if (opacity <= 0.5) {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "flex";
+                }
 
-      boxCenter.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      content.style.transform = `translateZ(20px)`;
-    };
+                boxCenter.style.padding = "3px";
+            }
 
-    const handleMouseUp = () => {
-      if (!isDragging) return;
-      setIsDragging(false);
-      document.body.style.userSelect = "";
-      
-      setTimeout(() => {
-        if (!forwardBtn || !content || !boxCenter) return;
-        
-        forwardBtn.style.transition = "left 0.3s ease, min-width 0.3s ease";
-        forwardBtn.style.left = "3px";
-        forwardBtn.style.minWidth = "48px";
-        content.style.display = "flex";
-        boxCenter.style.paddingRight = "30px";
-        content.style.opacity = "1";
-        
-        setTimeout(() => {
-          if (forwardBtn) {
-            forwardBtn.style.transition = "";
-          }
-        }, 300);
-      }, 1000);
-    };
+            console.log(forwardBtn.style.minWidth);
+            // 3D effect
+            const xRatio = (e.clientX / window.innerWidth) * 2 - 1;
+            const yRatio = (e.clientY / window.innerHeight) * 2 - 1;
+            const rotateY = xRatio * 20;
+            const rotateX = -yRatio * 20;
 
-    const handleMouseLeave = () => {
-      if (!boxCenter || !content) return;
-      boxCenter.style.transform = "";
-      content.style.transform = "";
-    };
+            boxCenter.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            content.style.transform = `translateZ(20px)`;
 
-    forwardBtn.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeave);
+            if (forwardBtn.style.minWidth == "100%") {
+                navigation("/load");
+                // navigation("/home");
 
-    return () => {
-      forwardBtn.removeEventListener("mousedown", handleMouseDown);
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, [isDragging]);
+            }
+        };
 
-  return (
-    <div className="page">
-      <div className="shape s1"></div>
-      <div className="boxCenter" ref={boxCenterRef}>
-        <button className="forwardBtn" ref={forwardBtnRef}>
-          <i className="fas fa-arrow-right"></i>
-        </button>
-        <div className="content" ref={contentRef}>
-          <p>Get started</p>
+        const handleMouseUp = () => {
+            if (!isDragging) return;
+            setIsDragging(false);
+            document.body.style.userSelect = "";
+            setTimeout(() => {
+                if (!forwardBtn || !content || !boxCenter) return;
+
+                forwardBtn.style.transition =
+                    "left 0.3s ease, min-width 0.3s ease";
+                forwardBtn.style.left = "3px";
+                forwardBtn.style.minWidth = "48px";
+                content.style.display = "flex";
+                boxCenter.style.paddingRight = "30px";
+                content.style.opacity = "1";
+
+                setTimeout(() => {
+                    if (forwardBtn) {
+                        forwardBtn.style.transition = "";
+                    }
+                }, 900);
+            }, 1000);
+        };
+
+        const handleMouseLeave = () => {
+            if (!boxCenter || !content) return;
+            boxCenter.style.transform = "";
+            content.style.transform = "";
+        };
+
+        forwardBtn.addEventListener("mousedown", handleMouseDown);
+        document.addEventListener("mousemove", handleMouseMove);
+        +document.addEventListener("mouseup", handleMouseUp);
+        document.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+            forwardBtn.removeEventListener("mousedown", handleMouseDown);
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+            document.removeEventListener("mouseleave", handleMouseLeave);
+        };
+    }, [isDragging]);
+
+    return (
+        <div className="Startpage">
+            <div className="shape s1"></div>
+            <div className="boxCenter" ref={boxCenterRef}>
+                <button className="forwardBtn" ref={forwardBtnRef}>
+                    <i className="fas fa-arrow-right"></i>
+                </button>
+                <div className="content" ref={contentRef}>
+                    <p>Get started</p>
+                </div>
+            </div>
+            <div className="shape s3"></div>
         </div>
-      </div>
-      <div className="shape s3"></div>
-    </div>
-  );
+    );
 }

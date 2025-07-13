@@ -1,14 +1,4 @@
  
-* {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
-
- body {
-   background-color: #e5e5e573;
- }
-
  :root {
    --background: #ffffff;
    --borderradius: 15px;
@@ -17,7 +7,8 @@
    --fontSizeIcon: 25px;
  }
 
- .main {
+.SettingsPage {
+  min-width: 300px;
    font-family: "Helvetica Neue", Arial, sans-serif;
    width: 100%;
    display: flex;
@@ -27,7 +18,7 @@
    text-shadow: 0.1px 0 2px rgba(62, 17, 83, 0.721);
  }
 
- .main .nav_section {
+.SettingsPage .nav_section {
    width: 100%;
    display: flex;
    padding: var(--padding);
@@ -79,6 +70,7 @@
  }
 
  .user_section {
+  
    background-color: var(--background);
    border-radius: var(--borderradius);
    padding: var(--padding);
@@ -280,3 +272,4 @@
  .container_toggle:checked+label:after {
    transform: translateX(25px);
  }
+ 

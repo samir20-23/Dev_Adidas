@@ -15,7 +15,7 @@
   margin-bottom: 8px;
 }
 
-.shape {
+.logoShape {
   position: absolute;
   background: currentColor;
   transform: rotate(-31deg);
@@ -23,9 +23,20 @@
   height: calc(150 / 120 * 100%);
 }
 
-.s1 { top: calc(86  / 120 * 100%); left: calc(36  / 206 * 100%); }
-.s2 { top: calc(45  / 120 * 100%); left: calc(82  / 206 * 100%); }
-.s3 { top: calc(4   / 120 * 100%); left: calc(128 / 206 * 100%); }
+.logoS1 {
+  top: calc(86 / 120 * 100%);
+  left: calc(36 / 206 * 100%);
+}
+
+.logoS2 {
+  top: calc(45 / 120 * 100%);
+  left: calc(82 / 206 * 100%);
+}
+
+.logoS3 {
+  top: calc(4 / 120 * 100%);
+  left: calc(128 / 206 * 100%);
+}
 
 .logo-loader {
   width: 100%;
@@ -49,7 +60,15 @@
 }
 
 @keyframes logo-load {
-  0%   { width: 0; }
-  50%  { width: 100%; }
-  100% { width: 0; }
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+  }
 }
