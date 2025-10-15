@@ -1,0 +1,49 @@
+.payment-container {
+    min-height: 100vh;
+    background: #F5F5F5;
+    padding-bottom: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.payment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+}
+
+/* Content */
+.payment-content {
+    padding: 20px;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 16px;
+}
+
+/*

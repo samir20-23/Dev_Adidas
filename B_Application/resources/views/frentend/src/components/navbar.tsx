@@ -1,43 +1,49 @@
 // src/components/navbar.tsx
-import React from "react"
+import React, { useState } from "react"
 import "../css/navbar.css"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import Logo from "../assets/logoo.png"
 import CartIcon from "../assets/cart.png"
 import Left from "../assets/left.png"
+import heartRed from "../assets/heart.png"
 
 export default function Navbar() {
-  const location = useLocation().pathname;
+  const location = useLocation()   // full location object
+  const navigate = useNavigate()
+  const [liked, setLiked] = useState(false)
+
   const closeBurger = () => {
     const el = document.getElementById("burger-toggle") as HTMLInputElement | null
     if (el) el.checked = false
   }
-  // determine icon based on current path
-  const isProductOrDetail = location.pathname === "/product" || location.pathname === "/detail"
-  const iconClass = isProductOrDetail ? "fa fa-heart-o" : "fa fa-bell"
+
+  // helper to check dynamic product/detail paths
+  const isProductPath = location.pathname.startsWith("/product")
+  const isDetailPath = location.pathname.startsWith("/detail")
+
   return (
     <>
       <nav className="navbarmain">
         {(() => {
-          if (location === "/product" || location === "/detail") {
+          if (isProductPath || isDetailPath) {
             return (
               <>
-              
-                <div className="vector">
+                <div
+                  className="vector"
+                  onClick={() => navigate(-1)}
+                  style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}
+                >
                   <img src={Left} alt="Left" className="LeftIcon" />
-                  <p>Detail</p>
+                  <p style={{ margin: 0 }}>{isProductPath ? "Product" : "Detail"}</p>
                 </div>
               </>
             )
-          }
-          else {
+          } else {
             return (
               <>
                 <div className="divhamburger">
-                  {/* hidden checkbox (must be sibling of label + menu) */}
                   <input id="burger-toggle" type="checkbox" className="burger-toggle" />
 
-                  {/* your original label + svg (unchanged) */}
                   <label className="hamburger" htmlFor="burger-toggle">
                     <svg viewBox="0 0 32 32">
                       <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
@@ -45,9 +51,11 @@ export default function Navbar() {
                     </svg>
                   </label>
 
-                  {/* NEW: hamburger controlled menu (sibling of input) */}
                   <div className="hamburger-menu" onClick={closeBurger}>
                     <Link to="/" onClick={closeBurger}>Home</Link>
+                    <Link to="/product" onClick={closeBurger}>Product</Link>
+                    <Link to="/detail" onClick={closeBurger}>Detail</Link>
+                    <Link to="/cart" onClick={closeBurger}>Cart</Link>
                     <Link to="/settings" onClick={closeBurger}>Settings</Link>
                     <Link to="/login" onClick={closeBurger}>Login</Link>
                     <Link to="/register" onClick={closeBurger}>Register</Link>
@@ -66,7 +74,6 @@ export default function Navbar() {
                       className="hamburger-lang"
                       onClick={(e) => e.stopPropagation()}
                       onChange={(e) => {
-                        /* placeholder: wire your i18n code here */
                         const v = (e.target as HTMLSelectElement).value
                         console.log("lang:", v)
                       }}
@@ -82,30 +89,58 @@ export default function Navbar() {
           }
         })()}
 
-
-        <div className="logonavbar">
+        <div className="logonavbar" onClick={() => navigate("/home")} style={{ cursor: "pointer" }}>
           <img src={Logo} alt="logo" />
         </div>
 
         <div className="iconnavbar">
           {(() => {
-            if (location === "/product") {
+            if (isProductPath) {
               return (
                 <>
-                  <img src={CartIcon} className="CartIcon" alt="CartIcon" />
-                  <i className="fa fa-heart-o" id="icon" aria-hidden="true" />
+                  <img
+                    src={CartIcon}
+                    className="CartIcon"
+                    alt="CartIcon"
+                    onClick={() => navigate("/cart")}
+                    style={{ cursor: "pointer", width: 28, marginRight: 10 }}
+                  />
+
+                  {/* heart toggle: both icon and image toggle liked state */}
+                  {liked ? (
+                    <img
+                      src={heartRed}
+                      alt="liked"
+                      className="HeartImg"
+                      onClick={() => {
+                        setLiked(false)
+                        console.log("unliked")
+                      }}
+                      style={{ width: 20, cursor: "pointer" }}
+                    />
+                  ) : (
+                    <i
+                      className="fa fa-heart-o"
+                      id="icon"
+                      aria-hidden="true"
+                      onClick={() => {
+                        setLiked(true)
+                        console.log("liked")
+                      }}
+                      style={{ cursor: "pointer" }}
+                    />
+                  )}
                 </>
               )
             }
-            if (location === "/detail") {
+
+            if (isDetailPath) {
               return <i className="fa fa-heart-o" id="icon" aria-hidden="true" />
             }
-            else {
-              return <i className="fa fa-bell" id="icon" aria-hidden="true" />
-            }
+
+            return <i className="fa fa-bell" id="icon" aria-hidden="true" />
           })()}
         </div>
-
       </nav>
     </>
   )
