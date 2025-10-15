@@ -1,44 +1,29 @@
-import { Outlet, Link } from "react-router-dom";
-import "./css_layouts/main.css";
-import Logo from "../components/logo_Comp/Logo";
+// src/layouts/Layout.tsx
+import { Outlet, useLocation } from "react-router-dom"
+import Navbar from "../components/navbar"
+import Footer from "../components/footer"
+import "./css_layouts/main.css" 
+
 function Layout() {
+    const location = useLocation()
+
+    // paths where we hide navbar/footer
+    const hideNavPaths = ["/login", "/register", "/settings", "/load"]
+    const hideFooterPaths = ["/settings", "/register"]
+
+    // check if current path starts with any hide path (supports dynamic routes)
+    const showNav = !hideNavPaths.some(path => location.pathname.startsWith(path))
+    const showFooter = hideFooterPaths.some(path => location.pathname.startsWith(path))
+
     return (
         <div className="layout">
-            {/* <header>
-                <nav>
-                    <ul>
-                        <div className="logo">
-                            <Link to="/">
-                                <div className="h-12 w-auto">
-                                    <Logo />
-                                </div>
-                            </Link>
-                        </div>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/settings">Settings</Link>
-                        </li>
-                        <li>
-                            <Link to="/login">Login</Link>
-                        </li>
-                        <li>
-                            <Link to="/Register">Register</Link>
-                        </li>
-                    </ul>
-                </nav>
-            </header> */}
-
+            {showNav && <Navbar />}
             <main className="main">
                 <Outlet />
             </main>
-
-            {/* <footer>
-                <p>&copy; 2023 My Website</p>
-            </footer> */}
+            {showFooter && <Footer />}
         </div>
-    );
+    )
 }
 
-export default Layout;
+export default Layout

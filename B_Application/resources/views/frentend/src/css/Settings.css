@@ -162,14 +162,6 @@
    color: #ec0001;
  }
 
- .settings-footer {
-   text-align: center;
-   color: #aaa;
-   padding: 20px;
-   font-size: 14px;
-   margin-top: 20px;
- }
- 
 
  .container_toggle {
    height: 0;
@@ -236,10 +228,7 @@
    color: var(--text-main);
  }
 
- .title_settings_section,
- .settings-footer p {
-   color: var(--text-sub);
- }
+ 
 
  html.transition,
  html.transition * {
