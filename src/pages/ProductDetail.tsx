@@ -16,12 +16,7 @@ export default function ProductDetail() {
         <div className="product-detail-container">
             {/* Header */}
             <header className="product-header">
-                <button className="back-btn">
-                    <ChevronLeft size={24} />
-                </button>
-                <button className="like-btn-header" onClick={() => setIsLiked(!isLiked)}>
-                    <Heart size={24} fill={isLiked ? "#000" : "none"} />
-                </button>
+
             </header>
 
             {/* Product Image */}

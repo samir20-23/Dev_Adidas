@@ -17,7 +17,21 @@
     position: relative;
     /* added so absolute menu positions relative to nav */
     user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: transparent;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
 
+@media (min-width: 768px) {
+    .product-header {
+        grid-column: 1 / -1;
+    }
 }
 
 /* xx */
@@ -104,9 +118,7 @@ label {
     gap: 12px;
 }
 
-.iconnavbar #icon {
-    font-size: 22px;  
-}
+
 
 .iconnavbar .CartIcon {
     width: 20px;
@@ -212,13 +224,49 @@ label {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
- 
+
 /* ensure .navbarmain is positioned for absolute menu */
-.navbarmain { position: relative; }
+.navbarmain {
+    position: relative;
+}
 
 /* keep hamburger-menu z above nav */
-.hamburger-menu { z-index: 9999; }
+.hamburger-menu {
+    z-index: 9999;
+}
+
 /* tiny helpers for like/cart/left icons */
-.LeftIcon { width: 20px; height: 20px; object-fit: contain; cursor: pointer; }
-.CartIcon { width: 28px; height: 28px; object-fit: contain; cursor: pointer; }
-.HeartImg { width: 20px; height: 20px; object-fit: contain; cursor: pointer; }
+.LeftIcon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.CartIcon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.HeartImg {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+
+/*  */
+
+.like-btn-header {
+    background: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-size: 22px;
+}

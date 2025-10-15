@@ -2,6 +2,8 @@
 import React, { useState } from "react"
 import "../css/navbar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import { ChevronLeft, Heart, ShoppingCart, Home, User } from "lucide-react";
+
 import Logo from "../assets/logoo.png"
 import CartIcon from "../assets/cart.png"
 import Left from "../assets/left.png"
@@ -11,6 +13,7 @@ export default function Navbar() {
   const location = useLocation()   // full location object
   const navigate = useNavigate()
   const [liked, setLiked] = useState(false)
+  const [isLiked, setIsLiked] = useState(false);
 
   const closeBurger = () => {
     const el = document.getElementById("burger-toggle") as HTMLInputElement | null
@@ -107,29 +110,10 @@ export default function Navbar() {
                   />
 
                   {/* heart toggle: both icon and image toggle liked state */}
-                  {liked ? (
-                    <img
-                      src={heartRed}
-                      alt="liked"
-                      className="HeartImg"
-                      onClick={() => {
-                        setLiked(false)
-                        console.log("unliked")
-                      }}
-                      style={{ width: 20, cursor: "pointer" }}
-                    />
-                  ) : (
-                    <i
-                      className="fa fa-heart-o"
-                      id="icon"
-                      aria-hidden="true"
-                      onClick={() => {
-                        setLiked(true)
-                        console.log("liked")
-                      }}
-                      style={{ cursor: "pointer" }}
-                    />
-                  )}
+
+                  <button className="like-btn-header" onClick={() => setIsLiked(!isLiked)}>
+                    <Heart size={24} fill={isLiked ? "#000" : "none"} />
+                  </button>
                 </>
               )
             }
