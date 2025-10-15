@@ -1,69 +1,67 @@
-# React + TypeScript + Vite
+`
+<p align="center">
+  <img src="./B_Maquette_design/homepage.PNG" width="200"/>
+    <img src="./B_Maquette_design/cart.png" width="200"/>
+      <img src="./B_Maquette_design/product.png" width="200"/>
+          <img src="./B_Maquette_design/betail.png" width="200"/>
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+``markdown
+# Dev_Adidas 🏬👟
 
-Currently, two official plugins are available:
+Welcome to **Dev_Adidas** – your fun, educational clone of the Adidas online store! 🎉  
+Browse stylish shoes and t‑shirts, add them to your cart, checkout, and get a confirmation. All the essentials, zero fluff!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧩 What’s Inside?
+- **Home Page** – Featured products & banners  
+- **Product Detail** – Gallery, size/color selectors, stock status  
+- **Cart** – Animated add‑to‑cart feedback 🛒✨  
+- **Checkout** – Simple form with validations  
+- **Confirmation** – Order summary & “Thank you!” message 🙌  
+- **Contact** – Send us a message anytime 💌  
+- **Login / Register** – Secure your account 🔐  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
+<p align="center">
+  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWN4dWZkYzBvb3R4NDkyb3A1eGF0cHRlaTRjZHZmMDdleTI2aG92bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rJxtYAdhOnwAZlR5pW/giphy.gif" width="60"/>
+    <img src="https://media2.giphy.com/media/l0HlL827vOLbrrWAE/200.webp?cid=ecf05e47o5zgjten0vfjlokwn8iz9ysgam7af3fu9hzu9ld0&ep=v1_gifs_related&rid=200.webp&ct=g" width="60"/>
+      <img src="https://media4.giphy.com/media/1I0hlkzhi4zSmpqHrH/giphy.webp?cid=ecf05e47cn8ae3xp8kf9a0dolvvobpgnzve7g2yd3yegfl9d&ep=v1_gifs_related&rid=giphy.webp&ct=g" width="60"/>
+          <img src="https://media0.giphy.com/media/jGFOU6WSXrSzm/giphy.webp?cid=ecf05e47cn8ae3xp8kf9a0dolvvobpgnzve7g2yd3yegfl9d&ep=v1_gifs_related&rid=giphy.webp&ct=g" width="60"/>
+</p>
+## 🚀 Quick Start
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/samir20-23/Dev_Adidas.git
+cd Dev_Adidas/B_Application 
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+--- 
+<p align="center">
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWh2ZXk0NWc3aGwzb2psbGJjdGppeDJpdjY3bTZua2xyNnMxMDg3cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jPNxvhkqsUlfhqr3IT/giphy.gif" />
+</p>
+## ✍️ Creator
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Samir Aoulad Amar** 😎  
+📧 aouladamarsamir@gmail.com  
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+> “Keep calm and code on!” 💻❤️
+ 
+
+**Samir Aoulad Amar** 😎  
+📧 aouladamarsamir@gmail.com  
+
+> “Keep calm and code on!” 💻❤️
+ 
+**Samir Aoulad Amar** 😎  
+📧 aouladamarsamir@gmail.com  
+
+> “Keep calm and code on!” 💻❤️
+ 
+**Samir Aoulad Amar** 😎  
+📧 aouladamarsamir@gmail.com  
+
+> “Keep calm and code on!” 💻❤️
+ 
