@@ -1,10 +1,12 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Home, Heart, User, Trash2 } from "lucide-react";
 import '../css/cart.css'
 
 export default function Cart() {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState<any[]>([])
+
     const navigate = useNavigate();
 
     useEffect(() => {

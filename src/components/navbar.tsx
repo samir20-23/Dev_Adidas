@@ -1,5 +1,5 @@
 // src/components/navbar.tsx
-import React, { useState } from "react"
+// import React, { useState } from "react"
 import "../css/navbar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { ChevronLeft, Heart, ShoppingCart, Home, User } from "lucide-react";
@@ -8,6 +8,7 @@ import Logo from "../assets/logoo.png"
 import CartIcon from "../assets/cart.png"
 import Left from "../assets/left.png"
 import heartRed from "../assets/heart.png"
+import { useState } from "react"
 
 export default function Navbar() {
   const location = useLocation()   // full location object
