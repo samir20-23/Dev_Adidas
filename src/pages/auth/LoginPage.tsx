@@ -1,7 +1,7 @@
 // src/pages/LoginPage.tsx
 
 import { useEffect } from "react";
-import "../../css/register.css"; // match your actual filename
+import "../../css/Register.css"; // match your actual filename
 import "@fortawesome/fontawesome-free/css/all.min.css"; // if installed via npm
 import Logo from "../../components/logo_Comp/Logo";
 
