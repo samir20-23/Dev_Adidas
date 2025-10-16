@@ -6,7 +6,6 @@
     margin: 0 auto;
 }
 
-/* Header */
 .payment-header {
     display: flex;
     justify-content: space-between;
@@ -33,12 +32,10 @@
     color: #000;
 }
 
-/* Content */
 .payment-content {
     padding: 20px;
 }
 
-/* Section Title */
 .section-title {
     font-size: 16px;
     font-weight: 600;

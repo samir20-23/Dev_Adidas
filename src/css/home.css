@@ -11,7 +11,6 @@
     padding-bottom: 80px;
 }
 
-/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -51,7 +50,6 @@
     align-items: center;
 }
 
-/* Hero Banner */
 .hero-banner {
     position: relative;
     background: linear-gradient(135deg, #2D3E50 0%, #1A252F 100%);
@@ -132,7 +130,6 @@
     transform: rotate(-15deg);
 }
 
-/* Categories */
 .categories-section {
     padding: 24px 20px;
 }
@@ -186,7 +183,6 @@
     font-weight: 500;
 }
 
-/* Popular Shoes */
 .popular-section {
     padding: 24px 20px;
 }
@@ -304,7 +300,6 @@
     transform: translateY(-2px);
 }
 
-/* Trend Section */
 .trend-section {
     padding: 24px 20px;
 }
@@ -396,7 +391,6 @@
     color: #666;
 }
 
-/* Bottom Navigation */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -429,7 +423,6 @@
     color: #000;
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
     .products-grid {
         grid-template-columns: repeat(3, 1fr);

@@ -1,6 +1,6 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css";
 
- 
+
 .Startpage {
     width: 100%;
     height: 100vh;
@@ -11,7 +11,6 @@
     background-color: black;
     position: relative;
     overflow: hidden;
-    /* 3d */
     perspective: 1000px;
 }
 
@@ -29,7 +28,6 @@
     color: white;
     box-shadow: 0 0 5px -2px white;
     z-index: 2;
-    /* 3d */
     transform-style: preserve-3d;
     transition: transform 0.1s ease;
 }
@@ -51,7 +49,6 @@
     align-items: center;
     overflow: hidden;
     text-shadow: 0 0 2px white;
-    /* 3d */
     transform-style: preserve-3d;
     transition: transform 0.1s ease;
     user-select: none;
@@ -61,7 +58,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* high livel */
 .shape {
     width: 600px;
     height: 600px;
