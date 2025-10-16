@@ -1,5 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import "../css_comp/logo.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function isTransparent(bg: string): boolean {
     if (bg === "transparent") return true;
@@ -16,6 +18,14 @@ function isTransparent(bg: string): boolean {
 export default function Line_loader() {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [logoColor, setLogoColor] = useState<"black" | "white">("black");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigate("/home");
+        }, 2100);
+        return () => clearTimeout(timer);
+    }, []);
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;

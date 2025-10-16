@@ -1,10 +1,33 @@
-import { useState } from "react";
-import { ChevronLeft, Heart, ShoppingCart, Home, User } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ChevronLeft, Heart, ShoppingCart, Home as HomeIcon, User } from "lucide-react";
 import '../css/productDetail.css'
+
 export default function ProductDetail() {
     const [selectedColor, setSelectedColor] = useState("black");
     const [selectedSize, setSelectedSize] = useState("43");
     const [isLiked, setIsLiked] = useState(false);
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        const storedLiked = localStorage.getItem("liked");
+        if (storedLiked) {
+            const likedItems = JSON.parse(storedLiked);
+            if (likedItems[id]) {
+                setIsLiked(true);
+            }
+        }
+    }, [id]);
+
+    const toggleLike = () => {
+        const newLikedState = !isLiked;
+        setIsLiked(newLikedState);
+        const storedLiked = localStorage.getItem("liked");
+        const likedItems = storedLiked ? JSON.parse(storedLiked) : {};
+        likedItems[id] = newLikedState;
+        localStorage.setItem("liked", JSON.stringify(likedItems));
+    };
 
     const sizes = ["41", "42", "43", "44"];
     const colors = [
@@ -16,7 +39,12 @@ export default function ProductDetail() {
         <div className="product-detail-container">
             {/* Header */}
             <header className="product-header">
-
+                <button className="back-btn" onClick={() => navigate(-1)}>
+                    <ChevronLeft size={24} />
+                </button>
+                <button className="like-btn-header" onClick={toggleLike}>
+                    <Heart size={24} fill={isLiked ? "#000" : "none"} />
+                </button>
             </header>
 
             {/* Product Image */}
@@ -94,7 +122,7 @@ export default function ProductDetail() {
                 </div>
 
                 {/* Add to Cart Button */}
-                <button className="add-to-cart-btn-main">
+                <button className="add-to-cart-btn-main" onClick={() => alert("Added to cart!")}>
                     <ShoppingCart size={20} />
                     Add to cart
                 </button>
@@ -102,16 +130,16 @@ export default function ProductDetail() {
 
             {/* Bottom Navigation */}
             <nav className="bottom-nav">
-                <button className="nav-item">
-                    <Home size={24} />
+                <button className="nav-item" onClick={() => navigate('/')}>
+                    <HomeIcon size={24} />
                 </button>
-                <button className="nav-item active">
+                <button className="nav-item active" onClick={() => navigate('/cart')}>
                     <ShoppingCart size={24} />
                 </button>
                 <button className="nav-item">
                     <Heart size={24} />
                 </button>
-                <button className="nav-item">
+                <button className="nav-item" onClick={() => navigate('/settings')}>
                     <User size={24} />
                 </button>
             </nav>

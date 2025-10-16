@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-// pages/SettingsPage.tsx
 import { useEffect, useState } from "react";
+import { Home, ShoppingCart, Heart, User } from "lucide-react";
 import "../css/Settings.css";
 import profileImg from "../assets/profile.png"
 
@@ -23,6 +23,12 @@ export default function SettingsPage() {
 
     const handleToggle = () => {
         setDarkMode((prev) => !prev);
+    };
+
+    const handleDeleteAccount = () => {
+        if (window.confirm("Are you sure you want to delete your account?")) {
+            alert("Account deleted");
+        }
     };
 
     return (
@@ -169,7 +175,7 @@ export default function SettingsPage() {
 
                 <div className="section_main">
                     <div className="settings-items">
-                        <div className="item danger">
+                        <div className="item danger" onClick={handleDeleteAccount}>
                             <div className="item_content">
                                 <i
                                     className="fa fa-trash"
@@ -187,6 +193,20 @@ export default function SettingsPage() {
                     </div>
                 </div>
             </div>
+            <nav className="bottom-nav">
+                <button className="nav-item" onClick={() => navigate('/')}>
+                    <Home size={24} />
+                </button>
+                <button className="nav-item" onClick={() => navigate('/cart')}>
+                    <ShoppingCart size={24} />
+                </button>
+                <button className="nav-item">
+                    <Heart size={24} />
+                </button>
+                <button className="nav-item active" onClick={() => navigate('/settings')}>
+                    <User size={24} />
+                </button>
+            </nav>
         </div>
     );
 }

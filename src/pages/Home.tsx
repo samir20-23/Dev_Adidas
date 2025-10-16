@@ -8,8 +8,17 @@ export default function Home() {
     const navigate = useNavigate();
     const [liked, setLiked] = useState<{ [key: number]: boolean }>({});
 
+    useEffect(() => {
+        const storedLiked = localStorage.getItem("liked");
+        if (storedLiked) {
+            setLiked(JSON.parse(storedLiked));
+        }
+    }, []);
+
     const toggleLike = (id: number) => {
-        setLiked(prev => ({ ...prev, [id]: !prev[id] }));
+        const newLiked = { ...liked, [id]: !liked[id] };
+        setLiked(newLiked);
+        localStorage.setItem("liked", JSON.stringify(newLiked));
     };
 
     const popularShoes = [
@@ -58,9 +67,6 @@ export default function Home() {
                     <Search size={20} />
                     <input type="text" placeholder="Search" />
                 </div>
-                <button className="menu-btn">
-                    <Menu size={24} />
-                </button>
             </header>
 
             {/* Hero Banner */}
@@ -117,10 +123,13 @@ export default function Home() {
                 </div>
                 <div className="products-grid">
                     {popularShoes.map((shoe) => (
-                        <div key={shoe.id} className="product-card">
+                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="product-card">
                             <button
                                 className="like-btn"
-                                onClick={() => toggleLike(shoe.id)}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    toggleLike(shoe.id);
+                                }}
                             >
                                 <Heart size={20} fill={liked[shoe.id] ? "#000" : "none"} />
                             </button>
@@ -134,7 +143,7 @@ export default function Home() {
                             <button className="add-to-cart-btn">
                                 <ShoppingCart size={20} />
                             </button>
-                        </div>
+                        </Link>
                     ))}
                 </div>
                 <button className="explore-more-btn">Explore more</button>
@@ -145,10 +154,13 @@ export default function Home() {
                 <h2 className="section-title">Trend of the moment</h2>
                 <div className="trend-grid">
                     {trendShoes.map((shoe) => (
-                        <div key={shoe.id} className="trend-card">
+                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="trend-card">
                             <button
                                 className="like-btn-trend"
-                                onClick={() => toggleLike(shoe.id)}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    toggleLike(shoe.id)
+                                }}
                             >
                                 <Heart size={18} fill={liked[shoe.id] ? "#000" : "none"} />
                             </button>
@@ -163,7 +175,7 @@ export default function Home() {
                                 <h3>{shoe.name}</h3>
                                 <p>{shoe.subtitle}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
@@ -173,13 +185,13 @@ export default function Home() {
                 <button className="nav-item active">
                     <HomeIcon size={24} />
                 </button>
-                <button className="nav-item">
+                <button className="nav-item" onClick={() => navigate('/cart')}>
                     <ShoppingCart size={24} />
                 </button>
                 <button className="nav-item">
                     <Heart size={24} />
                 </button>
-                <button className="nav-item">
+                <button className="nav-item" onClick={() => navigate('/settings')}>
                     <User size={24} />
                 </button>
             </nav>
