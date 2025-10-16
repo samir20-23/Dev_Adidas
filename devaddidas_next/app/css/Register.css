@@ -1,0 +1,182 @@
+.titleRegister {
+  font-size: 25px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.221);
+  text-align: center;
+}
+
+.mainRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.headeRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logoBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+#registerForm {
+  width: 100%;
+}
+
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  border: none;
+  background: rgb(243, 241, 241);
+  padding: 10px;
+  padding-left: 12px;
+}
+
+
+.input-group #iconsInputs {
+  font-size: 1rem;
+  opacity: 0.5;
+  margin-right: 0.75rem;
+  pointer-events: none;
+}
+
+.input-group input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.input-group .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1rem;
+  color: #666;
+  opacity: 0.7;
+  z-index: 2;
+}
+
+.input-group .toggle-password:hover {
+  opacity: 1;
+}
+
+.logsWith i.fa {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.field-group {
+  margin-bottom: 1rem;
+}
+
+.field-group>label {
+  position: relative !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+  color: #000 !important;
+  cursor: pointer !important;
+}
+
+.error-msg {
+  display: block;
+  font-size: 0.85rem;
+  color: #c00;
+  min-height: 1em;
+}
+
+.field-group.error .input-group {
+  border-color: #c00;
+}
+
+.field-group.error .input-group input {
+  outline-color: #c00;
+}
+
+
+.terms {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: none;
+}
+
+
+#submitRegister {
+  width: 100%;
+  border-radius: 50px;
+  background: black;
+  border: none;
+  color: white;
+  padding: 14px;
+}
+
+.orRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  font-size: 20px;
+}
+
+span hr {
+  width: 200px;
+}
+
+.logsWith {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-btn {
+
+  width: 100%;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  padding: 14px;
+}
+
+#signupbtnAple {
+  background: black;
+}
+
+#signupbtnGoogle {
+  background-color: rgb(198, 198, 198);
+  color: black;
+}
+
+#AlreadyRegister {
+  color: rgb(80, 80, 80);
+}
+
+#AlreadyRegister span a {
+  color: black;
+  padding-left: 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ 

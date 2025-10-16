@@ -1,0 +1,11 @@
+.settings-footer {
+    text-align: center;
+    color: #aaa;
+    padding: 20px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.settings-footer p {
+    color: var(--text-sub);
+}
