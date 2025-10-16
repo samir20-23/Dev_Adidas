@@ -13,8 +13,8 @@ export default function ProductDetail() {
     useEffect(() => {
         const storedLiked = localStorage.getItem("liked");
         if (storedLiked) {
-            const likedItems = JSON.parse(storedLiked);
-            if (likedItems[id]) {
+            const likedItems: Record<string, boolean> = JSON.parse(storedLiked);
+            if (likedItems[id as string]) {
                 setIsLiked(true);
             }
         }
@@ -24,8 +24,8 @@ export default function ProductDetail() {
         const newLikedState = !isLiked;
         setIsLiked(newLikedState);
         const storedLiked = localStorage.getItem("liked");
-        const likedItems = storedLiked ? JSON.parse(storedLiked) : {};
-        likedItems[id] = newLikedState;
+        const likedItems: Record<string, boolean> = storedLiked ? JSON.parse(storedLiked) : {};
+        likedItems[id as string] = newLikedState;
         localStorage.setItem("liked", JSON.stringify(likedItems));
     };
 
