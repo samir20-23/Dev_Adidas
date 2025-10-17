@@ -1,0 +1,13 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "settings": "Settings",
+    "login": "Login",
+    "register": "Register",
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode",
+    "language": "Language"
+  }
+}

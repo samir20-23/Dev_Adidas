@@ -65,8 +65,9 @@ export default function StartPage() {
             content.style.transform = `translateZ(20px)`;
 
             if (forwardBtn.style.minWidth == "100%") {
-                navigation("/load");
-                // navigation("/home");
+                setTimeout(() => {
+                    navigation("/load");
+                }, 500);
 
             }
         };

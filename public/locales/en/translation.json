@@ -1,0 +1,72 @@
+
+{
+  "navbar": {
+    "home": "Home",
+    "product": "Product",
+    "detail": "Detail",
+    "cart": "Cart",
+    "settings": "Settings",
+    "login": "Login",
+    "register": "Register",
+    "theme": "Dark / Light",
+    "language": "Language"
+  },
+  "settings": {
+    "title": "Settings",
+    "userProfile": "User Profile",
+    "userName": "User Name",
+    "otherSettings": "Other Settings",
+    "notifications": "Notification",
+    "password": "Password",
+    "darkMode": "Dark mode",
+    "about": "About application",
+    "help": "Help/FAQ",
+    "deleteAccount": "Delete my account"
+  },
+  "register": {
+    "title": "Create an account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "terms": "I agree to the terms and conditions",
+    "submit": "Sign Up",
+    "or": "OR",
+    "apple": "Sign up with Apple",
+    "google": "Sign up with Google",
+    "already": "Already have an account?",
+    "login": "Log in"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log In",
+    "forgot": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "register": "Register"
+  },
+  "home": {
+    "search": "Search...",
+    "heroLabel": "NEW COLLECTION",
+    "heroTitle": "Find Your Perfect Shoes",
+    "shopNow": "Shop Now",
+    "categories": "Categories",
+    "popular": "Popular",
+    "seeAll": "See All",
+    "exploreMore": "Explore More",
+    "trending": "Trending"
+  },
+  "cart": {
+    "emptyTitle": "Your Cart is Empty",
+    "emptyText": "Looks like you haven't added anything to your cart yet.",
+    "startShopping": "Start Shopping"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "colors": "Colors",
+    "sizes": "Sizes",
+    "details": "Details",
+    "delivery": "Delivery",
+    "readMore": "Read More"
+  }
+}

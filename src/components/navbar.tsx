@@ -1,30 +1,32 @@
-// src/components/navbar.tsx
-// import React, { useState } from "react"
 import "../css/navbar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { ChevronLeft, Heart, ShoppingCart, Home, User } from "lucide-react";
+import { Heart } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 import Logo from "../assets/logoo.png"
 import LogoWhite from "../assets/logoWhite.png"
 import CartIcon from "../assets/cart.png"
 import Left from "../assets/left.png"
-import heartRed from "../assets/heart.png"
 import { useState } from "react"
 import { useTheme } from "../contexts/ThemeContext";
 
 export default function Navbar() {
-  const location = useLocation()   // full location object
+  const location = useLocation()
   const navigate = useNavigate()
-  const [liked, setLiked] = useState(false)
+  const { t, i18n } = useTranslation();
   const [isLiked, setIsLiked] = useState(false);
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   const closeBurger = () => {
     const el = document.getElementById("burger-toggle") as HTMLInputElement | null
     if (el) el.checked = false
   }
 
-  // helper to check dynamic product/detail paths
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    closeBurger();
+  };
+
   const isProductPath = location.pathname.startsWith("/product")
   const isDetailPath = location.pathname.startsWith("/detail")
 
@@ -41,7 +43,7 @@ export default function Navbar() {
                   style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}
                 >
                   <img src={Left} alt="Left" className="LeftIcon" />
-                  <p style={{ margin: 0 }}>{isProductPath ? "Product" : "Detail"}</p>
+                  <p style={{ margin: 0 }}>{isProductPath ? t('navbar.product') : t('navbar.detail')}</p>
                 </div>
               </>
             )
@@ -58,35 +60,31 @@ export default function Navbar() {
                     </svg>
                   </label>
 
-                  <div className="hamburger-menu" onClick={closeBurger}>
-                    <Link to="/" onClick={closeBurger}>Home</Link>
-                    <Link to="/product" onClick={closeBurger}>Product</Link>
-                    <Link to="/detail" onClick={closeBurger}>Detail</Link>
-                    <Link to="/cart" onClick={closeBurger}>Cart</Link>
-                    <Link to="/settings" onClick={closeBurger}>Settings</Link>
-                    <Link to="/login" onClick={closeBurger}>Login</Link>
-                    <Link to="/register" onClick={closeBurger}>Register</Link>
+                  <div className="hamburger-menu">
+                    <Link to="/" onClick={closeBurger}>{t('navbar.home')}</Link>
+                    <Link to="/product" onClick={closeBurger}>{t('navbar.product')}</Link>
+                    <Link to="/cart" onClick={closeBurger}>{t('navbar.cart')}</Link>
+                    <Link to="/settings" onClick={closeBurger}>{t('navbar.settings')}</Link>
+                    <Link to="/login" onClick={closeBurger}>{t('navbar.login')}</Link>
+                    <Link to="/register" onClick={closeBurger}>{t('navbar.register')}</Link>
 
                     <button
                       className="hamburger-theme-btn"
                       onClick={(e) => {
                         e.stopPropagation()
-                        document.body.classList.toggle("dark-mode")
+                        toggleTheme()
                       }}
                     >
-                      Dark / Light
+                      {t('navbar.theme')}
                     </button>
 
                     <select
                       className="hamburger-lang"
+                      value={i18n.language}
                       onClick={(e) => e.stopPropagation()}
-                      onChange={(e) => {
-                        const v = (e.target as HTMLSelectElement).value
-                        console.log("lang:", v)
-                      }}
+                      onChange={(e) => changeLanguage(e.target.value)}
                     >
                       <option value="en">EN</option>
-                      <option value="fr">FR</option>
                       <option value="ar">AR</option>
                     </select>
                   </div>
@@ -112,20 +110,15 @@ export default function Navbar() {
                     onClick={() => navigate("/cart")}
                     style={{ cursor: "pointer", width: 28, marginRight: 10 }}
                   />
-
-                  {/* heart toggle: both icon and image toggle liked state */}
-
                   <button className="like-btn-header" onClick={() => setIsLiked(!isLiked)}>
                     <Heart size={24} fill={isLiked ? (theme === 'dark' ? '#FFF' : '#000') : "none"} />
                   </button>
                 </>
               )
             }
-
             if (isDetailPath) {
               return <i className="fa fa-heart-o" id="icon" aria-hidden="true" />
             }
-
             return <i className="fa fa-bell" id="icon" aria-hidden="true" />
           })()}
         </div>
