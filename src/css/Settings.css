@@ -94,7 +94,7 @@
  .user_Profile .img {
    width: 60px;
    height: 60px;
-   background:#6c2d87;
+   background:var(--primary-color);
    border-radius: 50px;
  }
   .user_Profile .img img {

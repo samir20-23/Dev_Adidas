@@ -38,7 +38,7 @@
 
 .empty-cart-text {
     font-size: 15px;
-    color: #666;
+    color: var(--text-color);
     line-height: 1.5;
     margin-bottom: 30px;
 }

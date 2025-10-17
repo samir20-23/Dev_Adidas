@@ -54,7 +54,7 @@
 
 .hero-banner {
     position: relative;
-    background: linear-gradient(135deg, #2D3E50 0%, #1A252F 100%);
+    background: var(--primary-color);
     border-radius: 20px;
     margin: 16px 20px;
     padding: 30px 24px;
@@ -68,14 +68,14 @@
 }
 
 .hero-label {
-    color: white;
+    color: var(--secondary-color);
     font-size: 13px;
     letter-spacing: 1px;
     opacity: 0.9;
 }
 
 .hero-title {
-    color: white;
+    color: var(--secondary-color);
     font-size: 48px;
     font-weight: 700;
     margin: 8px 0 16px;
@@ -83,8 +83,8 @@
 }
 
 .shop-now-btn {
-    background: white;
-    color: #000;
+    background: var(--secondary-color);
+    color: var(--primary-color);
     border: none;
     padding: 12px 24px;
     border-radius: 25px;
@@ -107,7 +107,7 @@
     right: 20px;
     background: rgba(255, 255, 255, 0.2);
     border: none;
-    color: white;
+    color: var(--secondary-color);
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -197,7 +197,7 @@
 }
 
 .see-all {
-    color: #4A90E2;
+    color: var(--primary-color);
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
@@ -313,7 +313,7 @@
 }
 
 .trend-card {
-    background: #F5EFE6;
+    background: var(--secondary-color);
     border-radius: 16px;
     padding: 16px;
     position: relative;
@@ -321,14 +321,14 @@
 }
 
 .trend-card:nth-child(2) {
-    background: #E8E4D9;
+    background: var(--secondary-color);
 }
 
 .like-btn-trend {
     position: absolute;
     top: 16px;
     right: 16px;
-    background: white;
+    background: var(--secondary-color);
     border: none;
     width: 32px;
     height: 32px;
@@ -344,7 +344,7 @@
     position: absolute;
     top: 16px;
     left: 16px;
-    background: white;
+    background: var(--secondary-color);
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 13px;
@@ -368,7 +368,7 @@
 }
 
 .trend-shop-btn {
-    background: white;
+    background: var(--secondary-color);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -390,7 +390,7 @@
 
 .trend-info p {
     font-size: 13px;
-    color: #666;
+    color: var(--text-color);
 }
 
 @media (max-width: 1200px) {

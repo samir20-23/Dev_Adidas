@@ -162,7 +162,7 @@ span hr {
 }
 
 #signupbtnAple {
-  background: black;
+  background: var(--primary-color);
 }
 
 #signupbtnGoogle {
@@ -171,7 +171,7 @@ span hr {
 }
 
 #AlreadyRegister {
-  color: rgb(80, 80, 80);
+  color: var(--text-color);
 }
 
 #AlreadyRegister span a {
