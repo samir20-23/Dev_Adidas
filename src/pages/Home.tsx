@@ -181,7 +181,7 @@ export default function Home() {
             </section>
 
             {/* Bottom Navigation */}
-            <nav className="bottom-nav">
+            {/* <nav className="bottom-nav">
                 <button className="nav-item active">
                     <HomeIcon size={24} />
                 </button>
@@ -194,7 +194,7 @@ export default function Home() {
                 <button className="nav-item" onClick={() => navigate('/settings')}>
                     <User size={24} />
                 </button>
-            </nav>
+            </nav> */}
         </div>
     );
 }

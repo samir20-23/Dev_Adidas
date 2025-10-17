@@ -1,11 +1,13 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Search, Menu, ChevronRight, Heart, ShoppingCart, Home as HomeIcon, User } from "lucide-react";
 import "../css/home.css";
 
 export default function Home() {
-    const navigate = useNavigate();
+    const router = useRouter();
     const [liked, setLiked] = useState<{ [key: number]: boolean }>({});
 
     useEffect(() => {
@@ -38,7 +40,7 @@ export default function Home() {
             id: 3,
             name: "Adidas Barricola Shoes",
             price: "449 $",
-            image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=300&fit=crop"
+            image: "https://images.unsplash.com/photo-1605348532760-6753d2c4la3329?w=400&h=300&fit=crop"
         }
     ];
 
@@ -119,11 +121,11 @@ export default function Home() {
             <section className="popular-section">
                 <div className="section-header">
                     <h2 className="section-title">Popular Shoes</h2>
-                    <Link to="/see-all" className="see-all">See All</Link>
+                    <Link href="/see-all" className="see-all">See All</Link>
                 </div>
                 <div className="products-grid">
                     {popularShoes.map((shoe) => (
-                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="product-card">
+                        <Link href={`/product/${shoe.id}`} key={shoe.id} className="product-card">
                             <button
                                 className="like-btn"
                                 onClick={(e) => {
@@ -154,7 +156,7 @@ export default function Home() {
                 <h2 className="section-title">Trend of the moment</h2>
                 <div className="trend-grid">
                     {trendShoes.map((shoe) => (
-                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="trend-card">
+                        <Link href={`/product/${shoe.id}`} key={shoe.id} className="trend-card">
                             <button
                                 className="like-btn-trend"
                                 onClick={(e) => {
@@ -185,13 +187,13 @@ export default function Home() {
                 <button className="nav-item active">
                     <HomeIcon size={24} />
                 </button>
-                <button className="nav-item" onClick={() => navigate('/cart')}>
+                <button className="nav-item" onClick={() => router.push('/cart')}>
                     <ShoppingCart size={24} />
                 </button>
                 <button className="nav-item">
                     <Heart size={24} />
                 </button>
-                <button className="nav-item" onClick={() => navigate('/settings')}>
+                <button className="nav-item" onClick={() => router.push('/settings')}>
                     <User size={24} />
                 </button>
             </nav>

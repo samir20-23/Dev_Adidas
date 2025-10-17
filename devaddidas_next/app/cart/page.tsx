@@ -1,19 +1,14 @@
+"use client";
 
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ShoppingCart, Home, Heart, User, Trash2 } from "lucide-react";
 import '../css/cart.css'
 
-
-
-
-
 export default function Cart() {
     const [cartItems, setCartItems] = useState<any[]>([]);
-
-
-    const navigate = useNavigate();
+    const router = useRouter();
 
     useEffect(() => {
         const storedCart = localStorage.getItem("cart");
@@ -39,7 +34,7 @@ export default function Cart() {
                     <p className="empty-cart-text">
                         Looks like you haven't added anything to your cart yet
                     </p>
-                    <button className="start-shopping-btn" onClick={() => navigate('/')}>
+                    <button className="start-shopping-btn" onClick={() => router.push('/')}>
                         Start Shopping
                     </button>
                 </div>
@@ -62,16 +57,16 @@ export default function Cart() {
 
             {/* Bottom Navigation */}
             <nav className="bottom-nav">
-                <button className="nav-item" onClick={() => navigate('/')}>
+                <button className="nav-item" onClick={() => router.push('/')}>
                     <Home size={24} />
                 </button>
-                <button className="nav-item active" onClick={() => navigate('/cart')}>
+                <button className="nav-item active" onClick={() => router.push('/cart')}>
                     <ShoppingCart size={24} />
                 </button>
                 <button className="nav-item">
                     <Heart size={24} />
                 </button>
-                <button className="nav-item" onClick={() => navigate('/settings')}>
+                <button className="nav-item" onClick={() => router.push('/settings')}>
                     <User size={24} />
                 </button>
             </nav>

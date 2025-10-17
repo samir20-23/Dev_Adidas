@@ -1,32 +1,39 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useRouter, useParams } from "next/navigation";
 import { ChevronLeft, Heart, ShoppingCart, Home as HomeIcon, User } from "lucide-react";
-import '../css/productDetail.css'
+import '../../css/productDetail.css'
 
 export default function ProductDetail() {
     const [selectedColor, setSelectedColor] = useState("black");
     const [selectedSize, setSelectedSize] = useState("43");
     const [isLiked, setIsLiked] = useState(false);
-    const navigate = useNavigate();
-    const { id } = useParams();
+    const router = useRouter();
+    const params = useParams();
+    const id = params.id;
 
     useEffect(() => {
-        const storedLiked = localStorage.getItem("liked");
-        if (storedLiked) {
-            const likedItems: Record<string, boolean> = JSON.parse(storedLiked);
-            if (likedItems[id as string]) {
-                setIsLiked(true);
+        if (id) {
+            const storedLiked = localStorage.getItem("liked");
+            if (storedLiked) {
+                const likedItems: Record<string, boolean> = JSON.parse(storedLiked);
+                if (likedItems[id as string]) {
+                    setIsLiked(true);
+                }
             }
         }
     }, [id]);
 
     const toggleLike = () => {
-        const newLikedState = !isLiked;
-        setIsLiked(newLikedState);
-        const storedLiked = localStorage.getItem("liked");
-        const likedItems: Record<string, boolean> = storedLiked ? JSON.parse(storedLiked) : {};
-        likedItems[id as string] = newLikedState;
-        localStorage.setItem("liked", JSON.stringify(likedItems));
+        if (id) {
+            const newLikedState = !isLiked;
+            setIsLiked(newLikedState);
+            const storedLiked = localStorage.getItem("liked");
+            const likedItems: Record<string, boolean> = storedLiked ? JSON.parse(storedLiked) : {};
+            likedItems[id as string] = newLikedState;
+            localStorage.setItem("liked", JSON.stringify(likedItems));
+        }
     };
 
     const sizes = ["41", "42", "43", "44"];
@@ -39,7 +46,7 @@ export default function ProductDetail() {
         <div className="product-detail-container">
             {/* Header */}
             <header className="product-header">
-                <button className="back-btn" onClick={() => navigate(-1)}>
+                <button className="back-btn" onClick={() => router.back()}>
                     <ChevronLeft size={24} />
                 </button>
                 <button className="like-btn-header" onClick={toggleLike}>
@@ -129,20 +136,20 @@ export default function ProductDetail() {
             </div>
 
             {/* Bottom Navigation */}
-            {/* <nav className="bottom-nav">
-                <button className="nav-item" onClick={() => navigate('/')}>
+            <nav className="bottom-nav">
+                <button className="nav-item" onClick={() => router.push('/')}>
                     <HomeIcon size={24} />
                 </button>
-                <button className="nav-item active" onClick={() => navigate('/cart')}>
+                <button className="nav-item active" onClick={() => router.push('/cart')}>
                     <ShoppingCart size={24} />
                 </button>
                 <button className="nav-item">
                     <Heart size={24} />
                 </button>
-                <button className="nav-item" onClick={() => navigate('/settings')}>
+                <button className="nav-item" onClick={() => router.push('/settings')}>
                     <User size={24} />
                 </button>
-            </nav> */}
+            </nav>
         </div>
     );
 }

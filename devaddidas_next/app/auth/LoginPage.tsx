@@ -1,62 +1,67 @@
-// src/pages/LoginPage.tsx
+"use client";
 
 import { useEffect } from "react";
-import "../../css/Register.css"; // match your actual filename
-import "@fortawesome/fontawesome-free/css/all.min.css"; // if installed via npm
-import Logo from "../../components/logo_Comp/Logo";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import "../../css/Register.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+// Assuming Logo component will be created at this path
+// import Logo from "../../components/logo_Comp/Logo";
 
 export default function LoginPage() {
-    useEffect(() => {
-        // 1) Password show/hide toggle
-        const toggleIcons =
-            document.querySelectorAll<HTMLElement>(".toggle-password");
-        toggleIcons.forEach((eye) => {
-            eye.addEventListener("click", () => {
-                const targetId = eye.getAttribute("data-target");
-                if (!targetId) return;
-                const input = document.getElementById(
-                    targetId
-                ) as HTMLInputElement | null;
-                if (!input) return;
+    const router = useRouter();
 
-                if (input.type === "password") {
-                    input.type = "text";
-                    eye.classList.replace("fa-eye", "fa-eye-slash");
-                } else {
-                    input.type = "password";
-                    eye.classList.replace("fa-eye-slash", "fa-eye");
-                }
-            });
+    useEffect(() => {
+        const toggleIcons = document.querySelectorAll<HTMLElement>(".toggle-password");
+        const handleClick = (event: MouseEvent) => {
+            const eye = event.currentTarget as HTMLElement;
+            const targetId = eye.getAttribute("data-target");
+            if (!targetId) return;
+            const input = document.getElementById(targetId) as HTMLInputElement | null;
+            if (!input) return;
+
+            if (input.type === "password") {
+                input.type = "text";
+                eye.classList.replace("fa-eye", "fa-eye-slash");
+            } else {
+                input.type = "password";
+                eye.classList.replace("fa-eye-slash", "fa-eye");
+            }
+        };
+
+        toggleIcons.forEach((eye) => {
+            eye.addEventListener("click", handleClick);
         });
 
-        // 2) Remember‑me checkbox opacity toggle
-        const checkbox = document.getElementById(
-            "termsCheckbox"
-        ) as HTMLInputElement | null;
+        const checkbox = document.getElementById("termsCheckbox") as HTMLInputElement | null;
         const textContent = document.getElementById("termsCheckboxcontent");
-        if (checkbox && textContent) {
-            checkbox.addEventListener("click", () => {
-                textContent.style.opacity =
-                    textContent.style.opacity === "0.5" ? "1" : "0.5";
-            });
+        const handleCheckboxClick = () => {
+            if (textContent) {
+                textContent.style.opacity = textContent.style.opacity === "0.5" ? "1" : "0.5";
+            }
+        };
+
+        if (checkbox) {
+            checkbox.addEventListener("click", handleCheckboxClick);
         }
 
-        // 3) Clear error messages on input
         const inputs = document.querySelectorAll<HTMLInputElement>(
             "input[type='email'], input[type='password']"
         );
+        const handleInput = (event: Event) => {
+            const inp = event.currentTarget as HTMLInputElement;
+            const errorSpan = document.getElementById(`error-${inp.id}`);
+            if (errorSpan) errorSpan.textContent = "";
+        };
+
         inputs.forEach((inp) => {
-            inp.addEventListener("input", () => {
-                const errorSpan = document.getElementById(`error-${inp.id}`);
-                if (errorSpan) errorSpan.textContent = "";
-            });
+            inp.addEventListener("input", handleInput);
         });
 
         return () => {
-            // cleanup listeners
-            toggleIcons.forEach((eye) => eye.replaceWith(eye.cloneNode(true)));
-            if (checkbox) checkbox.replaceWith(checkbox.cloneNode(true));
-            inputs.forEach((inp) => inp.replaceWith(inp.cloneNode(true)));
+            toggleIcons.forEach((eye) => eye.removeEventListener("click", handleClick));
+            if (checkbox) checkbox.removeEventListener("click", handleCheckboxClick);
+            inputs.forEach((inp) => inp.removeEventListener("input", handleInput));
         };
     }, []);
 
@@ -64,13 +69,12 @@ export default function LoginPage() {
         <div className="mainRegister">
             <div className="headeRegister">
                 <div className="logoBar">
-                    <Logo />
+                    {/* <Logo /> */}
                 </div>
                 <h2 className="titleRegister">Welcome Back!</h2>
             </div>
 
             <form id="registerForm" onSubmit={(e) => e.preventDefault()}>
-                {/* Email */}
                 <div className="field-group">
                     <p className="label">Email *</p>
                     <div className="input-group">
@@ -86,7 +90,6 @@ export default function LoginPage() {
                     <span className="error-msg" id="error-emailRegister"></span>
                 </div>
 
-                {/* Password */}
                 <div className="field-group">
                     <p className="label">Password *</p>
                     <div className="input-group">
@@ -105,13 +108,9 @@ export default function LoginPage() {
                             style={{ cursor: "pointer" }}
                         />
                     </div>
-                    <span
-                        className="error-msg"
-                        id="error-passwordRegister"
-                    ></span>
+                    <span className="error-msg" id="error-passwordRegister"></span>
                 </div>
 
-                {/* Remember Me */}
                 <div className="terms field-group">
                     <input type="checkbox" id="termsCheckbox" />
                     <p
@@ -119,7 +118,6 @@ export default function LoginPage() {
                         style={{ opacity: 0.5, cursor: "pointer" }}
                         className="label"
                     >
-                        {" "}
                         Remember me!
                     </p>
                     <span className="error-msg" id="error-termsCheckbox"></span>
@@ -131,13 +129,9 @@ export default function LoginPage() {
             </form>
 
             <div className="orRegister">
-                <span>
-                    <hr />
-                </span>
+                <span><hr /></span>
                 <span>or</span>
-                <span>
-                    <hr />
-                </span>
+                <span><hr /></span>
             </div>
 
             <div className="logsWith">
@@ -154,7 +148,7 @@ export default function LoginPage() {
             <p id="AlreadyRegister">
                 Don’t have an account?{" "}
                 <span>
-                    <a href="/register">Sign up</a>
+                    <Link href="/auth/RegisterPage">Sign up</Link>
                 </span>
             </p>
         </div>

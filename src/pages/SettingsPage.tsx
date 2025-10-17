@@ -193,7 +193,7 @@ export default function SettingsPage() {
                     </div>
                 </div>
             </div>
-            <nav className="bottom-nav">
+            {/* <nav className="bottom-nav">
                 <button className="nav-item" onClick={() => navigate('/')}>
                     <Home size={24} />
                 </button>
@@ -206,7 +206,7 @@ export default function SettingsPage() {
                 <button className="nav-item active" onClick={() => navigate('/settings')}>
                     <User size={24} />
                 </button>
-            </nav>
+            </nav> */}
         </div>
     );
 }

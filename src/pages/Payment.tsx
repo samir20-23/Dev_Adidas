@@ -105,7 +105,7 @@ export default function Payment() {
             </div>
 
             {/* Bottom Navigation */}
-            <nav className="bottom-nav">
+            {/* <nav className="bottom-nav">
                 <button className="nav-item">
                     <Home size={24} />
                 </button>
@@ -118,7 +118,7 @@ export default function Payment() {
                 <button className="nav-item active">
                     <User size={24} />
                 </button>
-            </nav>
+            </nav> */}
         </div>
     );
 }

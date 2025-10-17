@@ -60,7 +60,7 @@ export default function Cart() {
             )}
 
             {/* Bottom Navigation */}
-            <nav className="bottom-nav">
+            {/* <nav className="bottom-nav">
                 <button className="nav-item" onClick={() => navigate('/')}>
                     <Home size={24} />
                 </button>
@@ -73,7 +73,7 @@ export default function Cart() {
                 <button className="nav-item" onClick={() => navigate('/settings')}>
                     <User size={24} />
                 </button>
-            </nav>
+            </nav> */}
         </div>
     );
 }

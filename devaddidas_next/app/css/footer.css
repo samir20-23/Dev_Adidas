@@ -1,11 +1,7 @@
 .settings-footer {
-    text-align: center;
-    color: #aaa;
+    background-color: #f8f9fa;
     padding: 20px;
-    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
     margin-top: 20px;
-}
-
-.settings-footer p {
-    color: var(--text-sub);
 }

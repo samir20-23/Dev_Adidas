@@ -1,14 +1,21 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Home, ShoppingCart, Heart, User } from "lucide-react";
 import "../css/Settings.css";
-import profileImg from "../assets/profile.png"
+
+// Assuming profileImg will be in the public folder
+const profileImg = "/profile.png";
 
 export default function SettingsPage() {
-    const [darkMode, setDarkMode] = useState(
-        document.documentElement.getAttribute("data-theme") === "dark"
-    );
-    const navigate = useNavigate();
+    const [darkMode, setDarkMode] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        setDarkMode(isDark);
+    }, []);
 
     useEffect(() => {
         document.documentElement.classList.add("transition");
@@ -34,7 +41,7 @@ export default function SettingsPage() {
     return (
         <div className="SettingsPage">
             <div className="nav_section">
-                <div onClick={() => navigate(-1)}>
+                <div onClick={() => router.back()}>
                     <i
                         className="fa fa-angle-left"
                         id="backSettings"
@@ -51,12 +58,7 @@ export default function SettingsPage() {
                 <div className="user_section">
                     <div className="user_Profile">
                         <div className="img">
-                            <div className="img">
-
-                                <img src={profileImg} alt="Profile" />
-
-                            </div>
-
+                            <img src={profileImg} alt="Profile" />
                         </div>
                         <p className="user_name"> User Name</p>
                     </div>
@@ -194,16 +196,16 @@ export default function SettingsPage() {
                 </div>
             </div>
             <nav className="bottom-nav">
-                <button className="nav-item" onClick={() => navigate('/')}>
+                <button className="nav-item" onClick={() => router.push('/')}>
                     <Home size={24} />
                 </button>
-                <button className="nav-item" onClick={() => navigate('/cart')}>
+                <button className="nav-item" onClick={() => router.push('/cart')}>
                     <ShoppingCart size={24} />
                 </button>
                 <button className="nav-item">
                     <Heart size={24} />
                 </button>
-                <button className="nav-item active" onClick={() => navigate('/settings')}>
+                <button className="nav-item active" onClick={() => router.push('/settings')}>
                     <User size={24} />
                 </button>
             </nav>
