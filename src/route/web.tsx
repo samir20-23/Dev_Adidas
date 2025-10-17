@@ -7,8 +7,10 @@ import LoginPage from "../pages/auth/LoginPage.tsx";
 import RegisterPage from "../pages/auth/RegisterPage.tsx";
 import Layouts from "../layouts/index.tsx";
 import ProductDetail from "../pages/ProductDetail.tsx";
-import Cart from "../pages/Cart.tsx"
+import Cart from "../pages/Cart.tsx";
 import Payment from "../pages/Payment.tsx";
+import Menubar from "../components/menubar.tsx";
+
 export const router = createBrowserRouter([
     {
         element: <Layouts />,
@@ -20,14 +22,24 @@ export const router = createBrowserRouter([
             {
                 path: "/home",
                 element: <Home />,
-            }, {
+            },
+            {
                 path: "/product/:id",
-                element: <ProductDetail />
+                element: <ProductDetail />,
             },
             {
                 path: "/cart",
-                element: <Cart />
-            }
+                element: <Cart />,
+            },
+        ],
+    },
+    {
+        element: <Menubar />,
+        children: [
+            {
+                path: "/home",
+                element: <Home />,
+            },
         ],
     },
     {
@@ -35,7 +47,7 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
     },
     {
-        path: "load",
+        path: "/load",
         element: <LoadPageLogo />,
     },
     {
@@ -45,8 +57,9 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <StartPage />,
-    }, {
+    },
+    {
         path: "/payment",
-        element: <Payment />
-    }
+        element: <Payment />,
+    },
 ]);
