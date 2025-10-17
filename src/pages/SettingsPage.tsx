@@ -1,29 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Home, ShoppingCart, Heart, User } from "lucide-react";
+import { useTheme } from "../contexts/ThemeContext";
 import "../css/Settings.css";
 import profileImg from "../assets/profile.png"
 
 export default function SettingsPage() {
-    const [darkMode, setDarkMode] = useState(
-        document.documentElement.getAttribute("data-theme") === "dark"
-    );
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        document.documentElement.classList.add("transition");
-        window.setTimeout(() => {
-            document.documentElement.classList.remove("transition");
-        }, 300);
-        document.documentElement.setAttribute(
-            "data-theme",
-            darkMode ? "dark" : "light"
-        );
-    }, [darkMode]);
-
-    const handleToggle = () => {
-        setDarkMode((prev) => !prev);
-    };
 
     const handleDeleteAccount = () => {
         if (window.confirm("Are you sure you want to delete your account?")) {
@@ -130,8 +112,8 @@ export default function SettingsPage() {
                                     className="container_toggle"
                                     id="switch"
                                     name="mode"
-                                    checked={darkMode}
-                                    onChange={handleToggle}
+                                    checked={theme === 'dark'}
+                                    onChange={toggleTheme}
                                 />
                                 <label htmlFor="switch">Toggle</label>
                             </div>

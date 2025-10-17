@@ -2,6 +2,7 @@
   font-size: 25px;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.221);
   text-align: center;
+  color: var(--text-color);
 }
 
 .mainRegister {
@@ -39,7 +40,7 @@
   align-items: center;
   border-radius: 12px;
   border: none;
-  background: rgb(243, 241, 241);
+  background: var(--secondary-color);
   padding: 10px;
   padding-left: 12px;
 }
@@ -59,6 +60,7 @@
   padding: 0;
   font-size: 1rem;
   background: transparent;
+  color: var(--text-color);
 }
 
 .input-group .toggle-password {
@@ -91,7 +93,7 @@
   position: relative !important;
   z-index: 10 !important;
   pointer-events: auto !important;
-  color: #000 !important;
+  color: var(--text-color) !important;
   cursor: pointer !important;
 }
 
@@ -123,9 +125,9 @@
 #submitRegister {
   width: 100%;
   border-radius: 50px;
-  background: black;
+  background: var(--primary-color);
   border: none;
-  color: white;
+  color: var(--secondary-color);
   padding: 14px;
 }
 
@@ -173,7 +175,7 @@ span hr {
 }
 
 #AlreadyRegister span a {
-  color: black;
+  color: var(--text-color);
   padding-left: 15px;
   text-decoration: none;
   cursor: pointer;

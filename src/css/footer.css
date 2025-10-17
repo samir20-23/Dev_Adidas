@@ -1,11 +1,11 @@
 .settings-footer {
     text-align: center;
-    color: #aaa;
+    color: var(--text-color);
     padding: 20px;
     font-size: 14px;
     margin-top: 20px;
 }
 
 .settings-footer p {
-    color: var(--text-sub);
+    color: var(--text-color);
 }

@@ -1,6 +1,6 @@
 .payment-container {
     min-height: 100vh;
-    background: #F5F5F5;
+    background: var(--background-color);
     padding-bottom: 80px;
     max-width: 1400px;
     margin: 0 auto;
@@ -11,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background: white;
+    background: var(--secondary-color);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -29,7 +29,7 @@
 .page-title {
     font-size: 20px;
     font-weight: 700;
-    color: #000;
+    color: var(--text-color);
 }
 
 .payment-content {
@@ -42,7 +42,7 @@
 
     font-weight: 600;
 
-    color: #000;
+    color: var(--text-color);
 
     margin-bottom: 16px;
 

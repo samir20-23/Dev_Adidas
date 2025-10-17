@@ -5,16 +5,19 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { ChevronLeft, Heart, ShoppingCart, Home, User } from "lucide-react";
 
 import Logo from "../assets/logoo.png"
+import LogoWhite from "../assets/logoWhite.png"
 import CartIcon from "../assets/cart.png"
 import Left from "../assets/left.png"
 import heartRed from "../assets/heart.png"
 import { useState } from "react"
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function Navbar() {
   const location = useLocation()   // full location object
   const navigate = useNavigate()
   const [liked, setLiked] = useState(false)
   const [isLiked, setIsLiked] = useState(false);
+  const { theme } = useTheme();
 
   const closeBurger = () => {
     const el = document.getElementById("burger-toggle") as HTMLInputElement | null
@@ -94,7 +97,7 @@ export default function Navbar() {
         })()}
 
         <div className="logonavbar" onClick={() => navigate("/home")} style={{ cursor: "pointer" }}>
-          <img src={Logo} alt="logo" />
+          <img src={theme === 'dark' ? LogoWhite : Logo} alt="logo" />
         </div>
 
         <div className="iconnavbar">
@@ -113,7 +116,7 @@ export default function Navbar() {
                   {/* heart toggle: both icon and image toggle liked state */}
 
                   <button className="like-btn-header" onClick={() => setIsLiked(!isLiked)}>
-                    <Heart size={24} fill={isLiked ? "#000" : "none"} />
+                    <Heart size={24} fill={isLiked ? (theme === 'dark' ? '#FFF' : '#000') : "none"} />
                   </button>
                 </>
               )

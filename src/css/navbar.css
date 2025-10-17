@@ -5,7 +5,7 @@
  }
 
  .navbarmain {
-     background-color: #ffffff;
+     background-color: var(--secondary-color);
      display: flex;
      align-items: center;
      justify-content: space-between;
@@ -60,7 +60,7 @@
 
  .line {
      fill: none;
-     stroke: black;
+     stroke: var(--text-color);
      stroke-linecap: round;
      stroke-linejoin: round;
      stroke-width: 3;
@@ -129,7 +129,7 @@
      position: absolute;
      top: calc(100% + 8px);
      left: 10px;
-     background-color: #fff;
+     background-color: var(--secondary-color);
      border: 1px solid #ddd;
      border-radius: 8px;
      padding: 0.6rem;
@@ -148,7 +148,7 @@
 
  .hamburger-menu a {
      text-decoration: none;
-     color: #111;
+     color: var(--text-color);
      padding: 0.45rem;
      border-radius: 6px;
      transition: background 0.15s ease;
@@ -240,7 +240,7 @@
 
 
  .like-btn-header {
-     background: white;
+     background: var(--secondary-color);
      border: none;
      display: flex;
      align-items: center;

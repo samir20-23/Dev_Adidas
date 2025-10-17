@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--secondary-color);
     display: flex;
     justify-content: space-around;
     padding: 16px 20px;
@@ -25,11 +25,11 @@
 }
 
 .nav-item.active {
-    color: #000;
+    color: var(--primary-color);
 }
 
 .nav-item:hover {
-    color: #000;
+    color: var(--primary-color);
 }
 
 #iconsMenuBar {

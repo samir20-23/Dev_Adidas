@@ -1,1 +1,22 @@
- 
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #000000;
+  --secondary-color: #ffffff;
+  --icon-color: #000000;
+}
+
+[data-theme='dark'] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --primary-color: #ffffff;
+  --secondary-color: #000000;
+  --icon-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
