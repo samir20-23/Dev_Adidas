@@ -1,7 +1,7 @@
 import React from "react"
 // import "../css/footer.css";
 import { Home, User } from "lucide-react";
-// import "../css/footer.css"
+import "../css/footer.css"
 
 const Footer = () => (
     <div className="settings-footer">

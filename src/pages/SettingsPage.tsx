@@ -108,13 +108,10 @@ export default function SettingsPage() {
                             <div className="dark">
                                 <input
                                     type="checkbox"
-                                    className="container_toggle"
-                                    id="switch"
-                                    name="mode"
+                                    className="theme-checkbox" name="mode"
                                     checked={theme === 'dark'}
                                     onChange={toggleTheme}
                                 />
-                                <label htmlFor="switch">Toggle</label>
                             </div>
                         </div>
                     </div>

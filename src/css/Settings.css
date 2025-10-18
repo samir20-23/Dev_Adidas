@@ -1,4 +1,3 @@
- 
  :root {
    --borderradius: 15px;
    --fontSize: 17px;
@@ -6,26 +5,29 @@
    --fontSizeIcon: 25px;
  }
 
-.SettingsPage {
-  min-width: 300px;
+ .SettingsPage {
+   min-width: 300px;
    font-family: "Helvetica Neue", Arial, sans-serif;
    width: 100%;
    display: flex;
    flex-direction: column;
    gap: 35px;
    font-size: var(--fontSize);
-   text-shadow: 0.1px 0 2px rgba(62, 17, 83, 0.721);
-   background-color: var(--background-color);
+   text-shadow: 0 0 1px rgba(0, 0, 0, 0.253);
    color: var(--text-color);
+   background-color: var(--background-color2); 
+
  }
 
-.SettingsPage .nav_section {
+ .SettingsPage .nav_section {
    width: 100%;
    display: flex;
-   padding: var(--padding);
    justify-content: space-between;
    padding-bottom: var(--padding);
    align-items: center;
+   padding-top: 10px;
+   padding-left: 9px;
+   padding-right: 9px; 
  }
 
  .nav_section .title_section {
@@ -52,9 +54,7 @@
    font-size: var(--fontSizeIcon);
  }
 
- .section_main {
-   padding: var(--padding);
- }
+
 
  .user_Profile,
  .item {
@@ -72,10 +72,12 @@
  }
 
  .user_section {
-  
+
    background-color: var(--secondary-color);
    border-radius: var(--borderradius);
-   padding: var(--padding);
+   padding: 14px;
+   padding-left: 25px;
+   padding-right: 25px;
 
    width: 100%;
    display: flex;
@@ -94,19 +96,22 @@
  .user_Profile .img {
    width: 60px;
    height: 60px;
-   background:var(--primary-color);
+   background: var(--primary-color);
    border-radius: 50px;
  }
-  .user_Profile .img img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-  }
+
+ .user_Profile .img img {
+   width: 100%;
+   height: 100%;
+   border-radius: 50px;
+ }
+
  .user_Profile .user_name {
    display: flex;
    justify-content: center;
    align-items: center;
    padding-left: 12px;
+   font-size: 15px;
  }
 
  .user_section i {
@@ -115,7 +120,12 @@
 
 
  .section_main {
-   margin-bottom: 20px;
+   margin-bottom: 10px;
+
+ }
+
+ .section_main {
+   padding: 9px;
  }
 
  .title_settings_section {
@@ -221,4 +231,54 @@
  .container_toggle:checked+label:after {
    transform: translateX(25px);
  }
- 
+
+ .theme-checkbox {
+   --toggle-size: 8px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   width: 6.25em;
+   height: 3.125em;
+   background: -webkit-gradient(linear, left top, right top, color-stop(50%, #efefef), color-stop(50%, #2a2a2a)) no-repeat;
+   background: -o-linear-gradient(left, #000000 50%, #ffffff 50%) no-repeat;
+   background: linear-gradient(to right, #2a2a2a 50%, #efefef 50%) no-repeat;
+   background-size: 205%;
+   background-position: 0;
+   -webkit-transition: 0.4s;
+   -o-transition: 0.4s;
+   transition: 0.4s;
+   border-radius: 99em;
+   position: relative;
+   cursor: pointer;
+   font-size: var(--toggle-size);
+   filter: blur(0.3px);
+
+ }
+
+ .theme-checkbox::before {
+   content: "";
+   width: 2.25em;
+   height: 2.25em;
+   position: absolute;
+   top: 0.438em;
+   left: 0.438em;
+   background: -webkit-gradient(linear, left top, right top, color-stop(50%, #efefef), color-stop(50%, #2a2a2a)) no-repeat;
+   background: -o-linear-gradient(left, #212121 50%, #ffffff 50%) no-repeat;
+   background: linear-gradient(to right, #232323 50%, #ffffff 50%) no-repeat;
+   filter: blur(0.2px);
+   background-size: 205%;
+   background-position: 100%;
+   border-radius: 50%;
+   -webkit-transition: 0.4s;
+   -o-transition: 0.4s;
+   transition: 0.4s;
+ }
+
+ .theme-checkbox:checked::before {
+   left: calc(100% - 2.25em - 0.438em);
+   background-position: 0;
+ }
+
+ .theme-checkbox:checked {
+   background-position: 100%;
+ }

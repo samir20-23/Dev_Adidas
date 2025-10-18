@@ -8,9 +8,9 @@ function Layout() {
     const location = useLocation()
 
     // paths where we hide navbar/footer
-    const hideNavPaths = ["/login", "/register", "/load"]
+    const hideNavPaths = ["/login", "/register", "/load","/settings"]
     const hideFooterPaths = ["/settings", "/register"]
-    const hideMenuPaths = ["/login", "/register", "/load"];
+    const hideMenuPaths = ["/login", "/register", "/load","/settings"];
 
     // check if current path starts with any hide path (supports dynamic routes)
     const showNav = !hideNavPaths.some(path => location.pathname.startsWith(path))
