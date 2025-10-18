@@ -1,6 +1,6 @@
 import "../css/navbar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { Heart } from "lucide-react";
+import { Heart, Moon, Sun } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 
 import Logo from "../assets/logoo.png"
@@ -24,7 +24,6 @@ export default function Navbar() {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    closeBurger();
   };
 
   const isProductPath = location.pathname.startsWith("/product")
@@ -61,32 +60,31 @@ export default function Navbar() {
                   </label>
 
                   <div className="hamburger-menu">
-                    <Link to="/" onClick={closeBurger}>{t('navbar.home')}</Link>
-                    <Link to="/product" onClick={closeBurger}>{t('navbar.product')}</Link>
-                    <Link to="/cart" onClick={closeBurger}>{t('navbar.cart')}</Link>
-                    <Link to="/settings" onClick={closeBurger}>{t('navbar.settings')}</Link>
-                    <Link to="/login" onClick={closeBurger}>{t('navbar.login')}</Link>
-                    <Link to="/register" onClick={closeBurger}>{t('navbar.register')}</Link>
+                    <div className="hamburger-menu-links">
+                      <Link to="/home" onClick={closeBurger}>{t('navbar.home')}</Link>
+                      <Link to="/product" onClick={closeBurger}>{t('navbar.product')}</Link>
+                      <Link to="/cart" onClick={closeBurger}>{t('navbar.cart')}</Link>
+                      <Link to="/settings" onClick={closeBurger}>{t('navbar.settings')}</Link>
+                      <Link to="/login" onClick={closeBurger}>{t('navbar.login')}</Link>
+                      <Link to="/register" onClick={closeBurger}>{t('navbar.register')}</Link>
+                    </div>
 
-                    <button
-                      className="hamburger-theme-btn"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleTheme()
-                      }}
-                    >
-                      {t('navbar.theme')}
-                    </button>
-
-                    <select
-                      className="hamburger-lang"
-                      value={i18n.language}
-                      onClick={(e) => e.stopPropagation()}
-                      onChange={(e) => changeLanguage(e.target.value)}
-                    >
-                      <option value="en">EN</option>
-                      <option value="ar">AR</option>
-                    </select>
+                    <div className="hamburger-menu-controls">
+                      <button
+                        className="hamburger-theme-btn"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleTheme()
+                        }}
+                      >
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                        <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+                      </button>
+                      <div className="hamburger-lang-switcher">
+                        <button onClick={() => changeLanguage('en')} className={i18n.language === 'en' ? 'active' : ''}>EN</button>
+                        <button onClick={() => changeLanguage('ar')} className={i18n.language === 'ar' ? 'active' : ''}>AR</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </>

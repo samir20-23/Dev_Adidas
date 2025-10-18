@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ChevronLeft, Heart, ShoppingCart, Home as HomeIcon, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { ChevronLeft, Heart, ShoppingCart } from "lucide-react";
 import '../css/productDetail.css'
 
 export default function ProductDetail() {
@@ -9,6 +10,7 @@ export default function ProductDetail() {
     const [isLiked, setIsLiked] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const storedLiked = localStorage.getItem("liked");
@@ -37,7 +39,6 @@ export default function ProductDetail() {
 
     return (
         <div className="product-detail-container">
-            {/* Header */}
             <header className="product-header">
                 <button className="back-btn" onClick={() => navigate(-1)}>
                     <ChevronLeft size={24} />
@@ -47,7 +48,6 @@ export default function ProductDetail() {
                 </button>
             </header>
 
-            {/* Product Image */}
             <div className="product-image-section">
                 <img
                     src={selectedColor === "black"
@@ -58,7 +58,6 @@ export default function ProductDetail() {
                 />
             </div>
 
-            {/* Product Info */}
             <div className="product-info-section">
                 <div className="product-brand-price">
                     <div>
@@ -68,9 +67,8 @@ export default function ProductDetail() {
                     <div className="product-price">$799</div>
                 </div>
 
-                {/* Color Selection */}
                 <div className="color-section">
-                    <label className="section-label">Color : <span className="selected-value">{selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)}</span></label>
+                    <label className="section-label">{t('product.colors')} : <span className="selected-value">{selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)}</span></label>
                     <div className="color-options">
                         {colors.map((color) => (
                             <button
@@ -84,9 +82,8 @@ export default function ProductDetail() {
                     </div>
                 </div>
 
-                {/* Size Selection */}
                 <div className="size-section">
-                    <label className="section-label">Size</label>
+                    <label className="section-label">{t('product.sizes')}</label>
                     <div className="size-options">
                         {sizes.map((size) => (
                             <button
@@ -100,49 +97,30 @@ export default function ProductDetail() {
                     </div>
                 </div>
 
-                {/* Product Details */}
                 <div className="product-details-section">
-                    <h3 className="details-title">Product Details</h3>
+                    <h3 className="details-title">{t('product.details')}</h3>
                     <p className="details-text">
                         Step into speed with the Men's Adizero EVO SL Running Shoes by adidas.
                         Designed for performance, these lightweight trainers combine agility and
                         comfort for your daily runs. Featuring a breathable mesh upper and responsive
                         cushioning, they help you achieve your best with every stride...
-                        <span className="read-more">Read more</span>
+                        <span className="read-more">{t('product.readMore')}</span>
                     </p>
                 </div>
 
-                {/* Delivery Options */}
                 <div className="delivery-section">
-                    <h3 className="details-title">Delivery Options</h3>
+                    <h3 className="details-title">{t('product.delivery')}</h3>
                     <p className="delivery-text">
                         Free delivery available for orders over $50. Standard delivery takes 3-5
                         business days. Express shipping options available at checkout.
                     </p>
                 </div>
 
-                {/* Add to Cart Button */}
                 <button className="add-to-cart-btn-main" onClick={() => alert("Added to cart!")}>
                     <ShoppingCart size={20} />
-                    Add to cart
+                    {t('product.addToCart')}
                 </button>
             </div>
-
-            {/* Bottom Navigation */}
-            {/* <nav className="bottom-nav">
-                <button className="nav-item" onClick={() => navigate('/')}>
-                    <HomeIcon size={24} />
-                </button>
-                <button className="nav-item active" onClick={() => navigate('/cart')}>
-                    <ShoppingCart size={24} />
-                </button>
-                <button className="nav-item">
-                    <Heart size={24} />
-                </button>
-                <button className="nav-item" onClick={() => navigate('/settings')}>
-                    <User size={24} />
-                </button>
-            </nav> */}
         </div>
     );
 }

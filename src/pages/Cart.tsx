@@ -1,18 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Home, Heart, User, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { ShoppingCart, Trash2 } from "lucide-react";
 import '../css/cart.css'
-
-
-
-
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState<any[]>([]);
-
-
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const storedCart = localStorage.getItem("cart");
@@ -34,12 +30,10 @@ export default function Cart() {
                     <div className="empty-cart-icon">
                         <ShoppingCart size={80} strokeWidth={1.5} />
                     </div>
-                    <h2 className="empty-cart-title">Your cart is empty!</h2>
-                    <p className="empty-cart-text">
-                        Looks like you haven't added anything to your cart yet
-                    </p>
-                    <button className="start-shopping-btn" onClick={() => navigate('/')}>
-                        Start Shopping
+                    <h2 className="empty-cart-title">{t('cart.emptyTitle')}</h2>
+                    <p className="empty-cart-text">{t('cart.emptyText')}</p>
+                    <button className="start-shopping-btn" onClick={() => navigate('/home')}>
+                        {t('cart.startShopping')}
                     </button>
                 </div>
             ) : (
@@ -58,22 +52,6 @@ export default function Cart() {
                     ))}
                 </div>
             )}
-
-            {/* Bottom Navigation */}
-            {/* <nav className="bottom-nav">
-                <button className="nav-item" onClick={() => navigate('/')}>
-                    <Home size={24} />
-                </button>
-                <button className="nav-item active" onClick={() => navigate('/cart')}>
-                    <ShoppingCart size={24} />
-                </button>
-                <button className="nav-item">
-                    <Heart size={24} />
-                </button>
-                <button className="nav-item" onClick={() => navigate('/settings')}>
-                    <User size={24} />
-                </button>
-            </nav> */}
         </div>
     );
 }

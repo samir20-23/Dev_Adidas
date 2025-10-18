@@ -1,22 +1,19 @@
-// src/pages/LoginPage.tsx
-
 import { useEffect } from "react";
-import "../../css/Register.css"; // match your actual filename
-import "@fortawesome/fontawesome-free/css/all.min.css"; // if installed via npm
+import { useTranslation } from "react-i18next";
+import "../../css/Register.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import Logo from "../../components/logo_Comp/Logo";
 
 export default function LoginPage() {
+    const { t } = useTranslation();
+
     useEffect(() => {
-        // 1) Password show/hide toggle
-        const toggleIcons =
-            document.querySelectorAll<HTMLElement>(".toggle-password");
+        const toggleIcons = document.querySelectorAll<HTMLElement>(".toggle-password");
         toggleIcons.forEach((eye) => {
-            eye.addEventListener("click", () => {
+            const clickHandler = () => {
                 const targetId = eye.getAttribute("data-target");
                 if (!targetId) return;
-                const input = document.getElementById(
-                    targetId
-                ) as HTMLInputElement | null;
+                const input = document.getElementById(targetId) as HTMLInputElement | null;
                 if (!input) return;
 
                 if (input.type === "password") {
@@ -26,38 +23,10 @@ export default function LoginPage() {
                     input.type = "password";
                     eye.classList.replace("fa-eye-slash", "fa-eye");
                 }
-            });
+            };
+            eye.addEventListener("click", clickHandler);
+            return () => eye.removeEventListener("click", clickHandler);
         });
-
-        // 2) Remember‑me checkbox opacity toggle
-        const checkbox = document.getElementById(
-            "termsCheckbox"
-        ) as HTMLInputElement | null;
-        const textContent = document.getElementById("termsCheckboxcontent");
-        if (checkbox && textContent) {
-            checkbox.addEventListener("click", () => {
-                textContent.style.opacity =
-                    textContent.style.opacity === "0.5" ? "1" : "0.5";
-            });
-        }
-
-        // 3) Clear error messages on input
-        const inputs = document.querySelectorAll<HTMLInputElement>(
-            "input[type='email'], input[type='password']"
-        );
-        inputs.forEach((inp) => {
-            inp.addEventListener("input", () => {
-                const errorSpan = document.getElementById(`error-${inp.id}`);
-                if (errorSpan) errorSpan.textContent = "";
-            });
-        });
-
-        return () => {
-            // cleanup listeners
-            toggleIcons.forEach((eye) => eye.replaceWith(eye.cloneNode(true)));
-            if (checkbox) checkbox.replaceWith(checkbox.cloneNode(true));
-            inputs.forEach((inp) => inp.replaceWith(inp.cloneNode(true)));
-        };
     }, []);
 
     return (
@@ -66,13 +35,12 @@ export default function LoginPage() {
                 <div className="logoBar">
                     <Logo />
                 </div>
-                <h2 className="titleRegister">Welcome Back!</h2>
+                <h2 className="titleRegister">{t('login.title')}</h2>
             </div>
 
             <form id="registerForm" onSubmit={(e) => e.preventDefault()}>
-                {/* Email */}
                 <div className="field-group">
-                    <p className="label">Email *</p>
+                    <p className="label">{t('login.email')} *</p>
                     <div className="input-group">
                         <i className="fa fa-envelope" id="iconsInputs" />
                         <input
@@ -86,16 +54,15 @@ export default function LoginPage() {
                     <span className="error-msg" id="error-emailRegister"></span>
                 </div>
 
-                {/* Password */}
                 <div className="field-group">
-                    <p className="label">Password *</p>
+                    <p className="label">{t('login.password')} *</p>
                     <div className="input-group">
                         <i className="fa fa-lock" id="iconsInputs" />
                         <input
                             type="password"
                             name="PasswordRegister"
                             id="passwordRegister"
-                            placeholder="Type your password"
+                            placeholder={t('login.password')}
                             required
                         />
                         <i
@@ -105,28 +72,15 @@ export default function LoginPage() {
                             style={{ cursor: "pointer" }}
                         />
                     </div>
-                    <span
-                        className="error-msg"
-                        id="error-passwordRegister"
-                    ></span>
+                    <span className="error-msg" id="error-passwordRegister"></span>
                 </div>
 
-                {/* Remember Me */}
                 <div className="terms field-group">
-                    <input type="checkbox" id="termsCheckbox" />
-                    <p
-                        id="termsCheckboxcontent"
-                        style={{ opacity: 0.5, cursor: "pointer" }}
-                        className="label"
-                    >
-                        {" "}
-                        Remember me!
-                    </p>
-                    <span className="error-msg" id="error-termsCheckbox"></span>
+                    <a href="#" style={{textDecoration: "none", color: "var(--text-color)"}}>{t('login.forgot')}</a>
                 </div>
 
                 <button type="submit" id="submitRegister">
-                    Log in
+                    {t('login.submit')}
                 </button>
             </form>
 
@@ -134,7 +88,7 @@ export default function LoginPage() {
                 <span>
                     <hr />
                 </span>
-                <span>or</span>
+                <span>{t('register.or')}</span>
                 <span>
                     <hr />
                 </span>
@@ -143,18 +97,18 @@ export default function LoginPage() {
             <div className="logsWith">
                 <button id="signupbtnAple" className="social-btn apple">
                     <i className="fa fa-apple" />
-                    <span>Sign up with Apple</span>
+                    <span>{t('register.apple')}</span>
                 </button>
                 <button id="signupbtnGoogle" className="social-btn google">
                     <i className="fa fa-google" />
-                    <span>Sign up with Google</span>
+                    <span>{t('register.google')}</span>
                 </button>
             </div>
 
             <p id="AlreadyRegister">
-                Don’t have an account?{" "}
+                {t('login.noAccount')}{" "}
                 <span>
-                    <a href="/register">Sign up</a>
+                    <a href="/register">{t('login.register')}</a>
                 </span>
             </p>
         </div>
