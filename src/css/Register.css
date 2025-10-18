@@ -181,4 +181,35 @@ span hr {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .mainRegister {
+    padding: 10px;
+    min-width: unset;
+    max-width: 100%;
+  }
+
+  span hr {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .titleRegister {
+    font-size: 22px;
+  }
+
+  .input-group input {
+    font-size: 0.9rem;
+  }
+
+  #submitRegister,
+  .social-btn {
+    padding: 12px;
+  }
+
+  span hr {
+    width: 50px;
+  }
+}
+
  
