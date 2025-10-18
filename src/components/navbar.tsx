@@ -105,10 +105,10 @@ export default function Navbar() {
                     className="CartIcon"
                     alt="CartIcon"
                     onClick={() => navigate("/cart")}
-                    style={{ cursor: "pointer", width: 28, marginRight: 10 }}
+                    style={{ cursor: "pointer", width: 20, marginRight: 10 }}
                   />
                   <button className="like-btn-header" onClick={() => setIsLiked(!isLiked)}>
-                    <Heart size={24} fill={isLiked ? (theme === 'dark' ? '#FFF' : '#000') : "none"} />
+                    <Heart size={21} fill={isLiked ? (theme === 'dark' ? '#FFF' : '#000') : "none"} />
                   </button>
                 </>
               )

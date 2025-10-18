@@ -211,13 +211,13 @@
 
  @media (min-width: 1024px) {
 
-     .vector { 
-         width: 35%; 
+     .vector {
+         width: 35%;
      }
  }
 
  .vector .LeftIcon {
-     width: 20px;
+     width: 9px;
  }
 
  .vector p {
@@ -230,4 +230,6 @@
      border: none;
      cursor: pointer;
      color: var(--text-color);
+     position: relative;
+     top: 2px;
  }

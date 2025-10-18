@@ -69,7 +69,7 @@ export default function Home() {
         <div className="home-container">
             <header className="header">
                 <div className="search-bar">
-                    <i className="fa fa-search"  id="iconSearch" aria-hidden="true"></i>
+                    <i className="fa fa-search" id="iconSearch" aria-hidden="true"></i>
                     <input type="text" placeholder={t('home.search')} />
                     <div className="filterButton">
                         <i className="fa fa-sliders" id="filtericon" aria-hidden="true"></i>
@@ -82,11 +82,10 @@ export default function Home() {
                     <span className="hero-label">{t('home.heroLabel')}</span>
                     <h1 className="hero-title">{t('home.heroTitle')}</h1>
                     <button className="shop-now-btn">
-                        {t('home.shopNow')} <ChevronRight size={20} />
+                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true"  id="iconRightHome"></i>
                     </button>
                 </div>
 
-                <button className="close-banner">×</button>
                 <div className="hero-shoe-img">
                     <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=400&fit=crop" alt="Campus Shoes" />
                 </div>

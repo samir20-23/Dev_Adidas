@@ -34,7 +34,7 @@ body {
 }
 
 .titleRegister {
-    font-size: 25px;
+    font-size: 1.75rem;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.221);
     text-align: center;
     color: var(--text-color);
@@ -45,7 +45,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 15px;
+    padding: 1rem;
     min-width: 300px;
     max-width: 600px;
     margin: 0 auto;
@@ -56,6 +56,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 1rem;
 }
 
 .logoBar {
@@ -63,6 +64,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 40%;
+    margin-bottom: 1rem;
 }
 
 #registerForm {
@@ -73,11 +75,10 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     border: none;
     background: var(--input-background);
-    padding: 10px;
-    padding-left: 12px;
+    padding: 0.75rem;
 }
 
 .input-group #iconsInputs {
@@ -126,6 +127,7 @@ body {
 
 .field-group .label {
     color: var(--text-color);
+    margin-bottom: 0.5rem;
 }
 
 .error-msg {
@@ -133,6 +135,7 @@ body {
     font-size: 0.85rem;
     color: var(--error-color);
     min-height: 1em;
+    margin-top: 0.25rem;
 }
 
 .field-group.error .input-group {
@@ -148,7 +151,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: row;
-    flex-wrap: none;
+    gap: 0.5rem;
 }
 
 #submitRegister {
@@ -157,16 +160,24 @@ body {
     background: var(--button-background);
     border: none;
     color: var(--button-text-color);
-    padding: 14px;
+    padding: 0.875rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitRegister:hover {
+    opacity: 0.9;
 }
 
 .orRegister {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 12px;
-    font-size: 20px;
+    padding: 0.75rem;
+    font-size: 1.25rem;
     color: var(--separator-color);
+    width: 100%;
 }
 
 span hr {
@@ -181,14 +192,17 @@ span hr {
     align-items: center;
     width: 100%;
     flex-direction: column;
-    gap: 12px;
+    gap: 0.75rem;
 }
 
 .social-btn {
     width: 100%;
     border-radius: 50px;
     border: none;
-    padding: 14px;
+    padding: 0.875rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #signupbtnAple {
@@ -203,54 +217,59 @@ span hr {
 
 #AlreadyRegister {
     color: var(--separator-color);
+    margin-top: 1rem;
 }
 
 #AlreadyRegister span a {
     color: var(--link-color);
-    padding-left: 15px;
+    padding-left: 1rem;
     text-decoration: none;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .mainRegister {
-        padding: 10px;
+        padding: 1rem;
     }
 
     .titleRegister {
-        font-size: 22px;
+        font-size: 1.75rem;
     }
 
     span hr {
-        width: 150px;
+        max-width: 150px;
     }
 }
 
 @media (max-width: 480px) {
     .mainRegister {
-        padding: 5px;
+        padding: 0.5rem;
     }
 
     .titleRegister {
-        font-size: 20px;
+        font-size: 1.5rem;
     }
 
     .input-group {
-        padding: 8px;
-        padding-left: 10px;
+        padding: 0.75rem;
     }
 
     #submitRegister,
     .social-btn {
-        padding: 12px;
+        padding: 0.875rem;
     }
 
     span hr {
-        width: 100px;
+        max-width: 100px;
     }
 
     .orRegister {
-        font-size: 18px;
+        font-size: 1.125rem;
+    }
+
+    .logsWith {
+        gap: 0.75rem;
     }
 }

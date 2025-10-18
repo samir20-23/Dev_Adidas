@@ -63,13 +63,24 @@
 
 .hero-banner {
     position: relative;
-    background: var(--primary-color);
     border-radius: 20px;
+    background-color: var(--primary-color);
     margin: 16px 20px;
     padding: 30px 24px;
     overflow: hidden;
     min-height: 200px;
 }
+
+@media (max-width: 500px) {
+
+    .hero-banner {
+
+        background-image: url("../assets/home_images/background.png");
+        background-size: cover;
+    }
+}
+
+
 
 .hero-content {
     position: relative;
@@ -95,7 +106,7 @@
     background: var(--secondary-color);
     color: var(--primary-color);
     border: none;
-    padding: 12px 24px;
+    padding: 9px 23px;
     border-radius: 25px;
     font-size: 14px;
     font-weight: 600;
@@ -104,6 +115,20 @@
     gap: 8px;
     cursor: pointer;
     transition: transform 0.2s;
+    position: relative;
+    top: 35px;
+}
+
+@media (min-width: 500px) {
+
+    .hero-banner {
+        min-height: 234px;
+
+    }
+
+    .shop-now-btn {
+        top: 30px;
+    }
 }
 
 .shop-now-btn:hover {
@@ -139,6 +164,9 @@
     height: 100%;
     object-fit: cover;
     transform: rotate(-15deg);
+    filter: blur(1px);
+    border-radius: 31px;
+    filter: drop-shadow(-7px 0px 20px rgba(255, 255, 255, 0.221));
 }
 
 .categories-section {
@@ -486,3 +514,5 @@
     font-size: 23px;
 
 }
+
+#iconRightHome {}
