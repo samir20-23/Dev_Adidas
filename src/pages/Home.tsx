@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Search, ChevronRight, Heart, ShoppingCart } from "lucide-react";
 import "../css/home.css";
+import Loading from "../components/loading";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -61,6 +62,19 @@ export default function Home() {
         }
     ];
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
     return (
         <div className="home-container">
             <header className="header">
@@ -78,6 +92,7 @@ export default function Home() {
                         {t('home.shopNow')} <ChevronRight size={20} />
                     </button>
                 </div>
+
                 <button className="close-banner">×</button>
                 <div className="hero-shoe-img">
                     <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=400&fit=crop" alt="Campus Shoes" />
@@ -157,21 +172,6 @@ export default function Home() {
                     ))}
                 </div>
             </section>
-            {/* Bottom Navigation */}
-            {/* <nav className="bottom-nav">
-                <button className="nav-item active">
-                    <HomeIcon size={24} />
-                </button>
-                <button className="nav-item" onClick={() => navigate('/cart')}>
-                    <ShoppingCart size={24} />
-                </button>
-                <button className="nav-item">
-                    <Heart size={24} />
-                </button>
-                <button className="nav-item" onClick={() => navigate('/settings')}>
-                    <User size={24} />
-                </button>
-            </nav> */}
         </div>
     );
 }

@@ -3,16 +3,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ChevronLeft, Heart, ShoppingCart } from "lucide-react";
 import '../css/productDetail.css'
+import Loading from "../components/loading";
 
 export default function ProductDetail() {
     const [selectedColor, setSelectedColor] = useState("black");
     const [selectedSize, setSelectedSize] = useState("43");
     const [isLiked, setIsLiked] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     const { id } = useParams();
     const { t } = useTranslation();
 
     useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+
         const storedLiked = localStorage.getItem("liked");
         if (storedLiked) {
             const likedItems: Record<string, boolean> = JSON.parse(storedLiked);
@@ -20,6 +26,7 @@ export default function ProductDetail() {
                 setIsLiked(true);
             }
         }
+        return () => clearTimeout(timer);
     }, [id]);
 
     const toggleLike = () => {
@@ -36,6 +43,10 @@ export default function ProductDetail() {
         { name: "black", image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop" },
         { name: "white", image: "https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=400&h=300&fit=crop" }
     ];
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <div className="product-detail-container">
