@@ -204,8 +204,16 @@
  .vector {
      display: flex;
      align-items: center;
-     gap: 12px;
+     /* gap: 12px; */
+     width: 39%;
      cursor: pointer;
+ }
+
+ @media (min-width: 1024px) {
+
+     .vector { 
+         width: 35%; 
+     }
  }
 
  .vector .LeftIcon {
