@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Search, ChevronRight, Heart, ShoppingCart } from "lucide-react";
 import "../css/home.css";
-import Loading from "../components/loading";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -62,25 +61,19 @@ export default function Home() {
         }
     ];
 
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, []);
 
-    if (isLoading) {
-        return <Loading />;
-    }
+
 
     return (
         <div className="home-container">
             <header className="header">
                 <div className="search-bar">
-                    <Search size={20} />
+                    <i className="fa fa-search"  id="iconSearch" aria-hidden="true"></i>
                     <input type="text" placeholder={t('home.search')} />
+                    <div className="filterButton">
+                        <i className="fa fa-sliders" id="filtericon" aria-hidden="true"></i>
+                    </div>
                 </div>
             </header>
 
