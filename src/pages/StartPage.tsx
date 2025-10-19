@@ -1,4 +1,3 @@
-// src/pages/StartPage.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/StartPage.css";
@@ -10,7 +9,6 @@ export default function StartPage() {
     const forwardBtnRef = useRef<HTMLButtonElement | null>(null);
     const contentRef = useRef<HTMLDivElement | null>(null);
 
-    // keep a ref so event listeners always read latest value without reattaching
     const isDraggingRef = useRef(false);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -24,11 +22,9 @@ export default function StartPage() {
         const content = contentRef.current;
         if (!boxCenter || !forwardBtn || !content) return;
 
-        // Helpers
         const clamp = (v: number, a: number, b: number) =>
             Math.min(Math.max(v, a), b);
 
-        // Handlers using PointerEvent for both mouse and touch
         const handlePointerDown = (e: PointerEvent) => {
             e.preventDefault();
             isDraggingRef.current = true;
@@ -36,21 +32,17 @@ export default function StartPage() {
             startXRef.current = e.clientX;
             document.body.style.userSelect = "none";
 
-            // Pre-calculate maxMove on drag start
             maxMoveRef.current = Math.max(1, boxCenter.clientWidth - forwardBtn.clientWidth - 6);
 
-            // capture pointer to the button so we keep getting events even if pointer leaves the element
             try {
                 if ("setPointerCapture" in forwardBtn) {
                     (forwardBtn as any).setPointerCapture((e as any).pointerId);
                 }
             } catch (err) {
-                // ignore if capture not supported
             }
         };
 
         const handlePointerMove = (e: PointerEvent) => {
-            // 3D tilt always, regardless of dragging
             const xRatio = (e.clientX / window.innerWidth) * 2 - 1;
             const yRatio = (e.clientY / window.innerHeight) * 2 - 1;
             const rotateY = xRatio * 20;
@@ -61,14 +53,12 @@ export default function StartPage() {
 
             if (!isDraggingRef.current) return;
 
-            // Dragging logic
             const dx = e.clientX - startXRef.current;
             const maxMove = maxMoveRef.current;
             const moveX = clamp(dx, 0, maxMove);
 
             forwardBtn.style.left = `${moveX + 3}px`;
 
-            // convert to percentage for minWidth, ensure between 20 and 100
             const percent = Math.min(100, Math.max(20, (moveX / maxMove) * 100));
             forwardBtn.style.minWidth = `${percent}%`;
 
@@ -83,13 +73,10 @@ export default function StartPage() {
 
             boxCenter.style.padding = "3px";
 
-            // if fully dragged to the end, navigate once
             if (moveX >= maxMove) {
-                // prevent multiple timers
                 if (navigateTimeoutRef.current == null) {
-                    // using window.setTimeout so TS knows it returns a number
                     navigateTimeoutRef.current = window.setTimeout(() => {
-                        // navigate("/load");
+                        navigate("/load");
                         console.log("👌👌👌")
                     }, 150) as unknown as number;
                 }
@@ -102,18 +89,14 @@ export default function StartPage() {
             setIsDragging(false);
             document.body.style.userSelect = "";
 
-            // release pointer capture if we set it
             try {
                 if (e && "releasePointerCapture" in forwardBtn) {
                     (forwardBtn as any).releasePointerCapture((e as any).pointerId);
                 }
             } catch (err) {
-                // ignore
             }
 
-            // If user did not reach the end, animate back to start
             setTimeout(() => {
-                // clear any pending navigate timeout if we didn't actually navigate yet
                 if (navigateTimeoutRef.current != null) {
                     clearTimeout(navigateTimeoutRef.current as unknown as number);
                     navigateTimeoutRef.current = null;
@@ -129,15 +112,13 @@ export default function StartPage() {
                 setTimeout(() => {
                     forwardBtn.style.transition = "";
                 }, 900);
-            }, 200); // slightly quicker snap-back for mobile feel
+            }, 200);
         };
 
-        // attach pointer events
         forwardBtn.addEventListener("pointerdown", handlePointerDown as any);
         document.addEventListener("pointermove", handlePointerMove as any);
         document.addEventListener("pointerup", handlePointerUpOrCancel as any);
         document.addEventListener("pointercancel", handlePointerUpOrCancel as any);
-        // pointer leave for visual reset when not dragging
         document.addEventListener(
             "pointerout",
             () => {
@@ -149,7 +130,6 @@ export default function StartPage() {
             { passive: true }
         );
 
-        // cleanup
         return () => {
             forwardBtn.removeEventListener("pointerdown", handlePointerDown as any);
             document.removeEventListener("pointermove", handlePointerMove as any);
@@ -159,7 +139,6 @@ export default function StartPage() {
                 handlePointerUpOrCancel as any
             );
             document.removeEventListener("pointerout", () => { });
-            // clear timeout if any
             if (navigateTimeoutRef.current != null) {
                 clearTimeout(navigateTimeoutRef.current as unknown as number);
                 navigateTimeoutRef.current = null;
@@ -182,4 +161,3 @@ export default function StartPage() {
         </div>
     );
 }
- 
