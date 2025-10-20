@@ -33,7 +33,6 @@
 }
 
 .forwardBtn {
-    /* position: relative; */
     min-width: 48px;
     height: 45px;
     background-color: white;
@@ -53,12 +52,6 @@
     transform-style: preserve-3d;
     transition: transform 0.1s ease;
     user-select: none;
-}
-
-.boxCenter,
-.forwardBtn,
-.content {
-    touch-action: none;
 }
 
 .content p {

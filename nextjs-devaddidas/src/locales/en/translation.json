@@ -1,0 +1,22 @@
+{
+  "home": {
+    "search": "Search for products...",
+    "heroLabel": "NEW COLLECTION",
+    "heroTitle": "The New Adidas Campus Shoes",
+    "shopNow": "Shop Now",
+    "categories": "Categories",
+    "popular": "Popular",
+    "seeAll": "See All",
+    "exploreMore": "Explore More",
+    "trending": "Trending"
+  },
+  "navbar": {
+    "product": "Product",
+    "detail": "Detail",
+    "home": "Home",
+    "cart": "Cart",
+    "settings": "Settings",
+    "login": "Login",
+    "register": "Register"
+  }
+}
