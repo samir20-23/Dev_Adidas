@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useLayoutEffect, useRef, useState } from "react";
 import "../css_comp/logo.css";
 import { useRouter } from "next/navigation";
@@ -19,14 +19,14 @@ function isTransparent(bg: string): boolean {
 export default function Line_loader() {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [logoColor, setLogoColor] = useState<"black" | "white">("black");
-    const router = useRouter();
+    const navigate = useRouter();
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            router.push("/home");
-        }, 3000);
+            navigate.push("/home");
+        }, 2100);
         return () => clearTimeout(timer);
-    }, [router]);
+    }, []);
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
@@ -62,7 +62,7 @@ export default function Line_loader() {
 
         // Set logo color based on luminance threshold
         setLogoColor(luminance > 0.5 ? "black" : "white");
-    }, []);
+    }, [wrapperRef.current]);
 
     return (
         <div
