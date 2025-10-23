@@ -10,7 +10,7 @@ import LogoWhite from "../../public/assets/logoWhite.png"
 import CartIcon from "../../public/assets/cart.png"
 import Left from "../../public/assets/left.png"
 import { useState } from "react"
-// import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../contexts/ThemeContext";
 import Image from "next/image";
 
 export default function Navbar() {
