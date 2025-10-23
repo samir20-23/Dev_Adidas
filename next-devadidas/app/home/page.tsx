@@ -1,13 +1,15 @@
-"use client";
+"use client"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import { Search, ChevronRight, Heart, ShoppingCart } from "lucide-react";
-import "./home.css";
+import "../home/home.css";
 import Image from "next/image";
 
 export default function Home() {
-    const router = useRouter();
+    const navigate = useRouter();
+    const { t } = useTranslation();
     const [liked, setLiked] = useState<{ [key: number]: boolean }>({});
 
     useEffect(() => {
@@ -70,7 +72,7 @@ export default function Home() {
             <header className="header">
                 <div className="search-bar">
                     <i className="fa fa-search" id="iconSearch" aria-hidden="true"></i>
-                    <input type="text" placeholder={'home.search'} />
+                    <input type="text" placeholder={t('home.search')} />
                     <div className="filterButton">
                         <i className="fa fa-sliders" id="filtericon" aria-hidden="true"></i>
                     </div>
@@ -79,10 +81,10 @@ export default function Home() {
 
             <div className="hero-banner">
                 <div className="hero-content">
-                    <span className="hero-label">{'home.heroLabel'}</span>
-                    <h1 className="hero-title">{'home.heroTitle'}</h1>
+                    <span className="hero-label">{t('home.heroLabel')}</span>
+                    <h1 className="hero-title">{t('home.heroTitle')}</h1>
                     <button className="shop-now-btn">
-                        {'home.shopNow'} <i className="fa fa-arrow-right" aria-hidden="true" id="iconRightHome"></i>
+                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true"  id="iconRightHome"></i>
                     </button>
                 </div>
 
@@ -92,7 +94,7 @@ export default function Home() {
             </div>
 
             <section className="categories-section">
-                <h2 className="section-title">{'home.categories'}</h2>
+                <h2 className="section-title">{t('home.categories')}</h2>
                 <div className="categories-grid">
                     {/* These could be translated as well if they are not dynamic */}
                     <div className="category-item">
@@ -116,8 +118,8 @@ export default function Home() {
 
             <section className="popular-section">
                 <div className="section-header">
-                    <h2 className="section-title">{'home.popular'}</h2>
-                    <Link href="/see-all" className="see-all">{'home.seeAll'}</Link>
+                    <h2 className="section-title">{t('home.popular')}</h2>
+                    <Link href="/see-all" className="see-all">{t('home.seeAll')}</Link>
                 </div>
                 <div className="products-grid">
                     {popularShoes.map((shoe) => (
@@ -137,11 +139,11 @@ export default function Home() {
                         </Link>
                     ))}
                 </div>
-                <button className="explore-more-btn">{'home.exploreMore'}</button>
+                <button className="explore-more-btn">{t('home.exploreMore')}</button>
             </section>
 
             <section className="trend-section">
-                <h2 className="section-title">{'home.trending'}</h2>
+                <h2 className="section-title">{t('home.trending')}</h2>
                 <div className="trend-grid">
                     {trendShoes.map((shoe) => (
                         <Link href={`/product/${shoe.id}`} key={shoe.id} className="trend-card">
@@ -154,7 +156,7 @@ export default function Home() {
                             <span className="trend-tag">{shoe.tag}</span>
                             <div className="trend-image"><img src={shoe.image} alt={shoe.name} /></div>
                             <button className="trend-shop-btn">
-                                {'home.shopNow'} <ChevronRight size={16} />
+                                {t('home.shopNow')} <ChevronRight size={16} />
                             </button>
                             <div className="trend-info">
                                 <h3>{shoe.name}</h3>
