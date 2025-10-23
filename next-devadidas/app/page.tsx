@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import "./start/start.css";
+import "./css/start.css";
 
 export default function StartPage() {
     const router = useRouter();

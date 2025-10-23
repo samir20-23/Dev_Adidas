@@ -18,9 +18,7 @@ export default function Navbar() {
   const navigate = useRouter()
   const { t, i18n } = useTranslation();
   const [isLiked, setIsLiked] = useState(false);
-  // const { theme, toggleTheme } = useTheme();
-  const theme = 'dark'
-  const toggleTheme = () => { }
+  const { theme, toggleTheme } = useTheme();
 
   const closeBurger = () => {
     const el = document.getElementById("burger-toggle") as HTMLInputElement | null

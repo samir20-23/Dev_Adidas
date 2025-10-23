@@ -7,9 +7,7 @@ import Link from "next/link";
 
 export default function AuthFooter() {
   const { t, i18n } = useTranslation();
-  // const { theme, toggleTheme } = useTheme();
-  const theme = 'dark'
-  const toggleTheme = () => {}
+  const { theme, toggleTheme } = useTheme();
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);

@@ -14,8 +14,7 @@ import Image from "next/image";
 
 export default function Menubar() {
     const navigate = useRouter();
-    // const { theme } = useTheme();
-    const theme = 'dark'
+    const { theme } = useTheme();
 
     return (
         <>
