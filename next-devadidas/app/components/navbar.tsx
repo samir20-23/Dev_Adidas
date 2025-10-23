@@ -5,10 +5,10 @@ import { usePathname, useRouter } from "next/navigation"
 import { Heart, Moon, Sun } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 
-import Logo from "../../../public/logoo.png"
-import LogoWhite from "../../../public/logoWhite.png"
-import CartIcon from "../../../public/cart.png"
-import Left from "../../../public/left.png"
+import Logo from "../../public/assets/logoo.png"
+import LogoWhite from "../../public/assets/logoWhite.png"
+import CartIcon from "../../public/assets/cart.png"
+import Left from "../../public/assets/left.png"
 import { useState } from "react"
 // import { useTheme } from "../contexts/ThemeContext";
 import Image from "next/image";
@@ -20,7 +20,7 @@ export default function Navbar() {
   const [isLiked, setIsLiked] = useState(false);
   // const { theme, toggleTheme } = useTheme();
   const theme = 'dark'
-  const toggleTheme = () => {}
+  const toggleTheme = () => { }
 
   const closeBurger = () => {
     const el = document.getElementById("burger-toggle") as HTMLInputElement | null
