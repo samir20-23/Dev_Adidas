@@ -3,22 +3,20 @@ import { usePathname } from "next/navigation"
 import Navbar from "./navbar"
 import Footer from "./footer"
 import Menubar from "./menubar"
-import "../css/main.css"
+import "../app/css/main.css"
 
-export default function MainLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    const pathname = usePathname()
+function MainLayout({ children }: { children: React.ReactNode }) {
+    const location = usePathname()
 
-    const hideNavPaths = ["/login", "/register", "/load", "/settings"]
+    // paths where we hide navbar/footer
+    const hideNavPaths = ["/login", "/register", "/load","/settings"]
     const hideFooterPaths = ["/settings", "/register"]
-    const hideMenuPaths = ["/login", "/register", "/load", "/settings"];
+    const hideMenuPaths = ["/login", "/register", "/load","/settings"];
 
-    const showNav = !hideNavPaths.some(path => pathname.startsWith(path))
-    const showFooter = hideFooterPaths.some(path => pathname.startsWith(path))
-    const showMenu = !hideMenuPaths.some(path => pathname.startsWith(path));
+    // check if current path starts with any hide path (supports dynamic routes)
+    const showNav = !hideNavPaths.some(path => location.startsWith(path))
+    const showFooter = hideFooterPaths.some(path => location.startsWith(path))
+    const showMenu = !hideMenuPaths.some(path => location.startsWith(path));
 
     return (
         <div className="layout">
@@ -31,3 +29,5 @@ export default function MainLayout({
         </div>
     )
 }
+
+export default MainLayout

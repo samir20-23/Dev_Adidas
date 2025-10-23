@@ -13,25 +13,25 @@ import profileBlack from "../../../public/assets/navbar-icons/profile-black.png"
 import Image from "next/image";
 
 export default function Menubar() {
-    const router = useRouter();
+    const navigate = useRouter();
     // const { theme } = useTheme();
-    const theme = "light"
+    const theme = 'dark'
 
     return (
         <>
             <nav className="bottom-nav" >
-                <button className="nav-item active" onClick={() => router.push("/home")}>
+                <button className="nav-item active" onClick={() => navigate.push("/home")}>
                     <Image src={theme === 'dark' ? homeWhite : homeBlack} id="iconsMenuBar" className="homeIcon" alt="home" />
                 </button>
-                <button className="nav-item" onClick={() => router.push("/cart")}>
+                <button className="nav-item" onClick={() => navigate.push("/cart")}>
                     <Image src={theme === 'dark' ? cartWhite : cartBlack} id="iconsMenuBar" className="cartIcon" alt="cart" />
 
                 </button>
-                <button className="nav-item" onClick={() => router.push("favorit")}>
-                    <Image src={theme === 'dark' ? heartWhite : heartBlack} id="iconsMenuBar" className="heartIcon" alt="favorite" />
+                <button className="nav-item" onClick={() => navigate.push("favorit")}>
+                    <Image src={theme === 'dark' ? heartWhite : heartBlack} id="iconsMenuBar" className="heartIcon" alt="heart" />
 
                 </button>
-                <button className="nav-item" onClick={() => router.push("/settings")}>
+                <button className="nav-item" onClick={() => navigate.push("/settings")}>
                     <Image src={theme === 'dark' ? profileWhite : profileBlack} id="iconsMenuBar" className="profileIcon" alt="profile" />
 
                 </button>

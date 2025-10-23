@@ -1,4 +1,4 @@
-"use client";
+"use client"
 // src/components/Logo.tsx
 import { useLayoutEffect, useRef, useState } from "react";
 import "../css_comp/logo.css";
@@ -54,7 +54,7 @@ export default function Logo() {
 
         // Set logo color based on luminance threshold
         setLogoColor(luminance > 0.5 ? "black" : "white");
-    }, []);
+    }, [wrapperRef.current]);
 
     return (
         <div
