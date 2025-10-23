@@ -1,0 +1,72 @@
+
+{
+  "navbar": {
+    "home": "الرئيسية",
+    "product": "المنتجات",
+    "detail": "التفاصيل",
+    "cart": "السلة",
+    "settings": "الإعدادات",
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "theme": "الوضع الداكن / الفاتح",
+    "language": "اللغة"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "userProfile": "الملف الشخصي",
+    "userName": "اسم المستخدم",
+    "otherSettings": "إعدادات أخرى",
+    "notifications": "الإشعارات",
+    "password": "كلمة المرور",
+    "darkMode": "الوضع الداكن",
+    "about": "حول التطبيق",
+    "help": "المساعدة/الأسئلة الشائعة",
+    "deleteAccount": "حذف الحساب"
+  },
+  "register": {
+    "title": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "terms": "أوافق على الشروط والأحكام",
+    "submit": "التسجيل",
+    "or": "أو",
+    "apple": "التسجيل باستخدام Apple",
+    "google": "التسجيل باستخدام Google",
+    "already": "هل لديك حساب بالفعل؟",
+    "login": "تسجيل الدخول"
+  },
+  "login": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "submit": "تسجيل الدخول",
+    "forgot": "هل نسيت كلمة المرور؟",
+    "noAccount": "ليس لديك حساب؟",
+    "register": "التسجيل"
+  },
+  "home": {
+    "search": "بحث...",
+    "heroLabel": "مجموعة جديدة",
+    "heroTitle": "اعثر على حذائك المثالي",
+    "shopNow": "تسوق الآن",
+    "categories": "الفئات",
+    "popular": "الأكثر شيوعًا",
+    "seeAll": "عرض الكل",
+    "exploreMore": "اكتشف المزيد",
+    "trending": "رائج"
+  },
+  "cart": {
+    "emptyTitle": "سلتك فارغة",
+    "emptyText": "يبدو أنك لم تقم بإضافة أي شيء إلى سلتك بعد.",
+    "startShopping": "ابدأ التسوق"
+  },
+  "product": {
+    "addToCart": "أضف إلى السلة",
+    "colors": "الألوان",
+    "sizes": "المقاسات",
+    "details": "التفاصيل",
+    "delivery": "التوصيل",
+    "readMore": "اقرأ المزيد"
+  }
+}
