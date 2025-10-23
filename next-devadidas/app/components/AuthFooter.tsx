@@ -1,7 +1,7 @@
 "use client"
 import { useTranslation } from "react-i18next";
 import { Moon, Sun } from "lucide-react";
-// import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../contexts/ThemeContext";
 import "./css_comp/authFooter.css";
 import Link from "next/link";
 

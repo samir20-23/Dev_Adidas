@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import "./i18n/i18n"
+import "./i18n/i18n";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import MainLayout from "./components/MainLayout";
-import Script from "next/script"
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,13 +27,14 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
       </head>
-      <body className={inter.className}>
+      {/* suppressHydrationWarning prevents React from complaining about small attribute differences */}
+      <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider>
           <MainLayout>{children}</MainLayout>
         </ThemeProvider>
+
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" strategy="afterInteractive" />
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/v4-shims.min.js" strategy="afterInteractive" />
-
       </body>
     </html>
   );

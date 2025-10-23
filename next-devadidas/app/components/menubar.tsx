@@ -9,7 +9,7 @@ import heartWhite from "../../public/assets/navbar-icons/heart-white.png"
 import heartBlack from "../../public/assets/navbar-icons/heart-black.png"
 import profileWhite from "../../public/assets/navbar-icons/profile-white.png"
 import profileBlack from "../../public/assets/navbar-icons/profile-black.png"
-// import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../contexts/ThemeContext";
 import Image from "next/image";
 
 export default function Menubar() {
