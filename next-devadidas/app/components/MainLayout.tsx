@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation"
 import Navbar from "./navbar"
 import Footer from "./footer"
 import Menubar from "./menubar"
-import "../app/css/main.css"
+import "../css/main.css"
 
 function MainLayout({ children }: { children: React.ReactNode }) {
     const location = usePathname()

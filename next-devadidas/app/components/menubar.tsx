@@ -1,14 +1,14 @@
 "use client"
 import { useRouter } from "next/navigation";
 import "../css/menubar.css";
-import homeWhite from "../../../public/assets/navbar-icons/home-white.png"
-import homeBlack from "../../../public/assets/navbar-icons/home-black.png"
-import cartWhite from "../../../public/assets/navbar-icons/card-white.png"
-import cartBlack from "../../../public/assets/navbar-icons/cart-black.png"
-import heartWhite from "../../../public/assets/navbar-icons/heart-white.png"
-import heartBlack from "../../../public/assets/navbar-icons/heart-black.png"
-import profileWhite from "../../../public/assets/navbar-icons/profile-white.png"
-import profileBlack from "../../../public/assets/navbar-icons/profile-black.png"
+import homeWhite from "../../public/assets/navbar-icons/home-white.png"
+import homeBlack from "../../public/assets/navbar-icons/home-black.png"
+import cartWhite from "../../public/assets/card-white-icon.png"
+import cartBlack from "../../public/assets/navbar-icons/cart-black.png"
+import heartWhite from "../../public/assets/navbar-icons/heart-white.png"
+import heartBlack from "../../public/assets/navbar-icons/heart-black.png"
+import profileWhite from "../../public/assets/navbar-icons/profile-white.png"
+import profileBlack from "../../public/assets/navbar-icons/profile-black.png"
 // import { useTheme } from "../contexts/ThemeContext";
 import Image from "next/image";
 
