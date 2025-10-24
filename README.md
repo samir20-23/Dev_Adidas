@@ -1,71 +1,180 @@
-web sit : https://devadidas-git-main-samir20-23s-projects.vercel.app/
+ 
+# Next-DevaAdidas
 
-# React + TypeScript + Vite
+A Next.js version of the original React project `dev_adidas`.  
+This project replicates the React app design and functionality using Next.js 16 with Turbopack.  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework:** Next.js 16 (Turbopack)
+- **Language:** TypeScript / React
+- **Styling:** CSS (included via CSS modules or styled-jsx)
+- **Font & Icons:** Font Awesome, Lucide Icons
+- **Internationalization:** i18next
+- **Theme:** Custom ThemeContext
+- **Routing:** Next.js App Router (`app` directory)
+- **Structure:** Clean page-based routing with layouts
 
-## Expanding the ESLint configuration
+The Next.js version is designed to exactly match the React version design and layout, with the following rules:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Do not change CSS or visual design**.  
+2. Client navigation replaces React Router navigation.  
+3. Pages may have client-only logic (`"use client"`), but server components remain static.  
+4. Navbar, Footer, and Menubar appear only on designated pages, like in the original React app.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+next-devadidas/
+├─ app/
+│  ├─ start/
+│  │  ├─ page.tsx
+│  │  └─ start.css
+│  ├─ load/
+│  │  ├─ page.tsx
+│  │  └─ load.css
+│  ├─ home/
+│  │  ├─ page.tsx
+│  │  └─ home.css
+│  ├─ product/
+│  │  └─ [id]/
+│  │     └─ page.tsx
+│  ├─ layout.tsx
+│  └─ page.tsx
+├─ components/
+│  ├─ navbar.tsx
+│  ├─ footer.tsx
+│  ├─ menubar.tsx
+│  ├─ loading.tsx
+│  └─ logo_comp/
+│     ├─ logo.tsx
+│     └─ line_loader.tsx
+├─ contexts/
+│  └─ ThemeContext.tsx
+├─ css_comp/
+│  ├─ authFooter.css
+│  ├─ loading.css
+│  └─ logo.css
+├─ i18n/
+│  └─ i18n.ts
+├─ public/
+│  └─ assets/
+│     └─ (images, icons, etc.)
+├─ globals.css
+└─ README.md
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+````
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Pages
+
+### `/start`
+- Client page with a button to navigate to `/load`.
+- Uses `start.css`.
+- Clean layout (no navbar, no footer, no menubar).
+
+### `/load`
+- Loading animation page with a 3-second timeout before redirecting to `/home`.
+- Uses `load.css`.
+- Clean layout.
+
+### `/home`
+- Main home page with all homepage content.
+- Uses `home.css`.
+- Includes optional navbar, footer, and menubar (like in React).
+
+### `/product/[id]`
+- Dynamic product detail page.
+- Uses inline or page-level CSS.
+- Buttons for back, favorite, cart.
+
+---
+
+## Components
+
+- **Navbar:** `components/navbar.tsx`
+- **Footer:** `components/footer.tsx`
+- **Menubar:** `components/menubar.tsx`
+- **Loading:** `components/loading.tsx`
+- **Logo Components:** `components/logo_comp/logo.tsx`, `line_loader.tsx`
+
+All components use CSS from `components/css_comp`.
+
+---
+
+## Styling
+
+- Page-specific CSS lives alongside pages (`start.css`, `load.css`, `home.css`).
+- Shared component CSS lives in `css_comp/`.
+- Font Awesome loaded via CDN in `layout.tsx`.
+- Lucide Icons used for buttons/icons.
+
+---
+
+## Internationalization
+
+- Uses `i18next` for language support.
+- Translation files located in `i18n/`.
+- Access with `useTranslation()` hook in components or pages.
+
+---
+
+## Theme
+
+- `ThemeContext` provides dark/light mode support.
+- Wraps `MainLayout` in `layout.tsx`.
+- Accessible via `useTheme()` in any component.
+
+---
+
+## Development
+
+### Install dependencies
+```bash
+npm install
+# or
+yarn install
+````
+
+### Run development server
+
+```bash
+npm run dev
+# or
+yarn dev
 ```
+
+* Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+### Build for production
+
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## Notes
+
+* **Do not modify CSS or div structure** — visual design must match the React version.
+* Client-only pages must have `"use client"` at the top.
+* If using external scripts or dynamic values, ensure they are compatible with SSR to avoid hydration errors.
+* Disable browser extensions like Grammarly during development to avoid hydration mismatch warnings.
+
+---
+
+## References
+
+* [Next.js Documentation](https://nextjs.org/docs)
+* [i18next](https://www.i18next.com/)
+* [Lucide React Icons](https://lucide.dev/)
+* [Font Awesome](https://fontawesome.com/)
+
+ 
