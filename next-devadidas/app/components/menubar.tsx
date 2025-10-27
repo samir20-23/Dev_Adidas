@@ -18,24 +18,44 @@ export default function Menubar() {
 
     return (
         <>
-            <nav className="bottom-nav" >
+            <nav className="bottom-nav">
                 <button className="nav-item active" onClick={() => navigate.push("/home")}>
-                    <Image src={theme === 'dark' ? homeWhite : homeBlack} id="iconsMenuBar" className="homeIcon" alt="home" />
+                    <Image
+                        src={theme === 'dark' ? homeWhite : homeBlack}
+                        id="iconsMenuBar"
+                        className="homeIcon"
+                        alt="home"
+                        style={{ width: '24px', height: '24px' }}
+                    />
                 </button>
                 <button className="nav-item" onClick={() => navigate.push("/cart")}>
-                    <Image src={theme === 'dark' ? cartWhite : cartBlack} id="iconsMenuBar" className="cartIcon" alt="cart" />
-
+                    <Image
+                        src={theme === 'dark' ? cartWhite : cartBlack}
+                        id="iconsMenuBar"
+                        className="cartIcon"
+                        alt="cart"
+                        style={{ width: '24px', height: '24px' }}
+                    />
                 </button>
-                <button className="nav-item" onClick={() => navigate.push("favorit")}>
-                    <Image src={theme === 'dark' ? heartWhite : heartBlack} id="iconsMenuBar" className="heartIcon" alt="heart" />
-
+                <button className="nav-item" onClick={() => navigate.push("/favorit")}>
+                    <Image
+                        src={theme === 'dark' ? heartWhite : heartBlack}
+                        id="iconsMenuBar"
+                        className="heartIcon"
+                        alt="heart"
+                        style={{ width: '24px', height: '24px' }}
+                    />
                 </button>
                 <button className="nav-item" onClick={() => navigate.push("/settings")}>
-                    <Image src={theme === 'dark' ? profileWhite : profileBlack} id="iconsMenuBar" className="profileIcon" alt="profile" />
-
+                    <Image
+                        src={theme === 'dark' ? profileWhite : profileBlack}
+                        id="iconsMenuBar"
+                        className="profileIcon"
+                        alt="profile"
+                        style={{ width: '24px', height: '24px' }}
+                    />
                 </button>
             </nav>
-
         </>
     );
 }

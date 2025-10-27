@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useTheme } from "../contexts/ThemeContext";
 import { useTranslation } from "react-i18next";
-import "../../css/Settings.css";
-import profileImg from "../../../public/assets/profile.png"
+import "../css/Settings.css";
+import profileImg from "../../public/assets/profile.png"
 import Image from "next/image";
 
 export default function SettingsPage() {
