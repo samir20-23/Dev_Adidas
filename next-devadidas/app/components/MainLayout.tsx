@@ -1,22 +1,25 @@
-"use client"
-import { usePathname } from "next/navigation"
-import Navbar from "./navbar"
-import Footer from "./footer"
-import Menubar from "./menubar"
-import "../css/main.css"
+'use client';
 
-function MainLayout({ children }: { children: React.ReactNode }) {
-    const location = usePathname()
+import { usePathname } from "next/navigation";
+import Navbar from "./navbar";
+import Footer from "./footer";
+import Menubar from "./menubar";
+import React from "react";
 
-    // paths where we hide navbar/footer
-    const hideNavPaths = ["/login", "/register", "/load","/settings", "/"]
-    const hideFooterPaths = ["/settings", "/register", "/"]
-    const hideMenuPaths = ["/login", "/register", "/load","/settings", "/"];
+interface MainLayoutProps {
+    children: React.ReactNode;
+}
 
-    // check if current path starts with any hide path (supports dynamic routes)
-    const showNav = !hideNavPaths.some(path => location.startsWith(path))
-    const showFooter = !hideFooterPaths.some(path => location.startsWith(path))
-    const showMenu = !hideMenuPaths.some(path => location.startsWith(path));
+export default function MainLayout({ children }: MainLayoutProps) {
+    const pathname = usePathname();
+
+    const hideNavPaths = ["/login", "/register", "/load", "/settings", "/start"];
+    const hideFooterPaths = ["/settings", "/register"];
+    const hideMenuPaths = ["/login", "/register", "/load", "/settings", "/start"];
+
+    const showNav = !hideNavPaths.some(path => pathname.startsWith(path));
+    const showFooter = hideFooterPaths.some(path => pathname.startsWith(path));
+    const showMenu = !hideMenuPaths.some(path => pathname.startsWith(path));
 
     return (
         <div className="layout">
@@ -27,7 +30,5 @@ function MainLayout({ children }: { children: React.ReactNode }) {
             {showFooter && <Footer />}
             {showMenu && <Menubar />}
         </div>
-    )
+    );
 }
-
-export default MainLayout

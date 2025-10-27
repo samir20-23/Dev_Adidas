@@ -1,47 +1,31 @@
-
 .layout {
-    width: 100%;
-    display: flex; 
-    flex-direction:column;
-}
-/* layouts */
-nav {  
-    background-color: #333;
-    padding: 10px;
-    width: 100%;
-
-}
-
-nav ul {
-    list-style: none;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-nav ul li {
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
+.main {
+    flex: 1;
+    overflow-y: auto; /* Allows content to scroll */
+    padding-top: 75px; /* Adjust this value based on your navbar's height */
+    padding-bottom: 80px; /* Adjust this value based on your menubar's height */
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
+/* Ensure navbar and menubar have a consistent height */
+.navbarmain {
+    height: 75px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
-nav ul li a:hover {
-    color: #f0f0f0;
+.bottom-nav {
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
-
-nav ul li a.active {
-    color: #f0f0f0;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-nav ul li a.active:hover {
-    color: #f0f0f0;
-    border-bottom: 2px solid #f0f0f0;
-}
-
- 
- 
