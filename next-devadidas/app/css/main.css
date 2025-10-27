@@ -12,15 +12,15 @@
 }
 
 /* Ensure navbar and menubar have a consistent height */
-.navbarmain {
+/* .navbarmain {
     height: 75px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-}
-
+} */
+/* 
 .bottom-nav {
     height: 80px;
     position: fixed;
@@ -28,4 +28,4 @@
     left: 0;
     right: 0;
     z-index: 1000;
-}
+} */

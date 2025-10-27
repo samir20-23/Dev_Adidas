@@ -13,13 +13,17 @@ interface MainLayoutProps {
 export default function MainLayout({ children }: MainLayoutProps) {
     const pathname = usePathname();
 
-    const hideNavPaths = ["/login", "/register", "/load", "/settings", "/start"];
-    const hideFooterPaths = ["/settings", "/register"];
-    const hideMenuPaths = ["/login", "/register", "/load", "/settings", "/start"];
+    // Exact paths to hide components on
+    const hideOnExactPaths = ["/", "/load", "/start"];
 
-    const showNav = !hideNavPaths.some(path => pathname.startsWith(path));
+    const hideNavPaths = ["/login", "/register", "/settings"];
+    const hideFooterPaths = ["/settings", "/register"];
+    const hideMenuPaths = ["/login", "/register", "/settings"];
+
+    // Check for exact path match or if the path starts with one of the prefixes
+    const showNav = !hideOnExactPaths.includes(pathname) && !hideNavPaths.some(path => pathname.startsWith(path));
     const showFooter = hideFooterPaths.some(path => pathname.startsWith(path));
-    const showMenu = !hideMenuPaths.some(path => pathname.startsWith(path));
+    const showMenu = !hideOnExactPaths.includes(pathname) && !hideMenuPaths.some(path => pathname.startsWith(path));
 
     return (
         <div className="layout">

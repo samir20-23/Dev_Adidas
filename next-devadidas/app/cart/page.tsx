@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { ShoppingCart, Trash2 } from "lucide-react";
-import '../../css/cart.css'
+import '../css/cart.css'
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState<any[]>([]);
