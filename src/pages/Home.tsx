@@ -82,12 +82,12 @@ export default function Home() {
                     <span className="hero-label">{t('home.heroLabel')}</span>
                     <h1 className="hero-title">{t('home.heroTitle')}</h1>
                     <button className="shop-now-btn">
-                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true"  id="iconRightHome"></i>
+                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true" id="iconRightHome"></i>
                     </button>
                 </div>
 
                 <div className="hero-shoe-img">
-                    <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=400&fit=crop" alt="Campus Shoes" />
+                    <img src="https://ubuykw.s3.amazonaws.com/brand-pages/category-175672089481.png" alt="Campus Shoes" />
                 </div>
             </div>
 
