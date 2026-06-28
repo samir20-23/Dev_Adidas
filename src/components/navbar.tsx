@@ -1,125 +1,40 @@
-import "../css/navbar.css"
-import { Link, useLocation, useNavigate } from "react-router-dom"
-import { Heart, Moon, Sun } from "lucide-react";
-import { useTranslation } from 'react-i18next';
-
-import Logo from "../assets/logoo.png"
-import LogoWhite from "../assets/logoWhite.png"
-import CartIcon from "../assets/cart.png"
-import Left from "../assets/left.png"
-import { useState } from "react"
-import { useTheme } from "../contexts/ThemeContext";
+import { useNavigate, useLocation } from "react-router-dom";
+import { ChevronLeft, ShoppingBasket, Heart, Bell } from "lucide-react";
+import "../css/navbar.css";
 
 export default function Navbar() {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const { t, i18n } = useTranslation();
-  const [isLiked, setIsLiked] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  const closeBurger = () => {
-    const el = document.getElementById("burger-toggle") as HTMLInputElement | null
-    if (el) el.checked = false
-  }
+    // Just an example logic: if not home, show back button on left
+    const isHome = location.pathname === "/home" || location.pathname === "/";
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-  };
-
-  const isProductPath = location.pathname.startsWith("/product")
-  const isDetailPath = location.pathname.startsWith("/detail")
-
-  return (
-    <>
-      <nav className="navbarmain">
-        {(() => {
-          if (isProductPath || isDetailPath) {
-            return (
-              <>
-                <div
-                  className="vector"
-                  onClick={() => navigate(-1)}
-                  style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}
-                >
-                  <img src={Left} alt="Left" className="LeftIcon" />
-                  <p style={{ margin: 0 }}>{isProductPath ? t('navbar.product') : t('navbar.detail')}</p>
-                </div>
-              </>
-            )
-          } else {
-            return (
-              <>
-                <div className="divhamburger">
-                  <input id="burger-toggle" type="checkbox" className="burger-toggle" />
-                  <label className="hamburger" htmlFor="burger-toggle">
-                    <svg viewBox="0 0 32 32">
-                      <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
-                      <path className="line" d="M7 16 27 16"></path>
-                    </svg>
-                  </label>
-
-                  <div className="hamburger-menu">
-                    <div className="hamburger-menu-links">
-                      <Link to="/home" onClick={closeBurger}>{t('navbar.home')}</Link>
-                      <Link to="/product" onClick={closeBurger}>{t('navbar.product')}</Link>
-                      <Link to="/cart" onClick={closeBurger}>{t('navbar.cart')}</Link>
-                      <Link to="/settings" onClick={closeBurger}>{t('navbar.settings')}</Link>
-                      <Link to="/login" onClick={closeBurger}>{t('navbar.login')}</Link>
-                      <Link to="/register" onClick={closeBurger}>{t('navbar.register')}</Link>
-                    </div>
-
-                    <div className="hamburger-menu-controls">
-                      <button
-                        className="hamburger-theme-btn"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleTheme()
-                        }}
-                      >
-                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                        <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-                      </button>
-                      <div className="hamburger-lang-switcher">
-                        <button onClick={() => changeLanguage('en')} className={i18n.language === 'en' ? 'active' : ''}>EN</button>
-                        <button onClick={() => changeLanguage('ar')} className={i18n.language === 'ar' ? 'active' : ''}>AR</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )
-          }
-        })()}
-
-        <div className="logonavbar" onClick={() => navigate("/home")} style={{ cursor: "pointer" }}>
-          <img src={theme === 'dark' ? LogoWhite : Logo} alt="logo" />
-        </div>
-
-        <div className="iconnavbar">
-          {(() => {
-            if (isProductPath) {
-              return (
-                <>
-                  <img
-                    src={CartIcon}
-                    className="CartIcon"
-                    alt="CartIcon"
-                    onClick={() => navigate("/cart")}
-                    style={{ cursor: "pointer", width: 20, marginRight: 10 }}
-                  />
-                  <button className="like-btn-header" onClick={() => setIsLiked(!isLiked)}>
-                    <Heart size={21} fill={isLiked ? (theme === 'dark' ? '#FFF' : '#000') : "none"} />
-                  </button>
-                </>
-              )
-            }
-            if (isDetailPath) {
-              return <i className="fa fa-heart-o" id="icon" aria-hidden="true" />
-            }
-            return <i className="fa fa-bell" id="icon" aria-hidden="true" />
-          })()}
-        </div>
-      </nav>
-    </>
-  )
+    return (
+        <nav className="app-navbar">
+            <div className="navbar-left">
+                {!isHome ? (
+                    <button className="navbar-left" onClick={() => navigate(-1)}>
+                        <ChevronLeft size={22} />
+                    </button>
+                ) : (
+                    <div style={{ width: 22 }}></div> // placeholder for spacing
+                )}
+            </div>
+            
+            <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" 
+                alt="Adidas" 
+                className="navbar-logo" 
+            />
+            
+            <div className="navbar-right">
+                <button className="navbar-icon-btn" onClick={() => navigate('/detail')}>
+                    <Heart size={22} />
+                </button>
+                <button className="navbar-icon-btn" onClick={() => navigate('/cart')}>
+                    <ShoppingBasket size={22} />
+                </button>
+            </div>
+        </nav>
+    );
 }

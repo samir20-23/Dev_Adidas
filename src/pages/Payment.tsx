@@ -1,124 +1,66 @@
 import { useState } from "react";
-import { ChevronLeft, CreditCard, Plus, Wallet, DollarSign, ShoppingCart, Home, Heart, User } from "lucide-react";
-import '../css/payment.css'
-export default function Payment() {
-    const [selectedPayment, setSelectedPayment] = useState("mastercard");
-    const [cashOnDelivery, setCashOnDelivery] = useState(false);
+import { Plus, Banknote } from "lucide-react";
+import "../css/payment.css";
 
-    const paymentMethods = [
-        {
-            id: "mastercard",
-            type: "Mastercard",
-            number: "3742 **** **** 0126",
-            icon: "mastercard",
-            bgColor: "#000"
-        },
-        {
-            id: "paypal",
-            type: "Paypal",
-            number: "1432 **** 8065",
-            icon: "paypal",
-            bgColor: "#fff"
-        },
-        {
-            id: "visa",
-            type: "Visa",
-            number: "4356 **** **** 9089",
-            icon: "visa",
-            bgColor: "#fff"
-        }
-    ];
+export default function Payment() {
+    const [selectedMethod, setSelectedMethod] = useState("mastercard");
 
     return (
-        <div className="payment-container">
-            {/* Header */}
-            <header className="payment-header">
-                <button className="back-btn">
-                    <ChevronLeft size={24} />
-                </button>
-                <h1 className="page-title">Payment</h1>
-                <div style={{ width: '44px' }}></div>
-            </header>
-
-            <div className="payment-content">
-                {/* Your Cards */}
-                <section className="cards-section">
-                    <h2 className="section-title">Your cards</h2>
-                    <div className="cards-list">
-                        {paymentMethods.map((method) => (
-                            <div
-                                key={method.id}
-                                className={`payment-card ${method.bgColor === '#000' ? 'dark' : 'light'}`}
-                                style={{ background: method.bgColor }}
-                                onClick={() => setSelectedPayment(method.id)}
-                            >
-                                <div className="card-content">
-                                    <div className="card-icon">
-                                        {method.icon === 'mastercard' && (
-                                            <div className="mastercard-logo">
-                                                <div className="circle red"></div>
-                                                <div className="circle orange"></div>
-                                            </div>
-                                        )}
-                                        {method.icon === 'paypal' && (
-                                            <span className="paypal-text">PayPal</span>
-                                        )}
-                                        {method.icon === 'visa' && (
-                                            <span className="visa-text">VISA</span>
-                                        )}
-                                    </div>
-                                    <div className="card-info">
-                                        <div className="card-type">{method.type}</div>
-                                        <div className="card-number">{method.number}</div>
-                                    </div>
-                                </div>
-                                <div className={`radio-btn ${selectedPayment === method.id ? 'checked' : ''}`}>
-                                    <div className="radio-inner"></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Other Options */}
-                <section className="other-options-section">
-                    <h2 className="section-title">Other options</h2>
-                    <div className="options-list">
-                        <button className="option-btn">
-                            <Plus size={20} />
-                            <span>Add new card</span>
-                        </button>
-                        <button
-                            className={`option-btn ${cashOnDelivery ? 'active' : ''}`}
-                            onClick={() => setCashOnDelivery(!cashOnDelivery)}
-                        >
-                            <DollarSign size={20} />
-                            <span>Cash on delivery</span>
-                        </button>
-                    </div>
-                </section>
-
-                {/* Pay Button */}
-                <button className="pay-now-btn">
-                    Pay now
-                </button>
+        <div className="payment-page">
+            <h2 className="section-title">Your cards</h2>
+            
+            {/* Mastercard */}
+            <div 
+                className={`payment-card ${selectedMethod === "mastercard" ? "selected" : ""}`}
+                onClick={() => setSelectedMethod("mastercard")}
+            >
+                <div style={{ display: 'flex', position: 'relative', width: 36, height: 24 }}>
+                    <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#EB001B', position: 'absolute', left: 0 }}></div>
+                    <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#F79E1B', position: 'absolute', left: 12, mixBlendMode: 'screen' }}></div>
+                </div>
+                <div className="card-info">
+                    <div className="card-name">Mastercard</div>
+                    <div className="card-number">3742 **** **** 0126</div>
+                </div>
+                <div className={`radio-btn ${selectedMethod === "mastercard" ? "selected" : ""}`}></div>
             </div>
 
-            {/* Bottom Navigation */}
-            {/* <nav className="bottom-nav">
-                <button className="nav-item">
-                    <Home size={24} />
-                </button>
-                <button className="nav-item">
-                    <ShoppingCart size={24} />
-                </button>
-                <button className="nav-item">
-                    <Heart size={24} />
-                </button>
-                <button className="nav-item active">
-                    <User size={24} />
-                </button>
-            </nav> */}
+            {/* Paypal */}
+            <div 
+                className={`payment-card ${selectedMethod === "paypal" ? "selected" : ""}`}
+                onClick={() => setSelectedMethod("paypal")}
+            >
+                <div style={{ color: '#003087', fontWeight: 800, fontStyle: 'italic', fontSize: 18, width: 36 }}>PayPal</div>
+                <div className="card-info">
+                    <div className="card-name" style={{ color: selectedMethod === 'paypal' ? '#fff' : 'inherit' }}>Paypal</div>
+                    <div className="card-number">1432 **** 8065</div>
+                </div>
+                <div className={`radio-btn ${selectedMethod === "paypal" ? "selected" : ""}`}></div>
+            </div>
+
+            {/* Visa */}
+            <div 
+                className={`payment-card ${selectedMethod === "visa" ? "selected" : ""}`}
+                onClick={() => setSelectedMethod("visa")}
+            >
+                <div style={{ color: '#1A1F71', fontWeight: 800, fontStyle: 'italic', fontSize: 18, width: 36 }}>VISA</div>
+                <div className="card-info">
+                    <div className="card-name" style={{ color: selectedMethod === 'visa' ? '#fff' : 'inherit' }}>Visa</div>
+                    <div className="card-number">4356 **** **** 9089</div>
+                </div>
+                <div className={`radio-btn ${selectedMethod === "visa" ? "selected" : ""}`}></div>
+            </div>
+
+            <h2 className="section-title">Other options</h2>
+            
+            <div className="option-card">
+                <Plus size={20} /> Add new card
+            </div>
+            <div className="option-card">
+                <Banknote size={20} /> Cash on delivery
+            </div>
+
+            <button className="btn-pay-now">Pay now</button>
         </div>
     );
 }

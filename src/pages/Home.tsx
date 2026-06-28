@@ -1,26 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Search, ChevronRight, Heart, ShoppingCart } from "lucide-react";
+import { Search, SlidersHorizontal, ShoppingBasket, Heart, Footprints, Shirt, ShoppingBag, ChevronRight } from "lucide-react";
 import "../css/home.css";
+import { useState } from "react";
 
 export default function Home() {
     const navigate = useNavigate();
-    const { t } = useTranslation();
     const [liked, setLiked] = useState<{ [key: number]: boolean }>({});
 
-    useEffect(() => {
-        const storedLiked = localStorage.getItem("liked");
-        if (storedLiked) {
-            setLiked(JSON.parse(storedLiked));
-        }
-    }, []);
-
-    const toggleLike = (id: number) => {
-        const newLiked = { ...liked, [id]: !liked[id] };
-        setLiked(newLiked);
-        localStorage.setItem("liked", JSON.stringify(newLiked));
+    const toggleLike = (id: number, e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setLiked((prev) => ({ ...prev, [id]: !prev[id] }));
     };
 
     const popularShoes = [
@@ -35,12 +25,6 @@ export default function Home() {
             name: "Adidas Stan West Korea",
             price: "170 $",
             image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&h=300&fit=crop"
-        },
-        {
-            id: 3,
-            name: "Adidas Barricola Shoes",
-            price: "449 $",
-            image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=300&fit=crop"
         }
     ];
 
@@ -48,122 +32,117 @@ export default function Home() {
         {
             id: 4,
             name: "Adidas Gazze 5",
-            subtitle: "Mens - Shoes",
-            tag: "490$",
+            subtitle: "Mens · Shoes",
+            price: "490$",
             image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop"
         },
         {
             id: 5,
             name: "Superstar shoes",
-            subtitle: "Mens - Shoes",
-            tag: "179$",
+            subtitle: "Mens · Shoes",
+            price: "179$",
             image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop"
         }
     ];
 
-
-
-
-
     return (
-        <div className="home-container">
-            <header className="header">
-                <div className="search-bar">
-                    <i className="fa fa-search" id="iconSearch" aria-hidden="true"></i>
-                    <input type="text" placeholder={t('home.search')} />
-                    <div className="filterButton">
-                        <i className="fa fa-sliders" id="filtericon" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </header>
+        <div className="home-page">
+            {/* Search Bar */}
+            <div className="search-bar">
+                <Search size={18} color="#AAAAAA" />
+                <input type="text" placeholder="Search..." />
+                <SlidersHorizontal size={18} color="#111" />
+            </div>
 
+            {/* Hero Banner */}
             <div className="hero-banner">
-                <div className="hero-content">
-                    <span className="hero-label">{t('home.heroLabel')}</span>
-                    <h1 className="hero-title">{t('home.heroTitle')}</h1>
-                    <button className="shop-now-btn">
-                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true" id="iconRightHome"></i>
-                    </button>
-                </div>
-
-                <div className="hero-shoe-img">
-                    <img src="https://ubuykw.s3.amazonaws.com/brand-pages/category-175672089481.png" alt="Campus Shoes" />
+                <img src="https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=800&h=400&fit=crop" alt="Campus Shoes" />
+                <div className="hero-text">
+                    <span className="hero-label">NEW COLLECTION</span>
+                    <h1 className="hero-title">Adidas<br />Campus</h1>
                 </div>
             </div>
 
-            <section className="categories-section">
-                <h2 className="section-title">{t('home.categories')}</h2>
-                <div className="categories-grid">
-                    {/* These could be translated as well if they are not dynamic */}
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/2818/2818324.png" alt="Shoes" /></div>
-                        <span>Shoes</span>
+            {/* Categories */}
+            <h2 className="section-title">Categories</h2>
+            <div className="categories-row">
+                <div className="category-item">
+                    <div className="category-circle active">
+                        <Footprints size={24} />
                     </div>
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/892/892458.png" alt="T-shirt" /></div>
-                        <span>T-shirt</span>
-                    </div>
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/2609/2609368.png" alt="Bags" /></div>
-                        <span>Bags</span>
-                    </div>
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/3082/3082031.png" alt="Tracksuit" /></div>
-                        <span>Tracksuit</span>
-                    </div>
+                    <span className="category-label">Shoes</span>
                 </div>
-            </section>
+                <div className="category-item">
+                    <div className="category-circle">
+                        <Shirt size={24} />
+                    </div>
+                    <span className="category-label">T-shirt</span>
+                </div>
+                <div className="category-item">
+                    <div className="category-circle">
+                        <ShoppingBag size={24} />
+                    </div>
+                    <span className="category-label">Bags</span>
+                </div>
+                <div className="category-item">
+                    <div className="category-circle">
+                        {/* Placeholder for Tracksuit, using Shirt for now */}
+                        <Shirt size={24} />
+                    </div>
+                    <span className="category-label">Tracksuit</span>
+                </div>
+            </div>
 
-            <section className="popular-section">
-                <div className="section-header">
-                    <h2 className="section-title">{t('home.popular')}</h2>
-                    <Link to="/see-all" className="see-all">{t('home.seeAll')}</Link>
-                </div>
-                <div className="products-grid">
-                    {popularShoes.map((shoe) => (
-                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="product-card">
-                            <button
-                                className="like-btn"
-                                onClick={(e) => { e.preventDefault(); toggleLike(shoe.id); }}
-                            >
-                                <Heart size={20} fill={liked[shoe.id] ? "#000" : "none"} />
+            {/* Popular Shoes */}
+            <h2 className="section-title">Popular Shoes</h2>
+            <div className="products-grid">
+                {popularShoes.map((shoe) => (
+                    <div 
+                        key={shoe.id} 
+                        className="product-card"
+                        onClick={() => navigate(`/product/${shoe.id}`)}
+                        style={{cursor: 'pointer'}}
+                    >
+                        <h3 className="product-name">{shoe.name}</h3>
+                        <div className="product-price">{shoe.price}</div>
+                        <img src={shoe.image} alt={shoe.name} className="product-img" />
+                        <div className="card-actions">
+                            <button className="btn-heart" onClick={(e) => toggleLike(shoe.id, e)}>
+                                <Heart size={20} fill={liked[shoe.id] ? "#111" : "none"} stroke="#111" />
                             </button>
-                            <div className="product-image"><img src={shoe.image} alt={shoe.name} /></div>
-                            <div className="product-info">
-                                <h3>{shoe.name}</h3>
-                                <p className="price">{shoe.price}</p>
-                            </div>
-                            <button className="add-to-cart-btn"><ShoppingCart size={20} /></button>
-                        </Link>
-                    ))}
-                </div>
-                <button className="explore-more-btn">{t('home.exploreMore')}</button>
-            </section>
+                            <button className="btn-cart" onClick={(e) => { e.stopPropagation(); navigate('/cart'); }}>
+                                <ShoppingBasket size={18} color="#fff" />
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
-            <section className="trend-section">
-                <h2 className="section-title">{t('home.trending')}</h2>
-                <div className="trend-grid">
-                    {trendShoes.map((shoe) => (
-                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="trend-card">
-                            <button
-                                className="like-btn-trend"
-                                onClick={(e) => { e.preventDefault(); toggleLike(shoe.id) }}
-                            >
-                                <Heart size={18} fill={liked[shoe.id] ? "#000" : "none"} />
-                            </button>
-                            <span className="trend-tag">{shoe.tag}</span>
-                            <div className="trend-image"><img src={shoe.image} alt={shoe.name} /></div>
-                            <button className="trend-shop-btn">
-                                {t('home.shopNow')} <ChevronRight size={16} />
-                            </button>
-                            <div className="trend-info">
-                                <h3>{shoe.name}</h3>
-                                <p>{shoe.subtitle}</p>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            </section>
+            <button className="btn-explore">Explore more</button>
+
+            {/* Trend of the moment */}
+            <h2 className="section-title">Trend of the moment</h2>
+            <div className="trending-grid">
+                {trendShoes.map((shoe) => (
+                    <div 
+                        key={shoe.id} 
+                        className="trending-card"
+                        onClick={() => navigate(`/product/${shoe.id}`)}
+                        style={{cursor: 'pointer'}}
+                    >
+                        <button className="trend-heart" onClick={(e) => toggleLike(shoe.id, e)}>
+                            <Heart size={20} fill={liked[shoe.id] ? "#111" : "none"} stroke="#111" />
+                        </button>
+                        <div className="trend-price">{shoe.price}</div>
+                        <img src={shoe.image} alt={shoe.name} className="trend-img" />
+                        <button className="trend-shop-btn" onClick={(e) => { e.stopPropagation(); navigate('/cart'); }}>
+                            Shop Now <ChevronRight size={14} />
+                        </button>
+                        <h3 className="trend-name">{shoe.name}</h3>
+                        <p className="trend-sub">{shoe.subtitle}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

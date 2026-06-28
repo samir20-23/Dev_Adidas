@@ -1,49 +1,100 @@
-.payment-container {
-    min-height: 100vh;
-    background: var(--background-color);
-    padding-bottom: 80px;
-    max-width: 1400px;
-    margin: 0 auto;
+.payment-page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 0 16px 100px;
 }
-
-.payment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: var(--secondary-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.back-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 8px;
-}
-
-.page-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-.payment-content {
-    padding: 20px;
-}
-
 .section-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 20px 0 12px;
+}
 
-    font-size: 16px;
+/* Mastercard (selected, black background) */
+.payment-card {
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+.payment-card.selected {
+  background: #000;
+}
+.payment-card.selected .card-name {
+  color: #fff;
+}
+.payment-card.selected .card-number {
+  color: #CCCCCC;
+}
+.card-info {
+  flex: 1;
+}
+.card-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.card-number {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.radio-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #CCC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.radio-btn.selected {
+  border-color: #fff;
+}
+.radio-btn.selected::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
 
-    font-weight: 600;
+/* Other options */
+.option-card {
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--text-primary);
+}
 
-    color: var(--text-color);
-
-    margin-bottom: 16px;
-
+/* Pay now button */
+.btn-pay-now {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 448px;
+  height: 56px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
 }
