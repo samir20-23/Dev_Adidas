@@ -1,18 +1,15 @@
-.titleRegister {
-  font-size: 25px;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.221);
-  text-align: center;
-  color: var(--text-color);
-}
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
 .mainRegister {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 15px;
-  min-width: 300px;
-  max-width: 600px;
+  padding: 20px 16px;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
 }
 
 .headeRegister {
@@ -20,6 +17,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 8px;
 }
 
 .logoBar {
@@ -27,42 +25,53 @@
   justify-content: center;
   align-items: center;
   width: 40%;
+  margin-bottom: 8px;
 }
 
-#registerForm {
-  width: 100%;
+.titleRegister {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 20px;
 }
 
+#registerForm { width: 100%; }
+
+.field-group { margin-bottom: 14px; }
+
+.label {
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: block;
+}
 
 .input-group {
   position: relative;
   display: flex;
   align-items: center;
   border-radius: 12px;
-  border: none;
-  background: var(--secondary-color);
-  padding: 10px;
-  padding-left: 12px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
 }
-
-
 .input-group #iconsInputs {
   font-size: 1rem;
   opacity: 0.5;
   margin-right: 0.75rem;
   pointer-events: none;
+  color: var(--text-primary);
 }
-
 .input-group input {
   flex: 1;
   border: none;
   outline: none;
-  padding: 0;
   font-size: 1rem;
   background: transparent;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
-
+.input-group input::placeholder { color: var(--text-muted); }
 .input-group .toggle-password {
   position: absolute;
   top: 50%;
@@ -70,78 +79,53 @@
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 1rem;
-  color: #666;
+  color: var(--text-secondary);
   opacity: 0.7;
   z-index: 2;
-}
-
-.input-group .toggle-password:hover {
-  opacity: 1;
-}
-
-.logsWith i.fa {
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
-  vertical-align: middle;
-}
-
-.field-group {
-  margin-bottom: 1rem;
-}
-
-.field-group>label {
-  position: relative !important;
-  z-index: 10 !important;
-  pointer-events: auto !important;
-  color: var(--text-color) !important;
-  cursor: pointer !important;
+  pointer-events: auto;
 }
 
 .error-msg {
-  display: block;
   font-size: 0.85rem;
-  color: #c00;
+  color: var(--danger);
   min-height: 1em;
 }
-
-.field-group.error .input-group {
-  border-color: #c00;
-}
-
-.field-group.error .input-group input {
-  outline-color: #c00;
-}
-
 
 .terms {
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: row;
-  flex-wrap: none;
+  gap: 8px;
 }
-
+.terms a { color: var(--text-primary); }
 
 #submitRegister {
   width: 100%;
   border-radius: 50px;
-  background: var(--primary-color);
+  background: var(--black-btn);
   border: none;
-  color: var(--secondary-color);
+  color: var(--black-btn-text);
   padding: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+  font-family: var(--font);
 }
 
 .orRegister {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 12px;
-  font-size: 20px;
+  padding: 16px;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  width: 100%;
 }
-
-span hr {
-  width: 200px;
-}
+.orRegister span { display: flex; align-items: center; }
+.orRegister hr { width: 80px; border-color: var(--border); }
 
 .logsWith {
   display: flex;
@@ -151,65 +135,38 @@ span hr {
   flex-direction: column;
   gap: 12px;
 }
-
 .social-btn {
-
   width: 100%;
   border-radius: 50px;
-  border: none;
-  color: white;
+  border: 1px solid var(--border);
   padding: 14px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font);
 }
-
-#signupbtnAple {
-  background: var(--primary-color);
+.social-btn.apple {
+  background: var(--black-btn);
+  color: var(--black-btn-text);
+  border-color: var(--black-btn);
 }
-
-#signupbtnGoogle {
-  background-color: rgb(198, 198, 198);
-  color: black;
+.social-btn.google {
+  background: var(--surface);
+  color: var(--text-primary);
 }
 
 #AlreadyRegister {
-  color: var(--text-color);
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
 }
-
 #AlreadyRegister span a {
-  color: var(--text-color);
-  padding-left: 15px;
+  color: var(--text-primary);
+  padding-left: 6px;
   text-decoration: none;
-  cursor: pointer;
+  font-weight: 600;
 }
-
-@media (max-width: 768px) {
-  .mainRegister {
-    padding: 10px;
-    min-width: unset;
-    max-width: 100%;
-  }
-
-  span hr {
-    width: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .titleRegister {
-    font-size: 22px;
-  }
-
-  .input-group input {
-    font-size: 0.9rem;
-  }
-
-  #submitRegister,
-  .social-btn {
-    padding: 12px;
-  }
-
-  span hr {
-    width: 50px;
-  }
-}
-
- 

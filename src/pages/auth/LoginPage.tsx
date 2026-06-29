@@ -1,120 +1,81 @@
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../css/Register.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import Logo from "../../components/logo_Comp/Logo";
 import AuthFooter from "../../components/AuthFooter";
+import { login } from "../../utils/auth";
 
 export default function LoginPage() {
-    const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPass, setShowPass] = useState(false);
 
-    useEffect(() => {
-        const toggleIcons = document.querySelectorAll<HTMLElement>(".toggle-password");
-        toggleIcons.forEach((eye) => {
-            const clickHandler = () => {
-                const targetId = eye.getAttribute("data-target");
-                if (!targetId) return;
-                const input = document.getElementById(targetId) as HTMLInputElement | null;
-                if (!input) return;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = login(email, password);
+    if (result.error) { setError(result.error); return; }
+    navigate('/home');
+  };
 
-                if (input.type === "password") {
-                    input.type = "text";
-                    eye.classList.replace("fa-eye", "fa-eye-slash");
-                } else {
-                    input.type = "password";
-                    eye.classList.replace("fa-eye-slash", "fa-eye");
-                }
-            };
-            eye.addEventListener("click", clickHandler);
-            return () => eye.removeEventListener("click", clickHandler);
-        });
-    }, []);
+  return (
+    <>
+      <div className="mainRegister">
+        <div className="headeRegister">
+          <div className="logoBar"><Logo /></div>
+          <h2 className="titleRegister">Login</h2>
+        </div>
 
-    return (
-        <>
-            <div className="mainRegister">
-                <div className="headeRegister">
-                    <div className="logoBar">
-                        <Logo />
-                    </div>
-                    <h2 className="titleRegister">{t('login.title')}</h2>
-                </div>
-
-                <form id="registerForm" onSubmit={(e) => e.preventDefault()}>
-                    <div className="field-group">
-                        <p className="label">{t('login.email')} *</p>
-                        <div className="input-group">
-                            <i className="fa fa-envelope" id="iconsInputs" />
-                            <input
-                                type="email"
-                                name="Email"
-                                id="emailRegister"
-                                placeholder="example@gmail.com"
-                                required
-                            />
-                        </div>
-                        <span className="error-msg" id="error-emailRegister"></span>
-                    </div>
-
-                    <div className="field-group">
-                        <p className="label">{t('login.password')} *</p>
-                        <div className="input-group">
-                            <i className="fa fa-lock" id="iconsInputs" />
-                            <input
-                                type="password"
-                                name="PasswordRegister"
-                                id="passwordRegister"
-                                placeholder={t('login.password')}
-                                required
-                            />
-                            <i
-                                className="fa fa-eye toggle-password"
-                                data-target="passwordRegister"
-                                id="iconsInputs"
-                                style={{ cursor: "pointer" }}
-                            />
-                        </div>
-                        <span className="error-msg" id="error-passwordRegister"></span>
-                    </div>
-
-                    <div className="terms field-group">
-                        <a href="#" style={{ textDecoration: "none", color: "var(--text-color)" }}>{t('login.forgot')}</a>
-                    </div>
-
-                    <button type="submit" id="submitRegister">
-                        {t('login.submit')}
-                    </button>
-                </form>
-
-                <div className="orRegister">
-                    <span>
-                        <hr />
-                    </span>
-                    <span>{t('register.or')}</span>
-                    <span>
-                        <hr />
-                    </span>
-                </div>
-
-                <div className="logsWith">
-                    <button id="signupbtnAple" className="social-btn apple">
-                        <i className="fa fa-apple" />
-                        <span>{t('register.apple')}</span>
-                    </button>
-                    <button id="signupbtnGoogle" className="social-btn google">
-                        <i className="fa fa-google" />
-                        <span>{t('register.google')}</span>
-                    </button>
-                </div>
-
-                <p id="AlreadyRegister">
-                    {t('login.noAccount')}{" "}
-                    <span>
-                        <a href="/register">{t('login.register')}</a>
-                    </span>
-                </p>
+        <form id="registerForm" onSubmit={handleSubmit}>
+          <div className="field-group">
+            <p className="label">Email *</p>
+            <div className="input-group">
+              <i className="fa fa-envelope" id="iconsInputs" />
+              <input
+                type="email"
+                placeholder="example@gmail.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+              />
             </div>
-            <AuthFooter />
-        </>
-    );
+          </div>
+
+          <div className="field-group">
+            <p className="label">Password *</p>
+            <div className="input-group">
+              <i className="fa fa-lock" id="iconsInputs" />
+              <input
+                type={showPass ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+              <i
+                className={`fa ${showPass ? 'fa-eye-slash' : 'fa-eye'} toggle-password`}
+                style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                onClick={() => setShowPass(p => !p)}
+              />
+            </div>
+          </div>
+
+          {error && <span className="error-msg" style={{ display: 'block', marginBottom: 8 }}>{error}</span>}
+
+          <div className="terms field-group">
+            <a href="#" style={{ textDecoration: 'none', color: 'var(--text-color)' }}>Forgot password?</a>
+          </div>
+
+          <button type="submit" id="submitRegister">Login</button>
+        </form>
+
+        <p id="AlreadyRegister">
+          Don't have an account?{" "}
+          <span><a href="/register">Register</a></span>
+        </p>
+      </div>
+      <AuthFooter />
+    </>
+  );
 }

@@ -1,8 +1,9 @@
 .payment-page {
   background: var(--bg);
   min-height: 100vh;
-  padding: 0 16px 100px;
+  padding: 0 16px 160px;
 }
+
 .section-title {
   font-size: 17px;
   font-weight: 600;
@@ -10,7 +11,6 @@
   margin: 20px 0 12px;
 }
 
-/* Mastercard (selected, black background) */
 .payment-card {
   width: 100%;
   background: var(--surface);
@@ -22,50 +22,43 @@
   margin-bottom: 10px;
   border: 1px solid var(--border);
   cursor: pointer;
-}
-.payment-card.selected {
-  background: #000;
-}
-.payment-card.selected .card-name {
-  color: #fff;
-}
-.payment-card.selected .card-number {
-  color: #CCCCCC;
-}
-.card-info {
-  flex: 1;
-}
-.card-name {
-  font-size: 15px;
-  font-weight: 600;
   color: var(--text-primary);
 }
-.card-number {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 2px;
+.payment-card.selected {
+  background: var(--black-btn);
+  border-color: var(--black-btn);
+  color: var(--black-btn-text);
 }
+.payment-card.selected .card-name,
+.payment-card.selected .card-number { color: var(--black-btn-text); }
+.card-info { flex: 1; }
+.card-name { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+.card-number { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
 .radio-btn {
-  width: 20px;
-  height: 20px;
+  width: 20px; height: 20px;
   border-radius: 50%;
-  border: 2px solid #CCC;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
 .radio-btn.selected {
-  border-color: #fff;
+  border-color: var(--black-btn-text);
 }
 .radio-btn.selected::after {
   content: '';
-  width: 10px;
-  height: 10px;
-  background: #fff;
+  width: 10px; height: 10px;
+  background: var(--black-btn-text);
   border-radius: 50%;
 }
 
-/* Other options */
+.no-cards-msg {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 20px 0;
+}
+
 .option-card {
   width: 100%;
   background: var(--surface);
@@ -81,17 +74,113 @@
   color: var(--text-primary);
 }
 
-/* Pay now button */
+/* Add card form */
+.add-card-form {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.add-card-form h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+.add-card-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 15px;
+  margin-bottom: 10px;
+  outline: none;
+  font-family: var(--font);
+}
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.btn-cancel-form {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn-save-card {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--black-btn);
+  color: var(--black-btn-text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Pay now */
 .btn-pay-now {
   position: fixed;
-  bottom: 24px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
   max-width: 448px;
   height: 56px;
-  background: #000;
-  color: #fff;
+  background: var(--black-btn);
+  color: var(--black-btn-text);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 99;
+}
+
+/* Success */
+.payment-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+  padding: 32px;
+  text-align: center;
+}
+.success-icon {
+  width: 72px; height: 72px;
+  background: var(--black-btn);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--black-btn-text);
+}
+.payment-success h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.payment-success p {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+.btn-continue {
+  margin-top: 8px;
+  padding: 14px 40px;
+  background: var(--black-btn);
+  color: var(--black-btn-text);
   border: none;
   border-radius: var(--radius-pill);
   font-size: 16px;

@@ -6,8 +6,8 @@
   width: 100%;
   max-width: 480px;
   height: 70px;
-  background: #fff;
-  border-top: 1px solid #F0F0F0;
+  background: var(--nav-bg);
+  border-top: 1px solid var(--border);
   border-radius: 20px 20px 0 0;
   display: flex;
   align-items: center;
@@ -25,13 +25,27 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #111;
+  color: var(--text-primary);
   transition: background 0.2s;
+  position: relative;
 }
 .nav-item.active {
-  background: #000;
-  color: #fff;
+  background: var(--black-btn);
+  color: var(--black-btn-text);
 }
-.nav-item.active svg {
-  stroke: #fff;
+.nav-item.active svg { stroke: var(--black-btn-text); }
+.nav-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--danger);
+  color: #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

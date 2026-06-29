@@ -1,38 +1,26 @@
-/* ====================================================
-   GLOBAL RESET + MOBILE-FIRST FOUNDATION
-   ==================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
-  height: 100%;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  background: #EEEEEE;
-}
-
-/* Import Inter font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* ====================================================
-   DESIGN TOKENS
-   ==================================================== */
 :root {
-  /* Colors */
   --bg: #F5F5F5;
   --surface: #FFFFFF;
-  --black: #000000;
   --text-primary: #111111;
   --text-secondary: #888888;
   --text-muted: #AAAAAA;
   --border: #E8E8E8;
+  --nav-bg: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --input-bg: #FFFFFF;
+  --black-btn: #000000;
+  --black-btn-text: #FFFFFF;
   --danger: #E53935;
 
-  /* Typography */
-  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font: 'Inter', system-ui, sans-serif;
   --text-xs: 11px;
   --text-sm: 13px;
   --text-base: 15px;
@@ -40,17 +28,15 @@ html, body {
   --text-xl: 22px;
   --text-2xl: 28px;
 
-  /* Radii */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-pill: 50px;
 
-  /* Shadows */
-  --shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-  --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
 
-  /* Dark mode compat (keep existing) */
+  /* legacy compat */
   --background-color: #F5F5F5;
   --background-color2: #F5F5F5;
   --text-color: #111111;
@@ -60,28 +46,38 @@ html, body {
   --icon-color: #000000;
 }
 
-[data-theme='dark'] {
-  --bg: #121212;
-  --surface: #1E1E1E;
-  --text-primary: #FFFFFF;
+html.dark {
+  --bg: #0F0F0F;
+  --surface: #1A1A1A;
+  --text-primary: #F0F0F0;
   --text-secondary: #AAAAAA;
   --text-muted: #666666;
-  --border: #333333;
-  --background-color: #121212;
+  --border: #2A2A2A;
+  --nav-bg: #1A1A1A;
+  --card-bg: #1E1E1E;
+  --input-bg: #252525;
+  --black-btn: #FFFFFF;
+  --black-btn-text: #000000;
+
+  --background-color: #0F0F0F;
   --background-color2: #1A1A1A;
-  --text-color: #ffffff;
-  --primary-color: #ffffff;
-  --secondary-color: #1E1E1E;
-  --secondary-color2: #121212;
-  --icon-color: #ffffff;
+  --text-color: #F0F0F0;
+  --primary-color: #FFFFFF;
+  --secondary-color: #1A1A1A;
+  --secondary-color2: #0F0F0F;
+  --icon-color: #F0F0F0;
 }
 
-/* ====================================================
-   ROOT CONTAINER — Mobile-first, centered on desktop
-   ==================================================== */
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  background: #CCCCCC;
+  transition: background-color 0.2s, color 0.2s;
+}
+
 #root {
-  max-width: 480px;
-  margin: 0 auto;
+  width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--bg);
@@ -91,13 +87,12 @@ html, body {
 
 @media (min-width: 769px) {
   #root {
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.18);
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 60px rgba(0,0,0,0.2);
   }
 }
 
-/* ====================================================
-   LAYOUT WRAPPER
-   ==================================================== */
 .layout {
   display: flex;
   flex-direction: column;
@@ -110,16 +105,6 @@ html, body {
   flex: 1;
 }
 
-/* ====================================================
-   GLOBAL BODY TRANSITION
-   ==================================================== */
-body {
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* ====================================================
-   UTILITY: page wrapper
-   ==================================================== */
 .page-wrapper {
   background: var(--bg);
   min-height: 100vh;

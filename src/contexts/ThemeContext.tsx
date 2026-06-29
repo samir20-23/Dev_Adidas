@@ -1,4 +1,3 @@
-
 import { createContext, useState, useContext, useEffect, type ReactNode } from 'react';
 
 interface ThemeContextData {
@@ -6,28 +5,20 @@ interface ThemeContextData {
   toggleTheme: () => void;
 }
 
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
-
 export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState('light');
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    localStorage.setItem('theme', next);
   };
 
   return (

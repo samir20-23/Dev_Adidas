@@ -1,9 +1,8 @@
 .home-page {
   background: var(--bg);
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 }
 
-/* Search bar */
 .search-bar {
   margin: 12px 16px;
   display: flex;
@@ -23,22 +22,39 @@
   color: var(--text-primary);
   background: transparent;
 }
+.search-bar input::placeholder { color: var(--text-muted); }
+.search-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  flex-shrink: 0;
+}
 
-/* Hero banner */
-.hero-banner {
+/* Hero Slider */
+.hero-slider {
+  position: relative;
   margin: 0 16px;
   border-radius: 20px;
   overflow: hidden;
   height: 180px;
-  position: relative;
 }
-.hero-banner img {
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.hero-banner::after {
-  content: '';
+.hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.55) 100%);
@@ -49,34 +65,41 @@
   left: 16px;
   z-index: 2;
 }
-.hero-text .hero-label {
+.hero-label {
   font-size: 11px;
   color: rgba(255,255,255,0.85);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.hero-text .hero-title {
+.hero-title {
   font-size: 26px;
   font-weight: 700;
   color: #fff;
   line-height: 1.2;
 }
-.hero-btn {
+.hero-dots {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  z-index: 2;
-  background: #fff;
-  color: #111;
+  bottom: 12px;
+  right: 16px;
+  display: flex;
+  gap: 5px;
+  z-index: 3;
+}
+.hero-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.6);
   border: none;
-  border-radius: var(--radius-pill);
-  padding: 8px 18px;
-  font-size: 13px;
-  font-weight: 500;
   cursor: pointer;
+  padding: 0;
+  transition: width 0.3s, background 0.3s;
+}
+.hero-dot.active {
+  width: 18px;
+  background: #fff;
 }
 
-/* Section title */
 .section-title {
   font-size: 18px;
   font-weight: 600;
@@ -84,7 +107,6 @@
   margin: 20px 16px 12px;
 }
 
-/* Categories */
 .categories-row {
   display: flex;
   gap: 16px;
@@ -96,23 +118,28 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font);
 }
 .category-circle {
   width: 62px;
   height: 62px;
   border-radius: 50%;
-  border: 1.5px solid #111;
+  border: 1.5px solid var(--text-primary);
   background: var(--surface);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.18s;
 }
 .category-circle.active {
-  background: #000;
-  border-color: #000;
-  color: #fff;
+  background: var(--black-btn);
+  border-color: var(--black-btn);
+  color: var(--black-btn-text);
 }
 .category-label {
   font-size: 12px;
@@ -120,7 +147,23 @@
   text-align: center;
 }
 
-/* Product grid */
+/* Empty category state */
+.empty-category {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+.empty-category p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.empty-category span {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -128,12 +171,13 @@
   padding: 0 16px;
 }
 .product-card {
-  background: var(--surface);
+  background: var(--card-bg);
   border-radius: var(--radius-lg);
   padding: 12px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 .product-card .product-name {
   font-size: 11px;
@@ -152,7 +196,7 @@
   object-fit: contain;
   margin-bottom: 10px;
 }
-.product-card .card-actions {
+.card-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -161,40 +205,41 @@
 .btn-cart {
   width: 40px;
   height: 36px;
-  background: #000;
+  background: var(--black-btn);
   border: none;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #fff;
 }
 .btn-heart {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #111;
   display: flex;
   align-items: center;
 }
 
-/* Explore more button */
 .btn-explore {
   display: block;
   width: calc(100% - 32px);
   margin: 20px 16px;
   height: 52px;
-  background: #000;
-  color: #fff;
+  background: var(--black-btn);
+  color: var(--black-btn-text);
   border: none;
   border-radius: var(--radius-pill);
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-explore:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 
-/* Trending section */
 .trending-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -202,17 +247,18 @@
   padding: 0 16px;
 }
 .trending-card {
-  background: #F0EDE6;
+  background: var(--surface);
   border-radius: var(--radius-lg);
   padding: 12px;
   position: relative;
+  cursor: pointer;
 }
-.trending-card .trend-price {
+.trend-price {
   font-size: 16px;
   font-weight: 700;
   color: var(--text-primary);
 }
-.trending-card .trend-heart {
+.trend-heart {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -220,14 +266,14 @@
   border: none;
   cursor: pointer;
 }
-.trending-card .trend-img {
+.trend-img {
   width: 100%;
   height: 100px;
   object-fit: contain;
   margin: 8px 0;
 }
-.trending-card .trend-shop-btn {
-  background: #fff;
+.trend-shop-btn {
+  background: var(--bg);
   border: none;
   border-radius: var(--radius-pill);
   padding: 6px 14px;
@@ -237,14 +283,15 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  color: var(--text-primary);
 }
-.trending-card .trend-name {
+.trend-name {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-primary);
   margin-top: 8px;
 }
-.trending-card .trend-sub {
+.trend-sub {
   font-size: 11px;
   color: var(--text-secondary);
 }
