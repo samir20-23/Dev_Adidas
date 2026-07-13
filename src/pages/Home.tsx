@@ -1,169 +1,287 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Search, ChevronRight, Heart, ShoppingCart } from "lucide-react";
+import { Search, ShoppingBasket, Heart, Footprints, Shirt, ShoppingBag, ChevronRight, X } from "lucide-react";
 import "../css/home.css";
+import { useState, useEffect, useRef } from "react";
+import { products, type Product } from "../data/products";
+import { addToCart, toggleWishlist, isWishlisted } from "../utils/storage";
+
+type Category = 'Shoes' | 'T-shirt' | 'Bags' | 'Tracksuit';
+
+// Hero slides per category — "main" image first, then others
+const HERO_SLIDES: Record<Category, string[]> = {
+  Shoes: [
+    "/products/Shoes/shoes main.png",
+    "/products/Shoes/Frame 202.png",
+    "/products/Shoes/Rectangle 6.png",
+    "/products/Shoes/Rectangle 72.png",
+    "/products/Shoes/Rectangle 73.png",
+  ],
+  "T-shirt": [
+    "/products/T-shirt/tshirt main .png",
+    "/products/T-shirt/Rectangle 72.png",
+    "/products/T-shirt/Rectangle 72 (copy 1).png",
+    "/products/T-shirt/Rectangle 72 (copy 2).png",
+    "/products/T-shirt/Rectangle 72 (copy 3).png",
+  ],
+  Bags: [
+    "/products/Bags/bag adidas  main.png",
+    "/products/Bags/Rectangle 72.png",
+    "/products/Bags/Rectangle 72 (copy 1).png",
+    "/products/Bags/Rectangle 72 (copy 2).png",
+    "/products/Bags/Rectangle 72 (copy 3).png",
+  ],
+  Tracksuit: [
+    "/products/Tracksuit/tracksuit main.png",
+    "/products/Tracksuit/Z.N.E._Hoodie_Grey_JE3070_21_model.jpg",
+    "/products/Tracksuit/jf2443_C.jpg",
+    "/products/Tracksuit/Rectangle 72.png",
+    "/products/Tracksuit/Rectangle 72 (copy 1).png",
+  ],
+};
+
+const CATEGORIES: { label: Category; icon: React.ReactNode }[] = [
+  { label: "Shoes",     icon: <Footprints size={24} /> },
+  { label: "T-shirt",  icon: <Shirt size={24} /> },
+  { label: "Bags",     icon: <ShoppingBag size={24} /> },
+  { label: "Tracksuit",icon: <Shirt size={24} /> },
+];
 
 export default function Home() {
-    const navigate = useNavigate();
-    const { t } = useTranslation();
-    const [liked, setLiked] = useState<{ [key: number]: boolean }>({});
+  const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [activeCategory, setActiveCategory] = useState<Category>("Shoes");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [, forceUpdate] = useState(0);
+  const touchStartX = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    useEffect(() => {
-        const storedLiked = localStorage.getItem("liked");
-        if (storedLiked) {
-            setLiked(JSON.parse(storedLiked));
-        }
-    }, []);
+  const slides = HERO_SLIDES[activeCategory];
 
-    const toggleLike = (id: number) => {
-        const newLiked = { ...liked, [id]: !liked[id] };
-        setLiked(newLiked);
-        localStorage.setItem("liked", JSON.stringify(newLiked));
-    };
-
-    const popularShoes = [
-        {
-            id: 1,
-            name: "Adidas Adizero F50",
-            price: "799 $",
-            image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop"
-        },
-        {
-            id: 2,
-            name: "Adidas Stan West Korea",
-            price: "170 $",
-            image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&h=300&fit=crop"
-        },
-        {
-            id: 3,
-            name: "Adidas Barricola Shoes",
-            price: "449 $",
-            image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=300&fit=crop"
-        }
-    ];
-
-    const trendShoes = [
-        {
-            id: 4,
-            name: "Adidas Gazze 5",
-            subtitle: "Mens - Shoes",
-            tag: "490$",
-            image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop"
-        },
-        {
-            id: 5,
-            name: "Superstar shoes",
-            subtitle: "Mens - Shoes",
-            tag: "179$",
-            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop"
-        }
-    ];
-
-
-
-
-
-    return (
-        <div className="home-container">
-            <header className="header">
-                <div className="search-bar">
-                    <i className="fa fa-search" id="iconSearch" aria-hidden="true"></i>
-                    <input type="text" placeholder={t('home.search')} />
-                    <div className="filterButton">
-                        <i className="fa fa-sliders" id="filtericon" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </header>
-
-            <div className="hero-banner">
-                <div className="hero-content">
-                    <span className="hero-label">{t('home.heroLabel')}</span>
-                    <h1 className="hero-title">{t('home.heroTitle')}</h1>
-                    <button className="shop-now-btn">
-                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true" id="iconRightHome"></i>
-                    </button>
-                </div>
-
-                <div className="hero-shoe-img">
-                    <img src="https://ubuykw.s3.amazonaws.com/brand-pages/category-175672089481.png" alt="Campus Shoes" />
-                </div>
-            </div>
-
-            <section className="categories-section">
-                <h2 className="section-title">{t('home.categories')}</h2>
-                <div className="categories-grid">
-                    {/* These could be translated as well if they are not dynamic */}
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/2818/2818324.png" alt="Shoes" /></div>
-                        <span>Shoes</span>
-                    </div>
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/892/892458.png" alt="T-shirt" /></div>
-                        <span>T-shirt</span>
-                    </div>
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/2609/2609368.png" alt="Bags" /></div>
-                        <span>Bags</span>
-                    </div>
-                    <div className="category-item">
-                        <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/3082/3082031.png" alt="Tracksuit" /></div>
-                        <span>Tracksuit</span>
-                    </div>
-                </div>
-            </section>
-
-            <section className="popular-section">
-                <div className="section-header">
-                    <h2 className="section-title">{t('home.popular')}</h2>
-                    <Link to="/see-all" className="see-all">{t('home.seeAll')}</Link>
-                </div>
-                <div className="products-grid">
-                    {popularShoes.map((shoe) => (
-                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="product-card">
-                            <button
-                                className="like-btn"
-                                onClick={(e) => { e.preventDefault(); toggleLike(shoe.id); }}
-                            >
-                                <Heart size={20} fill={liked[shoe.id] ? "#000" : "none"} />
-                            </button>
-                            <div className="product-image"><img src={shoe.image} alt={shoe.name} /></div>
-                            <div className="product-info">
-                                <h3>{shoe.name}</h3>
-                                <p className="price">{shoe.price}</p>
-                            </div>
-                            <button className="add-to-cart-btn"><ShoppingCart size={20} /></button>
-                        </Link>
-                    ))}
-                </div>
-                <button className="explore-more-btn">{t('home.exploreMore')}</button>
-            </section>
-
-            <section className="trend-section">
-                <h2 className="section-title">{t('home.trending')}</h2>
-                <div className="trend-grid">
-                    {trendShoes.map((shoe) => (
-                        <Link to={`/product/${shoe.id}`} key={shoe.id} className="trend-card">
-                            <button
-                                className="like-btn-trend"
-                                onClick={(e) => { e.preventDefault(); toggleLike(shoe.id) }}
-                            >
-                                <Heart size={18} fill={liked[shoe.id] ? "#000" : "none"} />
-                            </button>
-                            <span className="trend-tag">{shoe.tag}</span>
-                            <div className="trend-image"><img src={shoe.image} alt={shoe.name} /></div>
-                            <button className="trend-shop-btn">
-                                {t('home.shopNow')} <ChevronRight size={16} />
-                            </button>
-                            <div className="trend-info">
-                                <h3>{shoe.name}</h3>
-                                <p>{shoe.subtitle}</p>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            </section>
-        </div>
+  // Auto-advance slider — restart when category changes
+  useEffect(() => {
+    setCurrentSlide(0);
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(
+      () => setCurrentSlide(p => (p + 1) % slides.length),
+      3000
     );
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [activeCategory]);
+
+  // Re-render on wishlist/cart updates
+  useEffect(() => {
+    const h = () => forceUpdate(n => n + 1);
+    window.addEventListener("wishlistUpdated", h);
+    window.addEventListener("cartUpdated", h);
+    return () => {
+      window.removeEventListener("wishlistUpdated", h);
+      window.removeEventListener("cartUpdated", h);
+    };
+  }, []);
+
+  // Reset pagination when category or search changes
+  useEffect(() => { setVisibleCount(4); }, [activeCategory, searchQuery]);
+
+  // Touch swipe on hero
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      setCurrentSlide(p =>
+        diff > 0 ? (p + 1) % slides.length : (p - 1 + slides.length) % slides.length
+      );
+    }
+  };
+
+  // Search: if query is active, search ALL products regardless of category
+  // If no query, filter by active category
+  const filtered: Product[] = searchQuery.trim()
+    ? products.filter(p =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.collection.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : products.filter(p => p.category === activeCategory);
+
+  const popularProducts = filtered.filter(p => !p.trending);
+  const trendingProducts = filtered.filter(p => p.trending);
+  const displayed = popularProducts.slice(0, visibleCount);
+  const allLoaded = visibleCount >= popularProducts.length;
+
+  const handleCartClick = (e: React.MouseEvent, product: Product) => {
+    e.stopPropagation();
+    addToCart(product, product.sizes[0]);
+  };
+
+  const handleLike = (e: React.MouseEvent, id: number) => {
+    e.stopPropagation();
+    toggleWishlist(id);
+    forceUpdate(n => n + 1);
+  };
+
+  const isSearching = searchQuery.trim().length > 0;
+
+  return (
+    <div className="home-page">
+
+      {/* Search Bar */}
+      <div className="search-bar">
+        <Search size={18} color="var(--text-muted)" />
+        <input
+          type="text"
+          placeholder="Search shoes, bags, tracksuits..."
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+        />
+        {isSearching && (
+          <button className="search-clear" onClick={() => setSearchQuery("")}>
+            <X size={16} />
+          </button>
+        )}
+      </div>
+
+      {/* Hero Slider — hidden while searching */}
+      {!isSearching && (
+        <div
+          className="hero-slider"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {slides.map((src, i) => (
+            <div key={src} className={`hero-slide ${i === currentSlide ? "active" : ""}`}>
+              <img src={src} alt={`${activeCategory} slide ${i + 1}`} />
+              <div className="hero-overlay" />
+              <div className="hero-text">
+                <span className="hero-label">NEW COLLECTION</span>
+                <h1 className="hero-title">Adidas<br />{activeCategory}</h1>
+              </div>
+            </div>
+          ))}
+          <div className="hero-dots">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                className={`hero-dot ${i === currentSlide ? "active" : ""}`}
+                onClick={() => setCurrentSlide(i)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Category buttons */}
+      {!isSearching && (
+        <>
+          <h2 className="section-title">Categories</h2>
+          <div className="categories-row">
+            {CATEGORIES.map(c => (
+              <button
+                key={c.label}
+                className="category-item"
+                onClick={() => setActiveCategory(c.label)}
+              >
+                <div className={`category-circle ${activeCategory === c.label ? "active" : ""}`}>
+                  {c.icon}
+                </div>
+                <span className="category-label">{c.label}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Section title */}
+      <h2 className="section-title">
+        {isSearching
+          ? `Results for "${searchQuery}"`
+          : `Popular ${activeCategory}`}
+      </h2>
+
+      {/* Product grid */}
+      {popularProducts.length === 0 && trendingProducts.length === 0 ? (
+        <div className="empty-category">
+          <p>{isSearching ? `No results for "${searchQuery}"` : `No ${activeCategory.toLowerCase()} yet`}</p>
+          {!isSearching && <span>Check back soon 👋</span>}
+        </div>
+      ) : (
+        <>
+          {popularProducts.length > 0 && (
+            <div className="products-grid">
+              {displayed.map(product => (
+                <div
+                  key={product.id}
+                  className="product-card"
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >
+                  <h3 className="product-name">{product.name}</h3>
+                  <div className="product-price">{product.price} $</div>
+                  <img src={product.images[0]} alt={product.name} className="product-img" />
+                  <div className="card-actions">
+                    <button className="btn-heart" onClick={e => handleLike(e, product.id)}>
+                      <Heart
+                        size={20}
+                        fill={isWishlisted(product.id) ? "#E53935" : "none"}
+                        stroke={isWishlisted(product.id) ? "#E53935" : "var(--text-primary)"}
+                      />
+                    </button>
+                    <button className="btn-cart" onClick={e => handleCartClick(e, product)}>
+                      <ShoppingBasket size={18} color="var(--black-btn-text)" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {popularProducts.length > 0 && (
+            <button
+              className="btn-explore"
+              onClick={() => setVisibleCount(p => Math.min(p + 4, popularProducts.length))}
+              disabled={allLoaded}
+            >
+              {allLoaded ? "No more products" : "Explore more"}
+            </button>
+          )}
+
+          {/* Trending section */}
+          {trendingProducts.length > 0 && (
+            <>
+              <h2 className="section-title">Trend of the moment</h2>
+              <div className="trending-grid">
+                {trendingProducts.map(product => (
+                  <div
+                    key={product.id}
+                    className="trending-card"
+                    onClick={() => navigate(`/product/${product.id}`)}
+                  >
+                    <button className="trend-heart" onClick={e => handleLike(e, product.id)}>
+                      <Heart
+                        size={20}
+                        fill={isWishlisted(product.id) ? "#E53935" : "none"}
+                        stroke={isWishlisted(product.id) ? "#E53935" : "var(--text-primary)"}
+                      />
+                    </button>
+                    <div className="trend-price">{product.price}$</div>
+                    <img src={product.images[0]} alt={product.name} className="trend-img" />
+                    <button
+                      className="trend-shop-btn"
+                      onClick={e => { e.stopPropagation(); navigate(`/product/${product.id}`); }}
+                    >
+                      Shop Now <ChevronRight size={14} />
+                    </button>
+                    <h3 className="trend-name">{product.name}</h3>
+                    <p className="trend-sub">Mens · {product.category}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
 }

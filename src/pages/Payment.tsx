@@ -1,124 +1,133 @@
-import { useState } from "react";
-import { ChevronLeft, CreditCard, Plus, Wallet, DollarSign, ShoppingCart, Home, Heart, User } from "lucide-react";
-import '../css/payment.css'
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Plus, Banknote, CreditCard } from "lucide-react";
+import "../css/payment.css";
+
+interface PaymentMethod {
+  id: number;
+  type: string;
+  name: string;
+  number: string;
+  expiry: string;
+}
+
+const getMethods = (): PaymentMethod[] =>
+  JSON.parse(localStorage.getItem('paymentMethods') || '[]');
+
+const saveMethods = (m: PaymentMethod[]) =>
+  localStorage.setItem('paymentMethods', JSON.stringify(m));
+
 export default function Payment() {
-    const [selectedPayment, setSelectedPayment] = useState("mastercard");
-    const [cashOnDelivery, setCashOnDelivery] = useState(false);
+  const navigate = useNavigate();
+  const [methods, setMethods] = useState<PaymentMethod[]>(getMethods);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [form, setForm] = useState({ name: '', number: '', expiry: '' });
 
-    const paymentMethods = [
-        {
-            id: "mastercard",
-            type: "Mastercard",
-            number: "3742 **** **** 0126",
-            icon: "mastercard",
-            bgColor: "#000"
-        },
-        {
-            id: "paypal",
-            type: "Paypal",
-            number: "1432 **** 8065",
-            icon: "paypal",
-            bgColor: "#fff"
-        },
-        {
-            id: "visa",
-            type: "Visa",
-            number: "4356 **** **** 9089",
-            icon: "visa",
-            bgColor: "#fff"
-        }
-    ];
+  useEffect(() => {
+    if (methods.length > 0) setSelected(methods[0].id);
+  }, []);
 
+  const addCard = () => {
+    if (!form.name || !form.number || !form.expiry) return;
+    const newCard: PaymentMethod = {
+      id: Date.now(),
+      type: 'card',
+      name: form.name,
+      number: '**** **** **** ' + form.number.slice(-4),
+      expiry: form.expiry,
+    };
+    const updated = [...methods, newCard];
+    saveMethods(updated);
+    setMethods(updated);
+    setSelected(newCard.id);
+    setShowForm(false);
+    setForm({ name: '', number: '', expiry: '' });
+  };
+
+  const handlePay = () => {
+    if (!selected && methods.length > 0) return;
+    setSuccess(true);
+  };
+
+  if (success) {
     return (
-        <div className="payment-container">
-            {/* Header */}
-            <header className="payment-header">
-                <button className="back-btn">
-                    <ChevronLeft size={24} />
-                </button>
-                <h1 className="page-title">Payment</h1>
-                <div style={{ width: '44px' }}></div>
-            </header>
-
-            <div className="payment-content">
-                {/* Your Cards */}
-                <section className="cards-section">
-                    <h2 className="section-title">Your cards</h2>
-                    <div className="cards-list">
-                        {paymentMethods.map((method) => (
-                            <div
-                                key={method.id}
-                                className={`payment-card ${method.bgColor === '#000' ? 'dark' : 'light'}`}
-                                style={{ background: method.bgColor }}
-                                onClick={() => setSelectedPayment(method.id)}
-                            >
-                                <div className="card-content">
-                                    <div className="card-icon">
-                                        {method.icon === 'mastercard' && (
-                                            <div className="mastercard-logo">
-                                                <div className="circle red"></div>
-                                                <div className="circle orange"></div>
-                                            </div>
-                                        )}
-                                        {method.icon === 'paypal' && (
-                                            <span className="paypal-text">PayPal</span>
-                                        )}
-                                        {method.icon === 'visa' && (
-                                            <span className="visa-text">VISA</span>
-                                        )}
-                                    </div>
-                                    <div className="card-info">
-                                        <div className="card-type">{method.type}</div>
-                                        <div className="card-number">{method.number}</div>
-                                    </div>
-                                </div>
-                                <div className={`radio-btn ${selectedPayment === method.id ? 'checked' : ''}`}>
-                                    <div className="radio-inner"></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Other Options */}
-                <section className="other-options-section">
-                    <h2 className="section-title">Other options</h2>
-                    <div className="options-list">
-                        <button className="option-btn">
-                            <Plus size={20} />
-                            <span>Add new card</span>
-                        </button>
-                        <button
-                            className={`option-btn ${cashOnDelivery ? 'active' : ''}`}
-                            onClick={() => setCashOnDelivery(!cashOnDelivery)}
-                        >
-                            <DollarSign size={20} />
-                            <span>Cash on delivery</span>
-                        </button>
-                    </div>
-                </section>
-
-                {/* Pay Button */}
-                <button className="pay-now-btn">
-                    Pay now
-                </button>
-            </div>
-
-            {/* Bottom Navigation */}
-            {/* <nav className="bottom-nav">
-                <button className="nav-item">
-                    <Home size={24} />
-                </button>
-                <button className="nav-item">
-                    <ShoppingCart size={24} />
-                </button>
-                <button className="nav-item">
-                    <Heart size={24} />
-                </button>
-                <button className="nav-item active">
-                    <User size={24} />
-                </button>
-            </nav> */}
+      <div className="payment-page">
+        <div className="payment-success">
+          <div className="success-icon">✓</div>
+          <h2>Order Placed!</h2>
+          <p>Your order has been confirmed.</p>
+          <p>Estimated delivery: 3–5 business days</p>
+          <button className="btn-continue" onClick={() => {
+            localStorage.removeItem('cart');
+            window.dispatchEvent(new Event('cartUpdated'));
+            navigate('/home');
+          }}>Continue Shopping</button>
         </div>
+      </div>
     );
+  }
+
+  return (
+    <div className="payment-page">
+      <h2 className="section-title">Your cards</h2>
+
+      {methods.map(m => (
+        <div
+          key={m.id}
+          className={`payment-card ${selected === m.id ? 'selected' : ''}`}
+          onClick={() => setSelected(m.id)}
+        >
+          <CreditCard size={24} />
+          <div className="card-info">
+            <div className="card-name">{m.name}</div>
+            <div className="card-number">{m.number}</div>
+          </div>
+          <div className={`radio-btn ${selected === m.id ? 'selected' : ''}`} />
+        </div>
+      ))}
+
+      {methods.length === 0 && !showForm && (
+        <p className="no-cards-msg">No saved cards yet.</p>
+      )}
+
+      {showForm && (
+        <div className="add-card-form">
+          <h3>New Card</h3>
+          <input
+            placeholder="Cardholder name"
+            value={form.name}
+            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+          />
+          <input
+            placeholder="Card number"
+            maxLength={16}
+            value={form.number}
+            onChange={e => setForm(f => ({ ...f, number: e.target.value.replace(/\D/g, '') }))}
+          />
+          <input
+            placeholder="MM/YY"
+            maxLength={5}
+            value={form.expiry}
+            onChange={e => setForm(f => ({ ...f, expiry: e.target.value }))}
+          />
+          <div className="form-actions">
+            <button className="btn-cancel-form" onClick={() => setShowForm(false)}>Cancel</button>
+            <button className="btn-save-card" onClick={addCard}>Save Card</button>
+          </div>
+        </div>
+      )}
+
+      <h2 className="section-title">Other options</h2>
+      <div className="option-card" onClick={() => setShowForm(true)}>
+        <Plus size={20} /> Add new card
+      </div>
+      <div className="option-card">
+        <Banknote size={20} /> Cash on delivery
+      </div>
+
+      <button className="btn-pay-now" onClick={handlePay}>Pay now</button>
+    </div>
+  );
 }

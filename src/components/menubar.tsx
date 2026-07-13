@@ -1,40 +1,45 @@
-import { Search, Menu, ChevronRight, Heart, ShoppingCart, Home as HomeIcon, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import "../css/menubar.css";
-import homeWhite from "../assets/navbar-icons/home-white.png"
-import homeBlack from "../assets/navbar-icons/home-black.png"
-import cartWhite from "../assets/navbar-icons/card-white.png"
-import cartBlack from "../assets/navbar-icons/cart-black.png"
-import heartWhite from "../assets/navbar-icons/heart-white.png"
-import heartBlack from "../assets/navbar-icons/heart-black.png"
-import profileWhite from "../assets/navbar-icons/profile-white.png"
-import profileBlack from "../assets/navbar-icons/profile-black.png"
-import { useTheme } from "../contexts/ThemeContext";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Home, ShoppingBasket, Heart, User } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import '../css/menubar.css';
+import { getCart } from '../utils/storage';
 
 export default function Menubar() {
-    const navigate = useNavigate();
-    const { theme } = useTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [cartCount, setCartCount] = useState(() => getCart().reduce((s, i) => s + i.quantity, 0));
 
-    return (
-        <>
-            <nav className="bottom-nav" >
-                <button className="nav-item active" onClick={() => navigate("/home")}>
-                    <img src={theme === 'dark' ? homeWhite : homeBlack} id="iconsMenuBar" className="homeIcon" />
-                </button>
-                <button className="nav-item" onClick={() => navigate("/cart")}>
-                    <img src={theme === 'dark' ? cartWhite : cartBlack} id="iconsMenuBar" className="cartIcon" />
+  useEffect(() => {
+    const update = () => setCartCount(getCart().reduce((s, i) => s + i.quantity, 0));
+    window.addEventListener('cartUpdated', update);
+    return () => window.removeEventListener('cartUpdated', update);
+  }, []);
 
-                </button>
-                <button className="nav-item" onClick={() => navigate("favorit")}>
-                    <img src={theme === 'dark' ? heartWhite : heartBlack} id="iconsMenuBar" className="heartIcon" />
+  const navItems = [
+    { icon: <Home size={22} />, path: '/home', label: 'Home' },
+    { icon: <ShoppingBasket size={22} />, path: '/cart', label: 'Cart', badge: cartCount },
+    { icon: <Heart size={22} />, path: '/detail', label: 'Wishlist' },
+    { icon: <User size={22} />, path: '/settings', label: 'Profile' },
+  ];
 
-                </button>
-                <button className="nav-item" onClick={() => navigate("/settings")}>
-                    <img src={theme === 'dark' ? profileWhite : profileBlack} id="iconsMenuBar" className="profileIcon" />
-
-                </button>
-            </nav>
-
-        </>
-    );
+  return (
+    <nav className="bottom-nav">
+      {navItems.map(item => {
+        const isActive = location.pathname === item.path ||
+          (item.path === '/home' && location.pathname.startsWith('/product'));
+        return (
+          <button
+            key={item.path}
+            className={`nav-item ${isActive ? 'active' : ''}`}
+            onClick={() => navigate(item.path)}
+          >
+            {item.icon}
+            {item.badge != null && item.badge > 0 && (
+              <span className="nav-badge">{item.badge}</span>
+            )}
+          </button>
+        );
+      })}
+    </nav>
+  );
 }

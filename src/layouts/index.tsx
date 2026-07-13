@@ -1,30 +1,23 @@
 // src/layouts/Layout.tsx
 import { Outlet, useLocation } from "react-router-dom"
 import Navbar from "../components/navbar"
-import Footer from "../components/footer"
 import "./css_layouts/main.css"
 import Menubar from "../components/menubar"
+
 function Layout() {
     const location = useLocation()
+    const path = location.pathname;
 
-    // paths where we hide navbar/footer
-    const hideNavPaths = ["/login", "/register", "/load","/settings"]
-    const hideFooterPaths = ["/settings", "/register"]
-    const hideMenuPaths = ["/login", "/register", "/load","/settings"];
-
-    // check if current path starts with any hide path (supports dynamic routes)
-    const showNav = !hideNavPaths.some(path => location.pathname.startsWith(path))
-    const showFooter = hideFooterPaths.some(path => location.pathname.startsWith(path))
-    const showMenu = !hideMenuPaths.some(path => location.pathname.startsWith(path));
-
+    // These pages never show the top navbar or bottom menubar at all
+    // (they are full-screen standalone pages handled outside this layout)
+    // Everything inside this layout ALWAYS gets navbar + menubar
     return (
         <div className="layout">
-            {showNav && <Navbar />}
+            <Navbar />
             <main className="main">
                 <Outlet />
             </main>
-            {showFooter && <Footer />}
-            {showMenu && <Menubar />}
+            <Menubar />
         </div>
     )
 }

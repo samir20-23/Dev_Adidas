@@ -1,24 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
-  --background-color: #fdfdfd;
-  --background-color2: #f5f5f5;
-  --text-color: #000000;
+  --bg: #F5F5F5;
+  --surface: #FFFFFF;
+  --text-primary: #111111;
+  --text-secondary: #888888;
+  --text-muted: #AAAAAA;
+  --border: #E8E8E8;
+  --nav-bg: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --input-bg: #FFFFFF;
+  --black-btn: #000000;
+  --black-btn-text: #FFFFFF;
+  --danger: #E53935;
+
+  --font: 'Inter', system-ui, sans-serif;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 50px;
+
+  --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  --shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
+
+  /* legacy compat */
+  --background-color: #F5F5F5;
+  --background-color2: #F5F5F5;
+  --text-color: #111111;
   --primary-color: #000000;
-  --secondary-color: #ffffff;
+  --secondary-color: #FFFFFF;
+  --secondary-color2: #FFFFFF;
   --icon-color: #000000;
 }
 
-[data-theme='dark'] {
-  --background-color: #121212;
-  --background-color2: #2a2929;
+html.dark {
+  --bg: #0F0F0F;
+  --surface: #1A1A1A;
+  --text-primary: #F0F0F0;
+  --text-secondary: #AAAAAA;
+  --text-muted: #666666;
+  --border: #2A2A2A;
+  --nav-bg: #1A1A1A;
+  --card-bg: #1E1E1E;
+  --input-bg: #252525;
+  --black-btn: #FFFFFF;
+  --black-btn-text: #000000;
 
-  --text-color: #ffffff;
-  --primary-color: #ffffff;
-  --secondary-color: #000000;
-  --icon-color: #ffffff;
+  --background-color: #0F0F0F;
+  --background-color2: #1A1A1A;
+  --text-color: #F0F0F0;
+  --primary-color: #FFFFFF;
+  --secondary-color: #1A1A1A;
+  --secondary-color2: #0F0F0F;
+  --icon-color: #F0F0F0;
 }
 
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  background: #CCCCCC;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  position: relative;
+  overflow-x: hidden;
+}
+
+@media (min-width: 769px) {
+  #root {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 60px rgba(0,0,0,0.2);
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.main {
+  flex: 1;
+}
+
+.page-wrapper {
+  background: var(--bg);
+  min-height: 100vh;
+  padding-bottom: 80px;
 }

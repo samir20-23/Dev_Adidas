@@ -1,134 +1,117 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { ChevronLeft, Heart, ShoppingCart } from "lucide-react";
-import '../css/productDetail.css'
+import { useParams, useNavigate } from "react-router-dom";
+import { Heart, ShoppingBasket } from "lucide-react";
+import "../css/productDetail.css";
+import { products } from "../data/products";
+import { addToCart, toggleWishlist, isWishlisted } from "../utils/storage";
 
 export default function ProductDetail() {
-    const [selectedColor, setSelectedColor] = useState("black");
-    const [selectedSize, setSelectedSize] = useState("43");
-    const [isLiked, setIsLiked] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
-    const { id } = useParams();
-    const { t } = useTranslation();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const product = products.find(p => p.id === Number(id)) || products[0];
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [sizeError, setSizeError] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [wishlisted, setWishlisted] = useState(() => isWishlisted(product.id));
 
-        }, 1);
+  useEffect(() => {
+    setSelectedColor(product.colors[0]);
+    setSelectedSize(null);
+    setSizeError(false);
+    setWishlisted(isWishlisted(product.id));
+  }, [product.id]);
 
-        const storedLiked = localStorage.getItem("liked");
-        if (storedLiked) {
-            const likedItems: Record<string, boolean> = JSON.parse(storedLiked);
-            if (likedItems[id as string]) {
-                setIsLiked(true);
-            }
-        }
-        return () => clearTimeout(timer);
-    }, [id]);
+  const handleAddToCart = () => {
+    if (!selectedSize) { setSizeError(true); return; }
+    setSizeError(false);
+    addToCart(product, selectedSize);
+    setToast(true);
+    setTimeout(() => setToast(false), 2000);
+  };
 
-    const toggleLike = () => {
-        const newLikedState = !isLiked;
-        setIsLiked(newLikedState);
-        const storedLiked = localStorage.getItem("liked");
-        const likedItems: Record<string, boolean> = storedLiked ? JSON.parse(storedLiked) : {};
-        likedItems[id as string] = newLikedState;
-        localStorage.setItem("liked", JSON.stringify(likedItems));
-    };
+  const handleWishlist = () => {
+    toggleWishlist(product.id);
+    setWishlisted(isWishlisted(product.id));
+  };
 
-    const sizes = ["41", "42", "43", "44"];
-    const colors = [
-        { name: "black", image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop" },
-        { name: "white", image: "https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=400&h=300&fit=crop" }
-    ];
+  const shortDesc = product.description.slice(0, 100);
 
-
-
-    return (
-        <div className="product-detail-container">
-            <header className="product-header">
-                <button className="back-btn" onClick={() => navigate(-1)}>
-                    <ChevronLeft size={24} />
-                </button>
-                <button className="like-btn-header" onClick={toggleLike}>
-                    <Heart size={24} fill={isLiked ? "#000" : "none"} />
-                </button>
-            </header>
-
-            <div className="product-image-section">
-                <img
-                    src={selectedColor === "black"
-                        ? "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&h=600&fit=crop"
-                        : "https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=800&h=600&fit=crop"
-                    }
-                    alt="Adidas Adizero EVO"
-                />
-            </div>
-
-            <div className="product-info-section">
-                <div className="product-brand-price">
-                    <div>
-                        <h1 className="product-brand">Adidas</h1>
-                        <h2 className="product-name">Adizero EVO</h2>
-                    </div>
-                    <div className="product-price">$799</div>
-                </div>
-
-                <div className="color-section">
-                    <label className="section-label">{t('product.colors')} : <span className="selected-value">{selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)}</span></label>
-                    <div className="color-options">
-                        {colors.map((color) => (
-                            <button
-                                key={color.name}
-                                className={`color-option ${selectedColor === color.name ? 'active' : ''}`}
-                                onClick={() => setSelectedColor(color.name)}
-                            >
-                                <img src={color.image} alt={color.name} />
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="size-section">
-                    <label className="section-label">{t('product.sizes')}</label>
-                    <div className="size-options">
-                        {sizes.map((size) => (
-                            <button
-                                key={size}
-                                className={`size-option ${selectedSize === size ? 'active' : ''}`}
-                                onClick={() => setSelectedSize(size)}
-                            >
-                                {size}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="product-details-section">
-                    <h3 className="details-title">{t('product.details')}</h3>
-                    <p className="details-text">
-                        Step into speed with the Men's Adizero EVO SL Running Shoes by adidas.
-                        Designed for performance, these lightweight trainers combine agility and
-                        comfort for your daily runs. Featuring a breathable mesh upper and responsive
-                        cushioning, they help you achieve your best with every stride...
-                        <span className="read-more">{t('product.readMore')}</span>
-                    </p>
-                </div>
-
-                <div className="delivery-section">
-                    <h3 className="details-title">{t('product.delivery')}</h3>
-                    <p className="delivery-text">
-                        Free delivery available for orders over $50. Standard delivery takes 3-5
-                        business days. Express shipping options available at checkout.
-                    </p>
-                </div>
-
-                <button className="add-to-cart-btn-main" onClick={() => alert("Added to cart!")}>
-                    <ShoppingCart size={20} />
-                    {t('product.addToCart')}
-                </button>
-            </div>
+  return (
+    <div className="product-detail-page">
+      <div className="product-header-section">
+        <div className="product-title-block">
+          <div className="brand">{product.brand}</div>
+          <div className="model">{product.model}</div>
+          <button className="wishlist-btn" onClick={handleWishlist}>
+            <Heart size={22} fill={wishlisted ? "#E53935" : "none"} stroke={wishlisted ? "#E53935" : "var(--text-primary)"} />
+          </button>
         </div>
-    );
+        <img src={selectedColor.image} alt={product.name} className="product-main-image" />
+      </div>
+
+      <div className="product-price">${product.price}</div>
+
+      <div className="color-section">
+        <div className="color-label">Color : <span>{selectedColor.name}</span></div>
+        <div className="color-thumbnails">
+          {product.colors.map(c => (
+            <img
+              key={c.name}
+              src={c.image}
+              alt={c.name}
+              className={`color-thumb ${selectedColor.name === c.name ? 'selected' : ''}`}
+              onClick={() => setSelectedColor(c)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="size-section">
+        <div className="size-label">Size</div>
+        <div className="size-chips">
+          {product.sizes.map(size => (
+            <div
+              key={size}
+              className={`size-chip ${selectedSize === size ? 'selected' : ''}`}
+              onClick={() => { setSelectedSize(size); setSizeError(false); }}
+            >
+              {size}
+            </div>
+          ))}
+        </div>
+        {sizeError && <p className="size-error">Please select a size</p>}
+      </div>
+
+      <div className="info-section">
+        <h3>Product Details</h3>
+        <p>
+          {expanded ? product.description : shortDesc + (product.description.length > 100 ? '...' : '')}
+          {product.description.length > 100 && (
+            <span className="read-more" onClick={() => setExpanded(p => !p)}>
+              {' '}{expanded ? 'Show less' : 'Read more'}
+            </span>
+          )}
+        </p>
+      </div>
+
+      <div className="info-section">
+        <h3>Delivery Options</h3>
+        <p>Free standard delivery on orders over $50. Next day delivery available.</p>
+      </div>
+
+      <div className="add-to-cart-bar">
+        <button className="btn-add-to-cart" onClick={handleAddToCart}>
+          <ShoppingBasket size={18} />
+          Add to cart
+        </button>
+      </div>
+
+      {toast && (
+        <div className="toast">Added to cart ✓</div>
+      )}
+    </div>
+  );
 }
