@@ -12,7 +12,7 @@ const LABELS: Record<Key, { label: string; sub: string }> = {
   newArrivals:  { label: 'New arrivals',          sub: 'Be first to know' },
 };
 
-function loadPrefs(): Record<Key, boolean> {
+function loadPrefs(): Partial<Record<Key, boolean>> {
   try { return JSON.parse(localStorage.getItem('notifPrefs') || '{}'); } catch { return {}; }
 }
 
