@@ -147,3 +147,31 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+/* ======================================
+   DESKTOP LAYOUT (≥ 769px)
+   ====================================== */
+@media (min-width: 769px) {
+  .cart-page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 32px 160px;
+  }
+
+  .cart-item {
+    padding: 16px;
+  }
+
+  .cart-item-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .cart-summary {
+    bottom: 0;
+    left: 0;
+    transform: none;
+    max-width: 100%;
+    padding: 16px 32px;
+  }
+}

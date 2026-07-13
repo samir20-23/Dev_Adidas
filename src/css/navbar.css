@@ -1,14 +1,36 @@
+/* ============================
+   NAVBAR — Mobile First
+   ============================ */
 .app-navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
   background: var(--nav-bg);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
+  width: 100%;
 }
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo-img {
+  height: 28px;
+  display: block;
+}
+
 .navbar-back-btn {
   background: none;
   border: none;
@@ -21,12 +43,53 @@
   height: 32px;
   justify-content: center;
 }
-.navbar-logo {
-  height: 28px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+
+/* Desktop nav links — hidden on mobile */
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 4px;
 }
+
+.desktop-nav-link {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.desktop-nav-link:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+.desktop-nav-link.active {
+  background: var(--black-btn);
+  color: var(--black-btn-text);
+}
+
+.desktop-badge {
+  background: var(--danger);
+  color: #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile-only icon row */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -56,4 +119,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Responsive helpers */
+.mobile-only { display: flex; }
+.desktop-only { display: none; }
+
+/* ============================
+   DESKTOP BREAKPOINT (≥ 769px)
+   ============================ */
+@media (min-width: 769px) {
+  .mobile-only  { display: none !important; }
+  .desktop-only { display: flex !important; }
+  .desktop-nav  { display: flex; }
+
+  .navbar-container {
+    padding: 14px 32px;
+  }
 }

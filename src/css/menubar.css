@@ -49,3 +49,10 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Hide bottom nav on desktop — top navbar handles navigation */
+@media (min-width: 769px) {
+  .bottom-nav {
+    display: none;
+  }
+}

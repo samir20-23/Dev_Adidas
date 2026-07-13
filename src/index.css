@@ -72,7 +72,7 @@ html, body {
   height: 100%;
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
-  background: #CCCCCC;
+  background: var(--bg);
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -83,14 +83,6 @@ html, body {
   background: var(--bg);
   position: relative;
   overflow-x: hidden;
-}
-
-@media (min-width: 769px) {
-  #root {
-    max-width: 480px;
-    margin: 0 auto;
-    box-shadow: 0 0 60px rgba(0,0,0,0.2);
-  }
 }
 
 .layout {

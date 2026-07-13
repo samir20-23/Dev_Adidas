@@ -295,3 +295,79 @@
   font-size: 11px;
   color: var(--text-secondary);
 }
+
+/* ======================================
+   DESKTOP LAYOUT (≥ 769px)
+   ====================================== */
+@media (min-width: 769px) {
+  .home-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px 60px;
+  }
+
+  .search-bar {
+    margin: 20px 0;
+    height: 50px;
+  }
+
+  .hero-slider {
+    margin: 0;
+    height: 380px;
+    border-radius: 24px;
+  }
+
+  .hero-title { font-size: 42px; }
+  .hero-label { font-size: 13px; }
+
+  .section-title {
+    margin: 32px 0 16px;
+    font-size: 22px;
+  }
+
+  .categories-row {
+    padding: 0;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .category-circle {
+    width: 76px;
+    height: 76px;
+  }
+
+  .category-label { font-size: 13px; }
+
+  /* 4-column product grid on desktop */
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 0;
+  }
+
+  .product-card .product-img { height: 140px; }
+
+  .btn-explore {
+    width: 260px;
+    margin: 24px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 4-column trending grid on desktop */
+  .trending-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 0;
+  }
+
+  .trend-img { height: 140px; }
+}
+
+/* Tablets (769–1023px): 3 columns */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .products-grid  { grid-template-columns: repeat(3, 1fr); }
+  .trending-grid  { grid-template-columns: repeat(3, 1fr); }
+  .hero-slider    { height: 280px; }
+}

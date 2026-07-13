@@ -108,3 +108,37 @@
   justify-content: center;
   cursor: pointer;
 }
+
+/* ======================================
+   DESKTOP LAYOUT (≥ 769px)
+   ====================================== */
+@media (min-width: 769px) {
+  .detail-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+  }
+
+  .detail-hero {
+    height: 360px;
+    border-radius: 0 0 24px 24px;
+    overflow: hidden;
+  }
+
+  .detail-body {
+    padding: 24px 32px;
+  }
+
+  .detail-colors-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .detail-card-image {
+    height: 140px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .detail-colors-grid { grid-template-columns: repeat(3, 1fr); }
+}
