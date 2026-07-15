@@ -148,7 +148,7 @@ export default function StartPage() {
     }, [router]);
 
     return (
-        <div className="Startpage page">
+        <div className="Startpage page">     
             <div className="shape s1" />
             <div className="boxCenter" ref={boxCenterRef}>
                 <button className="forwardBtn" ref={forwardBtnRef} aria-label="forward">

@@ -104,3 +104,27 @@
 
     }
 }
+
+@media screen and (min-width: 768px) {
+
+    .shape {
+        width: 703px;
+        height: 770px;
+        background: radial-gradient(circle at center,
+                rgb(255, 255, 255) 13%,
+            rgba(255, 255, 255, 0.187) 70%);
+    border-radius: 170px;
+    transform: rotate(55deg);
+    filter: blur(4px);
+    position: absolute;
+    box-shadow: 0 0 60px 30px rgba(255, 255, 255, 0.317);
+    animation: move 6s infinite alternate initial;
+}
+.s1 {
+    top: -650px;
+}
+
+.s3 {
+    bottom: -550px;
+}
+}
