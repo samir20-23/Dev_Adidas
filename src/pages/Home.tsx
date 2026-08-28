@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Search, ShoppingBasket, Heart, Footprints, Shirt, ShoppingBag, ChevronRight, X } from "lucide-react";
 import "../css/home.css";
 import { useState, useEffect, useRef } from "react";
 import { products, type Product } from "../data/products";
 import { addToCart, toggleWishlist, isWishlisted } from "../utils/storage";
+import { getCurrentUser } from "../utils/auth";
 
 type Category = 'Shoes' | 'T-shirt' | 'Bags' | 'Tracksuit';
 
@@ -48,6 +49,7 @@ const CATEGORIES: { label: Category; icon: React.ReactNode }[] = [
 
 export default function Home() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [visibleCount, setVisibleCount] = useState(4);
   const [activeCategory, setActiveCategory] = useState<Category>("Shoes");
@@ -55,6 +57,20 @@ export default function Home() {
   const [, forceUpdate] = useState(0);
   const touchStartX = useRef(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Auth guard
+  useEffect(() => {
+    if (!getCurrentUser()) navigate('/login');
+  }, []);
+
+  // Read ?category= param from drawer navigation
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const cat = params.get('category') as Category | null;
+    if (cat && ['Shoes', 'T-shirt', 'Bags', 'Tracksuit'].includes(cat)) {
+      setActiveCategory(cat);
+    }
+  }, [location.search]);
 
   const slides = HERO_SLIDES[activeCategory];
 

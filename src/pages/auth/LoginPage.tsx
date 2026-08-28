@@ -72,7 +72,7 @@ export default function LoginPage() {
 
         <p id="AlreadyRegister">
           Don't have an account?{" "}
-          <span><a href="/register">Register</a></span>
+          <span><a onClick={() => navigate('/register')} style={{cursor:'pointer'}}>Register</a></span>
         </p>
       </div>
       <AuthFooter />

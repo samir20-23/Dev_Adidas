@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, Bell, Lock, Moon, Info, HelpCircle, LogOut, User } from "lucide-react";
 import "../css/Settings.css";
@@ -12,6 +12,9 @@ export default function SettingsPage() {
   const [showSheet, setShowSheet] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
+  useEffect(() => {
+    if (!user) navigate('/login');
+  }, []);
   const handleLogout = () => { logout(); navigate('/login'); };
   const handleDelete = () => {
     if (!confirmDelete) { setConfirmDelete(true); return; }

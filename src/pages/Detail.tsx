@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
-import "../css/productDetail.css";
 import "../css/detail.css";
 import { products } from "../data/products";
 import { addToCart, toggleWishlist, isWishlisted } from "../utils/storage";
