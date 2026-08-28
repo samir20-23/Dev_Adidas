@@ -3,14 +3,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { Search, ChevronRight, Heart, ShoppingCart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 import "../home/home.css";
-import Image from "next/image";
+import { useCart } from "../contexts/CartContext";
 
 export default function Home() {
     const navigate = useRouter();
     const { t } = useTranslation();
+    const { addToCart } = useCart();
     const [liked, setLiked] = useState<{ [key: number]: boolean }>({});
+    const [addedId, setAddedId] = useState<number | null>(null);
 
     useEffect(() => {
         const storedLiked = localStorage.getItem("liked");
@@ -25,47 +27,31 @@ export default function Home() {
         localStorage.setItem("liked", JSON.stringify(newLiked));
     };
 
+    const handleAddToCart = (e: React.MouseEvent, shoe: { id: number; name: string; price: string; priceNum: number; image: string }) => {
+        e.preventDefault();
+        addToCart({
+            id: shoe.id,
+            name: shoe.name,
+            price: shoe.price,
+            priceNum: shoe.priceNum,
+            image: shoe.image,
+            size: "43",
+            color: "Black",
+        });
+        setAddedId(shoe.id);
+        setTimeout(() => setAddedId(null), 1500);
+    };
+
     const popularShoes = [
-        {
-            id: 1,
-            name: "Adidas Adizero F50",
-            price: "799 $",
-            image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop"
-        },
-        {
-            id: 2,
-            name: "Adidas Stan West Korea",
-            price: "170 $",
-            image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&h=300&fit=crop"
-        },
-        {
-            id: 3,
-            name: "Adidas Barricola Shoes",
-            price: "449 $",
-            image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=300&fit=crop"
-        }
+        { id: 1, name: "Adidas Adizero F50", price: "$799", priceNum: 799, image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop" },
+        { id: 2, name: "Adidas Stan West Korea", price: "$170", priceNum: 170, image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&h=300&fit=crop" },
+        { id: 3, name: "Adidas Barricola Shoes", price: "$449", priceNum: 449, image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=300&fit=crop" },
     ];
 
     const trendShoes = [
-        {
-            id: 4,
-            name: "Adidas Gazze 5",
-            subtitle: "Mens - Shoes",
-            tag: "490$",
-            image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop"
-        },
-        {
-            id: 5,
-            name: "Superstar shoes",
-            subtitle: "Mens - Shoes",
-            tag: "179$",
-            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop"
-        }
+        { id: 4, name: "Adidas Gazze 5", subtitle: "Mens · Shoes", tag: "$490", priceNum: 490, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop" },
+        { id: 5, name: "Superstar Shoes", subtitle: "Mens · Shoes", tag: "$179", priceNum: 179, image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop" },
     ];
-
-
-
-
 
     return (
         <div className="home-container">
@@ -83,11 +69,13 @@ export default function Home() {
                 <div className="hero-content">
                     <span className="hero-label">{t('home.heroLabel')}</span>
                     <h1 className="hero-title">{t('home.heroTitle')}</h1>
-                    <button className="shop-now-btn">
-                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true"  id="iconRightHome"></i>
+                    <button
+                        className="shop-now-btn"
+                        onClick={() => navigate.push("/product")}
+                    >
+                        {t('home.shopNow')} <i className="fa fa-arrow-right" aria-hidden="true" id="iconRightHome"></i>
                     </button>
                 </div>
-
                 <div className="hero-shoe-img">
                     <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=400&fit=crop" alt="Campus Shoes" />
                 </div>
@@ -96,20 +84,19 @@ export default function Home() {
             <section className="categories-section">
                 <h2 className="section-title">{t('home.categories')}</h2>
                 <div className="categories-grid">
-                    {/* These could be translated as well if they are not dynamic */}
-                    <div className="category-item">
+                    <div className="category-item" onClick={() => navigate.push("/product")}>
                         <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/2818/2818324.png" alt="Shoes" /></div>
                         <span>Shoes</span>
                     </div>
-                    <div className="category-item">
+                    <div className="category-item" onClick={() => navigate.push("/product")}>
                         <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/892/892458.png" alt="T-shirt" /></div>
                         <span>T-shirt</span>
                     </div>
-                    <div className="category-item">
+                    <div className="category-item" onClick={() => navigate.push("/product")}>
                         <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/2609/2609368.png" alt="Bags" /></div>
                         <span>Bags</span>
                     </div>
-                    <div className="category-item">
+                    <div className="category-item" onClick={() => navigate.push("/product")}>
                         <div className="category-icon"><img src="https://cdn-icons-png.flaticon.com/512/3082/3082031.png" alt="Tracksuit" /></div>
                         <span>Tracksuit</span>
                     </div>
@@ -127,19 +114,28 @@ export default function Home() {
                             <button
                                 className="like-btn"
                                 onClick={(e) => { e.preventDefault(); toggleLike(shoe.id); }}
+                                aria-label="Toggle favourite"
                             >
-                                <Heart size={20} fill={liked[shoe.id] ? "#000" : "none"} />
+                                <Heart size={20} fill={liked[shoe.id] ? "currentColor" : "none"} />
                             </button>
                             <div className="product-image"><img src={shoe.image} alt={shoe.name} /></div>
                             <div className="product-info">
                                 <h3>{shoe.name}</h3>
                                 <p className="price">{shoe.price}</p>
                             </div>
-                            <button className="add-to-cart-btn"><ShoppingCart size={20} /></button>
+                            <button
+                                className={`add-to-cart-btn ${addedId === shoe.id ? "added" : ""}`}
+                                onClick={(e) => handleAddToCart(e, shoe)}
+                                aria-label="Add to cart"
+                            >
+                                <ShoppingCart size={20} />
+                            </button>
                         </Link>
                     ))}
                 </div>
-                <button className="explore-more-btn">{t('home.exploreMore')}</button>
+                <button className="explore-more-btn" onClick={() => navigate.push("/product")}>
+                    {t('home.exploreMore')}
+                </button>
             </section>
 
             <section className="trend-section">
@@ -149,14 +145,18 @@ export default function Home() {
                         <Link href={`/product/${shoe.id}`} key={shoe.id} className="trend-card">
                             <button
                                 className="like-btn-trend"
-                                onClick={(e) => { e.preventDefault(); toggleLike(shoe.id) }}
+                                onClick={(e) => { e.preventDefault(); toggleLike(shoe.id); }}
+                                aria-label="Toggle favourite"
                             >
-                                <Heart size={18} fill={liked[shoe.id] ? "#000" : "none"} />
+                                <Heart size={18} fill={liked[shoe.id] ? "currentColor" : "none"} />
                             </button>
                             <span className="trend-tag">{shoe.tag}</span>
                             <div className="trend-image"><img src={shoe.image} alt={shoe.name} /></div>
-                            <button className="trend-shop-btn">
-                                {t('home.shopNow')} <ChevronRight size={16} />
+                            <button
+                                className="trend-shop-btn"
+                                onClick={(e) => { e.stopPropagation(); navigate.push(`/product/${shoe.id}`); }}
+                            >
+                                {t('home.shopNow')} →
                             </button>
                             <div className="trend-info">
                                 <h3>{shoe.name}</h3>

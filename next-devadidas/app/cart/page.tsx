@@ -1,28 +1,15 @@
 "use client"
 import React from "react";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { ShoppingCart, Trash2 } from "lucide-react";
-import '../css/cart.css'
+import { ShoppingCart, Trash2, Plus, Minus } from "lucide-react";
+import { useCart } from "../contexts/CartContext";
+import '../css/cart.css';
 
 export default function Cart() {
-    const [cartItems, setCartItems] = useState<any[]>([]);
+    const { cartItems, removeFromCart, updateQuantity, totalPrice, totalItems } = useCart();
     const router = useRouter();
     const { t } = useTranslation();
-
-    useEffect(() => {
-        const storedCart = localStorage.getItem("cart");
-        if (storedCart) {
-            setCartItems(JSON.parse(storedCart));
-        }
-    }, []);
-
-    const removeFromCart = (id: number) => {
-        const newCart = cartItems.filter((item: any) => item.id !== id);
-        setCartItems(newCart);
-        localStorage.setItem("cart", JSON.stringify(newCart));
-    };
 
     return (
         <div className="cart-container">
@@ -39,18 +26,65 @@ export default function Cart() {
                 </div>
             ) : (
                 <div className="cart-with-items">
-                    {cartItems.map((item: any) => (
-                        <div key={item.id} className="cart-item">
-                            <img src={item.image} alt={item.name} />
-                            <div className="item-details">
-                                <h3>{item.name}</h3>
-                                <p>{item.price}</p>
+                    <h2 className="cart-title">{t('cart.title', 'My Cart')} ({totalItems})</h2>
+
+                    <div className="cart-items-list">
+                        {cartItems.map((item) => (
+                            <div key={`${item.id}-${item.size}-${item.color}`} className="cart-item">
+                                <img src={item.image} alt={item.name} className="cart-item-img" />
+                                <div className="cart-item-details">
+                                    <h3 className="cart-item-name">{item.name}</h3>
+                                    <p className="cart-item-meta">Size: {item.size} · {item.color}</p>
+                                    <p className="cart-item-price">{item.price}</p>
+                                    <div className="cart-item-qty">
+                                        <button
+                                            className="qty-btn"
+                                            onClick={() => updateQuantity(item.id, item.size, item.color, -1)}
+                                            aria-label="Decrease quantity"
+                                        >
+                                            <Minus size={14} />
+                                        </button>
+                                        <span className="qty-value">{item.quantity}</span>
+                                        <button
+                                            className="qty-btn"
+                                            onClick={() => updateQuantity(item.id, item.size, item.color, 1)}
+                                            aria-label="Increase quantity"
+                                        >
+                                            <Plus size={14} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <button
+                                    className="cart-remove-btn"
+                                    onClick={() => removeFromCart(item.id, item.size, item.color)}
+                                    aria-label="Remove item"
+                                >
+                                    <Trash2 size={18} />
+                                </button>
                             </div>
-                            <button onClick={() => removeFromCart(item.id)}>
-                                <Trash2 size={20} />
-                            </button>
+                        ))}
+                    </div>
+
+                    <div className="cart-summary">
+                        <div className="cart-summary-row">
+                            <span>{t('cart.subtotal', 'Subtotal')}</span>
+                            <span>${totalPrice.toFixed(2)}</span>
                         </div>
-                    ))}
+                        <div className="cart-summary-row">
+                            <span>{t('cart.shipping', 'Shipping')}</span>
+                            <span>{totalPrice >= 50 ? t('cart.free', 'Free') : '$9.99'}</span>
+                        </div>
+                        <div className="cart-summary-row cart-summary-total">
+                            <span>{t('cart.total', 'Total')}</span>
+                            <span>${(totalPrice >= 50 ? totalPrice : totalPrice + 9.99).toFixed(2)}</span>
+                        </div>
+                        <button
+                            className="checkout-btn"
+                            onClick={() => router.push('/checkout')}
+                        >
+                            {t('cart.checkout', 'Proceed to Checkout')}
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import Navbar from "./navbar";
-import Footer from "./footer";
 import Menubar from "./menubar";
 import React from "react";
 
@@ -13,25 +12,25 @@ interface MainLayoutProps {
 export default function MainLayout({ children }: MainLayoutProps) {
     const pathname = usePathname();
 
-    // Exact paths to hide components on
-    const hideOnExactPaths = ["/", "/load", "/start"];
+    // Pages that show NO layout at all (full-screen experiences)
+    const fullscreenPaths = ["/", "/load", "/start"];
 
-    const hideNavPaths = ["/login", "/register", "/settings"];
-    const hideFooterPaths = ["/settings", "/register"];
-    const hideMenuPaths = ["/login", "/register", "/settings"];
+    // Pages that show NO top navbar
+    const hideNavPaths = ["/login", "/register", "/settings", "/checkout"];
 
-    // Check for exact path match or if the path starts with one of the prefixes
-    const showNav = !hideOnExactPaths.includes(pathname) && !hideNavPaths.some(path => pathname.startsWith(path));
-    const showFooter = hideFooterPaths.some(path => pathname.startsWith(path));
-    const showMenu = !hideOnExactPaths.includes(pathname) && !hideMenuPaths.some(path => pathname.startsWith(path));
+    // Pages that show NO bottom menubar
+    const hideMenuPaths = ["/login", "/register", "/settings", "/checkout"];
+
+    const isFullscreen = fullscreenPaths.includes(pathname);
+    const showNav = !isFullscreen && !hideNavPaths.some(p => pathname.startsWith(p));
+    const showMenu = !isFullscreen && !hideMenuPaths.some(p => pathname.startsWith(p));
 
     return (
         <div className="layout">
             {showNav && <Navbar />}
-            <main className="main">
+            <main className="main" style={isFullscreen ? { paddingTop: 0, paddingBottom: 0 } : undefined}>
                 {children}
             </main>
-            {showFooter && <Footer />}
             {showMenu && <Menubar />}
         </div>
     );

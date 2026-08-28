@@ -202,6 +202,10 @@
     transform: translateY(-2px);
 }
 
+.add-to-cart-btn-main.added {
+    background: #22c55e;
+}
+
 
 @media (min-width: 768px) {
     .product-detail-container {
