@@ -33,7 +33,7 @@ export default function Navbar() {
       <div className="navbar-container">
         <div className="navbar-left">
           <img
-            src={isDark ? '/logoWhite.png' : '/logo.PNG'}
+            src={isDark ? '/whiteLogo.png' : '/logo.PNG'}
             alt="Adidas"
             className="navbar-logo-img"
             onClick={() => navigate('/home')}

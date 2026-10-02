@@ -9,7 +9,7 @@
 
 .logo-img {
   width: 100%;
-  max-width: 120px;
+  max-width: 220px;
   height: auto;
   object-fit: contain;
 }
@@ -48,7 +48,7 @@
 .logo-loader {
   width: 100%;
   max-width: 202px;
-  height: 6px;
+  height: 8px;
   border: 1px solid currentColor;
   border-radius: 2px;
   position: relative;

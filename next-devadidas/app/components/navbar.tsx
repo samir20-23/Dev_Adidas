@@ -6,7 +6,7 @@ import { Heart, Moon, Sun } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 
 import Logo from "../../public/assets/logoo.png"
-import LogoWhite from "../../public/assets/logoWhite.png"
+import whiteLogo from "../../public/assets/whiteLogo.png"
 import CartIcon from "../../public/assets/cart.png"
 import Left from "../../public/assets/left.png"
 import { useState } from "react"
@@ -91,7 +91,7 @@ export default function Navbar() {
         })()}
 
         <div className="logonavbar" onClick={() => navigate.push("/home")} style={{ cursor: "pointer" }}>
-          <Image src={theme === 'dark' ? LogoWhite : Logo} alt="logo" style={{ width: 120, height: 40 }} />
+          <Image src={theme === 'dark' ? whiteLogo : Logo} alt="logo" style={{ width: 120, height: 40 }} />
         </div>
 
         <div className="iconnavbar">

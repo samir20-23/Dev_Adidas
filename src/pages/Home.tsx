@@ -52,7 +52,7 @@ export default function Home() {
   const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [visibleCount, setVisibleCount] = useState(4);
-  const [activeCategory, setActiveCategory] = useState<Category>("Shoes");
+  const [ activeCategory, setActiveCategory] = useState<Category>("Shoes");
   const [searchQuery, setSearchQuery] = useState("");
   const [, forceUpdate] = useState(0);
   const touchStartX = useRef(0);
@@ -169,8 +169,10 @@ export default function Home() {
         >
           {slides.map((src, i) => (
             <div key={src} className={`hero-slide ${i === currentSlide ? "active" : ""}`}>
-              <img src={src} alt={`${activeCategory} slide ${i + 1}`} />
-              <div className="hero-overlay" />
+           <div className="hero-scroll"> {[...slides, ...slides, ...slides].map((image, index) => (
+            <img key={`${image}-${index}`} src={image} alt={`${activeCategory} ${index + 1}`} /> 
+            ))} </div>
+             <div className="hero-overlay" />
               <div className="hero-text">
                 <span className="hero-label">NEW COLLECTION</span>
                 <h1 className="hero-title">Adidas<br />{activeCategory}</h1>

@@ -9,7 +9,7 @@ export default function Logo() {
     return (
         <div className="logo-wrapper">
             <img
-                src={isDark ? '/logoWhite.png' : '/logo.PNG'}
+                src={isDark ? '/whiteLogo.png' : '/logo.PNG'}
                 alt="Adidas"
                 className="logo-img"
             />
